@@ -1,6 +1,6 @@
 <?php
 /******************************************************************************
- * Profil bearbeiten
+ * Edit profile
  *
  * Copyright    : (c) 2004 - 2012 The Admidio Team
  * Homepage     : http://www.admidio.org
@@ -8,7 +8,7 @@
  *
  * Parameters:
  *
- * user_id  :  ID des Benutzers, dessen Profil bearbeitet werden soll
+ * user_id  : ID des Benutzers, dessen Profil bearbeitet werden soll
  * new_user : 0 - (Default) vorhandenen User bearbeiten
  *            1 - Dialog um neue Benutzer hinzuzufuegen.
  *            2 - Dialog um Registrierung entgegenzunehmen

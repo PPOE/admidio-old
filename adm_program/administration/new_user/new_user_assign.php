@@ -127,7 +127,7 @@ if($member_found == 0)
             $member->startMembership($gPreferences['profile_default_role'], $new_user->getValue('usr_id'));
             
             $gMessage->setForwardUrl($_SESSION['navigation']->getPreviousUrl(), 2000);
-            $gMessage->show($gL10n->get('SYS_SAVE'));
+            $gMessage->show($gL10n->get('SYS_SAVE_DATA'));
         }
     }
 }

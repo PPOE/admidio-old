@@ -182,9 +182,16 @@ $iCal .= $date->getIcalFooter();
 
 if($getMode == 2)
 {
+    // for IE the filename must have special chars in hexadecimal 
+    if (preg_match('/MSIE/', $_SERVER['HTTP_USER_AGENT']))
+    {
+        $headline = urlencode($headline);
+    }
+
     header('Content-Type: text/calendar');
-    header('Content-Disposition: attachment; filename='. urlencode($headline). '.ics');
-    // noetig fuer IE, da ansonsten der Download mit SSL nicht funktioniert
+    header('Content-Disposition: attachment; filename="'. $headline. '.ics"');
+    
+	// neccessary for IE, because without it the download with SSL has problems
     header('Cache-Control: private');
     header('Pragma: public');
 }    
