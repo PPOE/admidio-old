@@ -347,7 +347,8 @@ function admFuncVariableIsValid($array, $variableName, $datatype, $defaultValue 
 		{
 			// boolean type must be 0 or 1 otherwise throw error
 			// do not check with in_array because this function don't work properly
-			if($array[$variableName] != '0' && $array[$variableName] != '1')
+			if($array[$variableName] != '0' && $array[$variableName] != '1'
+            && $array[$variableName] != 'false' && $array[$variableName] != 'true')
 			{
                 $errorMessage = $gL10n->get('SYS_INVALID_PAGE_VIEW');
 			}
@@ -405,7 +406,7 @@ function admFuncVariableIsValid($array, $variableName, $datatype, $defaultValue 
 		}
 		elseif($datatype == 'string')
 		{
-			$array[$variableName] = strStripTags(htmlentities($array[$variableName], ENT_COMPAT, 'UTF-8'));
+			$array[$variableName] = strStripTags(htmlspecialchars($array[$variableName], ENT_COMPAT, 'UTF-8'));
 		}
 
         // wurde kein Fehler entdeckt, dann den Inhalt der Variablen zurueckgeben

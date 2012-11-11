@@ -198,7 +198,7 @@ class ProfileFields
 	// returns the user value for this field
 	// format = 'html' : returns the value in html-format if this is necessary for that field type
 	// format = 'intern' : returns the value that is stored in database with no format applied
-	public function getValue($fieldNameIntern, $format = '', $usr_id = 0)
+	public function getValue($fieldNameIntern, $format = '')
 	{
 		global $gL10n, $gPreferences;
 		$value = '';
@@ -253,7 +253,7 @@ class ProfileFields
 		// get html output for that field type and value
 		if($format == 'html')
 		{
-			$value = $this->getHtmlValue($fieldNameIntern, $value, $usr_id);
+			$value = $this->getHtmlValue($fieldNameIntern, $value, $this->mUserId);
 		}
 
 		return $value;
