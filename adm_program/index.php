@@ -271,7 +271,7 @@ echo '</ul>
     </div>
 </div>';
 
-if($gCurrentUser->isWebmaster() || $gCurrentUser->assignRoles() || $gCurrentUser->approveUsers() || $gCurrentUser->editUsers())
+if($gCurrentUser->isWebmaster() || $gCurrentUser->assignRoles() || $gCurrentUser->approveUsers() || $gCurrentUser->editUsers() || $gCurrentUser->isLeader())
 {
     echo '
     <div class="formLayout" id="administration_list_form">
@@ -295,7 +295,7 @@ if($gCurrentUser->isWebmaster() || $gCurrentUser->assignRoles() || $gCurrentUser
                     </li>';
                 }
 
-                if($gCurrentUser->editUsers())
+                if($gCurrentUser->editUsers() || $gCurrentUser->isLeader())
                 {
                     echo '
                     <li>

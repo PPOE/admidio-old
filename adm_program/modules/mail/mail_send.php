@@ -21,6 +21,11 @@ require_once('../../libs/htmlawed/htmlawed.php');
 // Initialize and check the parameters
 $postRoleId = admFuncVariableIsValid($_POST, 'rol_id', 'numeric', 0);
 $getUserId  = admFuncVariableIsValid($_GET, 'usr_id', 'numeric', 0);
+$postMemberAkk  = admFuncVariableIsValid($_POST, 'member_akk', 'boolean', 0);
+$postMemberNotAkk  = admFuncVariableIsValid($_POST, 'member_not_akk', 'boolean', 0);
+$postMemberPaid  = admFuncVariableIsValid($_POST, 'member_paid', 'boolean', 0);
+$postMemberNotPaid  = admFuncVariableIsValid($_POST, 'member_not_paid', 'boolean', 0);
+$postPlz = admFuncVariableIsValid($_POST, 'plz', 'string', '');
 $_POST['subject'] = admFuncVariableIsValid($_GET, 'subject', 'string', $_POST['subject']);
 
 if ($gPreferences['enable_mail_module'] != 1)
@@ -218,7 +223,7 @@ if($gValidLogin == true && $gPreferences['mail_html_registered_users'] == 1)
 {
     $email->sendDataAsHtml();
 }
-
+$sentmails = 0;
 //Nun die Empfaenger zusammensuchen und an das Mailobjekt uebergeben
 if ($getUserId > 0)
 {
@@ -246,6 +251,35 @@ else
         $sqlConditions = ' AND mem_begin  <= \''.DATE_NOW.'\'
                            AND mem_end     > \''.DATE_NOW.'\' ';
     }
+
+    if ($postMemberAkk)
+    {
+        $sqlConditions .= ' AND akk.usd_value IS NOT NULL ';
+    }
+    if ($postMemberNotAkk)
+    {
+        $sqlConditions .= ' AND akk.usd_value IS NULL ';
+    }
+    if ($postMemberPaid)
+    {
+        $sqlConditions .= ' AND paid.usd_value >= \''.DATE_NOW.'\' ';
+    }
+    if ($postMemberNotPaid)
+    {
+        $sqlConditions .= ' AND (paid.usd_value IS NULL OR paid.usd_value < \''.DATE_NOW.'\' ) ';
+    }
+    if (strlen($postPlz) > 0) {
+      if (preg_match('/^(\s*[0-9]+\s*(\s*,\s*[0-9]+\s*)*)?$/', $postPlz) == 1)
+      {
+          $plzArray = preg_split("/[\s,]+/", $postPlz);
+          $sqlConditions .= ' AND plz.usd_value IN (\''.implode('\',\'',$plzArray).'\') ';
+      }
+      else
+      {
+          $sqlConditions .= ' AND 1 = 0 ';
+      } 
+    }
+
     
     $sql   = 'SELECT first_name.usd_value as first_name, last_name.usd_value as last_name, 
                      email.usd_value as email, rol_name
@@ -262,6 +296,15 @@ else
                 LEFT JOIN '. TBL_USER_DATA. ' as first_name
                   ON first_name.usd_usr_id = usr_id
                  AND first_name.usd_usf_id = '. $gProfileFields->getProperty('FIRST_NAME', 'usf_id'). '
+                LEFT JOIN '. TBL_USER_DATA. ' as paid
+                  ON paid.usd_usr_id = usr_id
+                 AND paid.usd_usf_id = '. $gProfileFields->getProperty('BEZAHLT_BIS', 'usf_id'). '
+                LEFT JOIN '. TBL_USER_DATA. ' as akk
+                  ON akk.usd_usr_id = usr_id
+                 AND akk.usd_usf_id = '. $gProfileFields->getProperty('ERSTAKKREDITIERUNG_(DATUM)', 'usf_id'). '
+                LEFT JOIN '. TBL_USER_DATA. ' as plz
+                  ON plz.usd_usr_id = usr_id
+                 AND plz.usd_usf_id = '. $gProfileFields->getProperty('POSTCODE', 'usf_id'). '
                WHERE rol_id      = '.$postRoleId.'
                  AND rol_cat_id  = cat_id
                  AND (  cat_org_id  = '. $gCurrentOrganization->getValue('org_id'). '
@@ -271,14 +314,15 @@ else
                  AND usr_valid   = 1 '.
                      $sqlConditions;
 
+
 	// Wenn der User eingeloggt ist, wird die UserID im Statement ausgeschlossen, 
 	//damit er die Mail nicht an sich selber schickt.
 	if ($gValidLogin)
 	{
 		$sql =$sql. ' AND usr_id <> '. $gCurrentUser->getValue('usr_id');
-    } 
-    $result = $gDb->query($sql);
-
+        } 
+    $result = $gDb->query($sql . " GROUP BY email");
+    $sentmails = $gDb->num_rows($result);
     if($gDb->num_rows($result) > 0)
     {
 		if($gPreferences['mail_sender_into_to'] == 1)
@@ -347,7 +391,7 @@ if ($email->sendEmail())
     
     if ($role->getValue('rol_id') > 0)
     {
-        $gMessage->show($gL10n->get('SYS_EMAIL_SEND', $gL10n->get('MAI_TO_ROLE', $role->getValue('rol_name'))));
+        $gMessage->show($gL10n->get('SYS_EMAIL_SEND', $gL10n->get('MAI_TO_ROLE', $role->getValue('rol_name') . " (" . $sentmails . " Mails)")));
     }
     else
     {

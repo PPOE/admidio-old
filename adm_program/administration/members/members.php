@@ -38,7 +38,7 @@ if(strlen($getLetter) > 1)
 }
 
 // nur berechtigte User duerfen die Mitgliederverwaltung aufrufen
-if (!$gCurrentUser->editUsers())
+if (!$gCurrentUser->editUsers() && !$gCurrentUser->isLeader())
 {
     $gMessage->show($gL10n->get('SYS_NO_RIGHTS'));
 }
@@ -61,6 +61,7 @@ if(strlen($getSearch) > 0)
     // Bedingung fuer die Suchanfrage
     $search_string = str_replace(',', '', $getSearch). '%';
     $search_condition = ' AND (  last_name.usd_value  || \' \' || first_name.usd_value LIKE \''.$search_string.'\'
+                              OR usr_login_name LIKE \''.$search_string.'\'
                               OR first_name.usd_value || \' \' || last_name.usd_value  LIKE \''.$search_string.'\' ) ';
 }
 else

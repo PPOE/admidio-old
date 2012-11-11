@@ -1,0 +1,1 @@
+sendemail -f mv@piratenpartei.at -t $1 -u "[Admidio] Mitglied entfernt" -m "Es wurde ein neues Mitglied deiner LO entfernt:\n\nhttps://mitglieder.piratenpartei.at/adm_program/modules/profile/profile.php?user_id=$2\n\nDu musst eingeloggt sein um diesen Link zu oeffnen."

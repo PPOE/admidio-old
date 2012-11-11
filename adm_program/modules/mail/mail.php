@@ -386,7 +386,74 @@ echo '
 								</dl>
 							</li>';
 						}
-						
+                                                if ($getRoleId > 0 || (strlen($getRoleName) > 0 && strlen($getCategory) > 0) ) {
+						echo'
+                                                <li>
+                                                        <dl>
+                                                                <dt>Einschr&auml;nkungen:</dt>
+                                                                <dd>
+                                                                        <input type="checkbox" id="member_akk" name="member_akk" value="1" ';
+                                                                        if (isset($form_values['member_akk']) && $form_values['member_akk'] == 1)
+                                                                        {
+                                                                                echo ' checked="checked" ';
+                                                                        }
+                                                                        echo ' /> <label for="member_akk">Nur Akkreditierte</label>
+                                                                </dd>
+                                                        </dl>
+                                                </li>
+                                                <li>
+                                                        <dl>
+                                                                <dt>&nbsp;</dt>
+                                                                <dd>
+                                                                        <input type="checkbox" id="member_not_akk" name="member_not_akk" value="1" ';
+                                                                        if (isset($form_values['member_not_akk']) && $form_values['member_not_akk'] == 1)
+                                                                        {
+                                                                                echo ' checked="checked" ';
+                                                                        }
+                                                                        echo ' /> <label for="member_not_akk">Nur Nicht-Akkreditierte</label>
+                                                                </dd>
+                                                        </dl>
+                                                </li>
+                                                <li>
+                                                        <dl>
+                                                                <dt>&nbsp;</dt>
+                                                                <dd>
+                                                                        <input type="checkbox" id="member_paid" name="member_paid" value="1" ';
+                                                                        if (isset($form_values['member_paid']) && $form_values['member_paid'] == 1)
+                                                                        {
+                                                                                echo ' checked="checked" ';
+                                                                        }
+                                                                        echo ' /> <label for="member_paid">Nur Zahlende</label>
+                                                                </dd>
+                                                        </dl>
+                                                </li>
+                                                <li>
+                                                        <dl>
+                                                                <dt>&nbsp;</dt>
+                                                                <dd>
+                                                                        <input type="checkbox" id="member_not_paid" name="member_not_paid" value="1" ';
+                                                                        if (isset($form_values['member_not_paid']) && $form_values['member_not_paid'] == 1)
+                                                                        {
+                                                                                echo ' checked="checked" ';
+                                                                        }
+                                                                        echo ' /> <label for="member_not_paid">Nur Nicht-Zahlende</label>
+                                                                </dd>
+                                                        </dl>
+                                                </li>
+                                                <li>
+                                                        <dl>
+                                                                <dt>&nbsp;</dt>
+                                                                <dd>
+                                                                        <input type="text" id="plz" name="plz" value="';
+                                                                        if (isset($form_values['plz']) && preg_match('/^([0-9]+(,[0-9]+)*)?$/',$form_values['plz']) == 1)
+                                                                        {
+                                                                                echo $form_values['plz'];
+                                                                        }
+                                                                        echo '" /> <label for="plz">Komma-separierte Liste von Postleitzahlen z.B. 8010,8020,8042</label>
+                                                                </dd>
+                                                        </dl>
+                                                </li>';
+                                                }
 						echo '<li>
 							<hr />
 						</li>

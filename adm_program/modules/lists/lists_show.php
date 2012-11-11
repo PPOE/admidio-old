@@ -337,7 +337,7 @@ for($column_number = 1; $column_number <= $list->countColumns(); $column_number+
 
     // versteckte Felder duerfen nur von Leuten mit entsprechenden Rechten gesehen werden
     if($usf_id == 0
-    || $gCurrentUser->editUsers()
+    || $gCurrentUser->editUsers() || $gCurrentUser->isLeader()
     || $gProfileFields->getPropertyById($usf_id, 'usf_hidden') == 0)
     {
         if($getMode == 'csv')
@@ -460,7 +460,7 @@ for($j = 0; $j < $members_per_page && $j + $getStart < $numMembers; $j++)
 
             // versteckte Felder duerfen nur von Leuten mit entsprechenden Rechten gesehen werden
             if($usf_id == 0
-            || $gCurrentUser->editUsers()
+            || $gCurrentUser->editUsers() || $gCurrentUser->isLeader()
             || $gProfileFields->getPropertyById($usf_id, 'usf_hidden') == 0)
             {
                 if($getMode != 'csv')

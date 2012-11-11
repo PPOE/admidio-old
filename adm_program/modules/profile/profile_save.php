@@ -106,7 +106,7 @@ foreach($gProfileFields->mProfileFields as $field)
     $post_id = 'usf-'. $field->getValue('usf_id');    
     
 	// check and save only fields that aren't disabled
-	if($gCurrentUser->editUsers() == true || $field->getValue('usf_disabled') == 0 || ($field->getValue('usf_disabled') == 1 && $getNewUser > 0))
+	if($gCurrentUser->editUsers() == true || $gCurrentUser->editProfile($getUserId) || $field->getValue('usf_disabled') == 0 || ($field->getValue('usf_disabled') == 1 && $getNewUser > 0))
 	{
 		if(isset($_POST[$post_id])) 
 		{
@@ -193,7 +193,7 @@ foreach($gProfileFields->mProfileFields as $field)
 $login_name_changed = false;
 $forum_old_username = '';
 
-if($gCurrentUser->isWebmaster() || $getNewUser > 0)
+if($gCurrentUser->isWebmaster() || $gCurrentUser->editProfile($user->getValue('usr_id')) || $getNewUser > 0)
 {
     // Loginname darf nur vom Webmaster bzw. bei Neuanlage geaendert werden    
     if($_POST['usr_login_name'] != $user->getValue('usr_login_name'))

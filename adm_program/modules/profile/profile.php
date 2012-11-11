@@ -21,8 +21,11 @@ require_once('roles_functions.php');
 // Initialize and check the parameters
 $getUserId = admFuncVariableIsValid($_GET, 'user_id', 'numeric', $gCurrentUser->getValue('usr_id'));
 
+// User auslesen
+$user = new User($gDb, $gProfileFields, $getUserId);
+
 //Testen ob Recht besteht Profil einzusehn
-if(!$gCurrentUser->viewProfile($getUserId))
+if(!$gCurrentUser->viewProfile($getUserId) || ($getUserId != $gCurrentUser->getValue('usr_id') && $gCurrentUser->editProfile($user->getValue('usr_id')) == false && $gCurrentUser->isLeaderFor($user->getValue('usr_id')) == false))
 {
     $gMessage->show($gL10n->get('SYS_NO_RIGHTS'));
 }
@@ -36,7 +39,7 @@ function getFieldCode($fieldNameIntern, $User)
     $value     = '';
     $msg_image = '';
 
-    if($gCurrentUser->editProfile($User->getValue('usr_id')) == false && $gProfileFields->getProperty($fieldNameIntern, 'usf_hidden') == 1)
+    if($gCurrentUser->editProfile($User->getValue('usr_id')) == false && $gCurrentUser->isLeaderFor($User->getValue('usr_id')) == false && $gProfileFields->getProperty($fieldNameIntern, 'usf_hidden') == 1)
     {
         return '';
     }
@@ -99,9 +102,6 @@ function getFieldCode($fieldNameIntern, $User)
     return $html;
 }
 
-// User auslesen
-$user = new User($gDb, $gProfileFields, $getUserId);
-
 unset($_SESSION['profile_request']);
 // Seiten fuer Zuruecknavigation merken
 if($user->getValue('usr_id') == $gCurrentUser->getValue('usr_id'))
@@ -149,16 +149,15 @@ echo '
             // *******************************************************************************
             // Userdaten-Block
             // *******************************************************************************
-
             echo '
             <div style="width: 65%; float: left;">
                 <div id="admProfileMasterData" class="groupBox">
                     <div class="groupBoxHeadline">
-                        <div style="float: left;">'. $user->getValue('FIRST_NAME'). ' '. $user->getValue('LAST_NAME');
+                        <div style="float: left;">'.$user->getValue('FIRST_NAME'). ' '. $user->getValue('LAST_NAME');
 
                             // Icon des Geschlechts anzeigen, wenn noetigen Rechte vorhanden
                             if(strlen($user->getValue('GENDER')) > 0
-                            && ($gCurrentUser->editProfile($user->getValue('usr_id')) == true || $gProfileFields->getProperty('GENDER', 'usf_hidden') == 0 ))
+                            && ($gCurrentUser->editProfile($user->getValue('usr_id')) == true || $gCurrentUser->isLeaderFor($user->getValue('usr_id')) == true || $gProfileFields->getProperty('GENDER', 'usf_hidden') == 0 ))
                             {
                                 echo ' '.$user->getValue('GENDER');
                             }
@@ -177,7 +176,7 @@ echo '
                                     src="'. THEME_PATH. '/icons/key.png" alt="'.$gL10n->get('SYS_CHANGE_PASSWORD').'" title="'.$gL10n->get('SYS_CHANGE_PASSWORD').'" /></a>';
                             }
                             // Nur berechtigte User duerfen ein Profil editieren
-                            if($gCurrentUser->editProfile($user->getValue('usr_id')) == true)
+                            if($gCurrentUser->editProfile($user->getValue('usr_id')) == true || $gCurrentUser->isLeaderFor($user->getValue('usr_id')) == true)
                             {
                                 echo '
                                 <a class="iconLink" href="'. $g_root_path. '/adm_program/modules/profile/profile_new.php?user_id='. $user->getValue('usr_id'). '"><img
@@ -211,7 +210,7 @@ echo '
                             {
                                 // nur Felder der Stammdaten anzeigen
                                 if($field->getValue('cat_name_intern') == 'MASTER_DATA'
-                                && (  $gCurrentUser->editProfile($user->getValue('usr_id')) == true || $field->getValue('usf_hidden') == 0 ))
+                                && (  $gCurrentUser->editProfile($user->getValue('usr_id')) == true || $gCurrentUser->isLeaderFor($user->getValue('usr_id')) == true || $field->getValue('usf_hidden') == 0 ))
                                 {
                                     switch($field->getValue('usf_name_intern'))
                                     {
@@ -244,7 +243,7 @@ echo '
                                                                 '&amp;daddr=';
 
                                                             if(strlen($user->getValue('ADDRESS')) > 0
-                                                            && ($gCurrentUser->editProfile($user->getValue('usr_id')) == true || $gProfileFields->getProperty('ADDRESS', 'usf_hidden') == 0))
+                                                            && ($gCurrentUser->editProfile($user->getValue('usr_id')) == true || $gCurrentUser->isLeaderFor($user->getValue('usr_id')) == true || $gProfileFields->getProperty('ADDRESS', 'usf_hidden') == 0))
                                                             {
                                                                 $address   .= '<div>'.$user->getValue('ADDRESS'). '</div>';
                                                                 $map_url   .= urlencode($user->getValue('ADDRESS'));
@@ -252,7 +251,7 @@ echo '
                                                             }
 
                                                             if(strlen($user->getValue('POSTCODE')) > 0
-                                                            && ($gCurrentUser->editProfile($user->getValue('usr_id')) == true || $gProfileFields->getProperty('POSTCODE', 'usf_hidden') == 0))
+                                                            && ($gCurrentUser->editProfile($user->getValue('usr_id')) == true || $gCurrentUser->isLeaderFor($user->getValue('usr_id')) == true || $gProfileFields->getProperty('POSTCODE', 'usf_hidden') == 0))
                                                             {
                                                                 $address   .= '<div>'.$user->getValue('POSTCODE');
                                                                 $map_url   .= ',%20'. urlencode($user->getValue('POSTCODE'));
@@ -260,18 +259,18 @@ echo '
 
 																// Ort und PLZ in eine Zeile schreiben, falls man beides sehen darf
 	                                                            if(strlen($user->getValue('CITY')) == 0
-	                                                            || ($gCurrentUser->editProfile($user->getValue('usr_id')) == false && $gProfileFields->getProperty('CITY', 'usf_hidden') == 1))
+	                                                            || ($gCurrentUser->editProfile($user->getValue('usr_id')) == false && $gCurrentUser->isLeaderFor($user->getValue('usr_id')) == false && $gProfileFields->getProperty('CITY', 'usf_hidden') == 1))
 	                                                            {
 	                                                                $address   .= '</div>';
 	                                                            }
                                                             }
 
                                                             if(strlen($user->getValue('CITY')) > 0
-                                                            && ($gCurrentUser->editProfile($user->getValue('usr_id')) == true || $gProfileFields->getProperty('CITY', 'usf_hidden') == 0))
+                                                            && ($gCurrentUser->editProfile($user->getValue('usr_id')) == true || $gCurrentUser->isLeaderFor($user->getValue('usr_id')) == true || $gProfileFields->getProperty('CITY', 'usf_hidden') == 0))
                                                             {
                                                             	// Ort und PLZ in eine Zeile schreiben, falls man beides sehen darf
 	                                                            if(strlen($user->getValue('POSTCODE')) == 0
-	                                                            || ($gCurrentUser->editProfile($user->getValue('usr_id')) == false && $gProfileFields->getProperty('POSTCODE', 'usf_hidden') == 1))
+	                                                            || ($gCurrentUser->editProfile($user->getValue('usr_id')) == false && $gCurrentUser->isLeaderFor($user->getValue('usr_id')) == false && $gProfileFields->getProperty('POSTCODE', 'usf_hidden') == 1))
 	                                                            {
 	                                                                $address   .= '<div>';
 	                                                            }
@@ -281,7 +280,7 @@ echo '
                                                             }
 
                                                             if(strlen($user->getValue('COUNTRY')) > 0
-                                                            && ($gCurrentUser->editProfile($user->getValue('usr_id')) == true || $gProfileFields->getProperty('COUNTRY', 'usf_hidden') == 0))
+                                                            && ($gCurrentUser->editProfile($user->getValue('usr_id')) == true || $gCurrentUser->isLeaderFor($user->getValue('usr_id')) == true || $gProfileFields->getProperty('COUNTRY', 'usf_hidden') == 0))
                                                             {
 																$country    = $user->getValue('COUNTRY');
                                                                 $address   .= '<div>'.$country. '</div>';
@@ -314,7 +313,7 @@ echo '
                                             break;
 
                                         default:
-                                            echo getFieldCode($field->getValue('usf_name_intern'), $user);
+                                            echo getFieldCode($field->getValue('usf_name_intern'), $user, $user->getValue('usr_id'));
                                             break;
                                     }
                                 }
@@ -323,7 +322,6 @@ echo '
                     </div>
                 </div>
             </div>';
-
             echo '<div style="width: 28%; float: right">';
 
                 // *******************************************************************************
@@ -340,7 +338,7 @@ echo '
                                 </td>
                             </tr>';
                              // Nur berechtigte User duerfen das Profilfoto editieren
-                            if($gCurrentUser->editProfile($user->getValue('usr_id')) == true)
+                            if($gCurrentUser->editProfile($user->getValue('usr_id')) == true || $gCurrentUser->isLeaderFor($user->getValue('usr_id')) == true)
                             {
                                 echo '
                                 <tr>
@@ -376,7 +374,7 @@ echo '
             // Felder der Kategorie Stammdaten wurde schon angezeigt, nun alle anderen anzeigen
             // versteckte Felder nur anzeigen, wenn man das Recht hat, dieses Profil zu editieren
             if($field->getValue('cat_name_intern') != 'MASTER_DATA'
-            && (  $gCurrentUser->editProfile($user->getValue('usr_id')) == true
+            && (  $gCurrentUser->editProfile($user->getValue('usr_id')) == true || $gCurrentUser->isLeaderFor($user->getValue('usr_id')) == true
                || ($gCurrentUser->editProfile($user->getValue('usr_id')) == false && $field->getValue('usf_hidden') == 0 )))
             {
                 // show new category header if new category and field has value or is a checkbox field
@@ -394,7 +392,7 @@ echo '
                         <div class="groupBoxHeadline">
                             <div style="float: left;">'.$field->getValue('cat_name').'</div>';
                             // Nur berechtigte User duerfen ein Profil editieren
-                            if($gCurrentUser->editProfile($user->getValue('usr_id')) == true)
+                            if($gCurrentUser->editProfile($user->getValue('usr_id')) == true || $gCurrentUser->isLeaderFor($user->getValue('usr_id')) == true)
                             {
                                 echo '
                                 <div style="text-align: right;">

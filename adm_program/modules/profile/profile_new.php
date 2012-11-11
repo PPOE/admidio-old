@@ -121,9 +121,9 @@ function getFieldCode($fieldNameIntern, $user, $getNewUser)
     
     // Felder sperren, falls dies so eingestellt wurde
     $disabled = '';
-    if($gProfileFields->getProperty($fieldNameIntern, 'usf_disabled') == 1 && $gCurrentUser->editUsers() == false && $getNewUser == 0)
+    if($gProfileFields->getProperty($fieldNameIntern, 'usf_disabled') == 1 && $gCurrentUser->editUsers() == false &&  ($gCurrentUser->editProfile($user->getValue('usr_id')) == false || $gCurrentUser->isLGF() == false) && $getNewUser == 0)
     {
-		$disabled = ' disabled="disabled" ';
+    $disabled = ' disabled="disabled" ';
     }
 
     // Code fuer die einzelnen Felder zusammensetzen    
@@ -422,7 +422,7 @@ echo '
                 $show_field = true;
             }
             elseif($getNewUser != 2 
-            && ($getUserId == $gCurrentUser->getValue('usr_id') || $gCurrentUser->editUsers()))
+            && ($getUserId == $gCurrentUser->getValue('usr_id') || $gCurrentUser->editUsers() || $gCurrentUser->editProfile($getUserId)))
             {
                 // bei fremden Profilen duerfen versteckte Felder nur berechtigten Personen angezeigt werden
                 // Leiter duerfen dies nicht !!!
@@ -457,7 +457,7 @@ echo '
                                 <dt><label for="usr_login_name">'.$gL10n->get('SYS_USERNAME').':</label></dt>
                                 <dd>
                                     <input type="text" id="usr_login_name" name="usr_login_name" style="width: 200px;" maxlength="35" value="'. $user->getValue('usr_login_name'). '" ';
-                                    if($gCurrentUser->isWebmaster() == false && $getNewUser == 0)
+                                    if($gCurrentUser->isWebmaster() == false && $gCurrentUser->editProfile($user->getValue('usr_id')) == false && $getNewUser == 0)
                                     {
                                         echo ' disabled="disabled" ';
                                     }
@@ -477,7 +477,7 @@ echo '
                         {
                             echo '<li>
                                 <dl>
-                                    <dt><label for="usr_password">'.$gL10n->get('SYS_PASSWORD').':</label></dt>
+                                    <dt><label for="usr_password">'.$gL10n->get('SYS_PASSWORD').' (min. 6 Zeichen):</label></dt>
                                     <dd>
                                         <input type="password" id="usr_password" name="usr_password" style="width: 130px;" maxlength="20" />
                                         <span class="mandatoryFieldMarker" title="'.$gL10n->get('SYS_MANDATORY_FIELD').'">*</span>
@@ -522,7 +522,8 @@ echo '
             }
 
             // bei schneller Registrierung duerfen nur die Pflichtfelder ausgegeben werden
-            if($show_field == true)
+            //if($show_field == true)
+            if ($field->getValue('usf_disabled') == 0)
             {
                 // Html des Feldes ausgeben
                 echo getFieldCode($field->getValue('usf_name_intern'), $user, $getNewUser);

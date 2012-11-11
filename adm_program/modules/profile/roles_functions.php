@@ -62,7 +62,7 @@ function getRoleMemberships($gDb,$gCurrentUser,$user,$result_role,$count_role,$d
 
     while($row = $gDb->fetch_array($result_role))
     {
-        if($gCurrentUser->viewRole($row['mem_rol_id']) && $row['rol_visible']==1)
+        if(($gCurrentUser->viewRole($row['mem_rol_id']) || $gCurrentUser->getValue('usr_id') == $user->getValue('usr_id')) && $row['rol_visible']==1)
         {
             $show_rol_end_date = false;
 
@@ -83,7 +83,7 @@ function getRoleMemberships($gDb,$gCurrentUser,$user,$result_role,$count_role,$d
                 <dl>
                     <dt>
                         '. $role->getValue('cat_name'). ' - ';
-                            if($gCurrentUser->viewRole($member->getValue('mem_rol_id')))
+                            if($gCurrentUser->viewRole($member->getValue('mem_rol_id')) || $gCurrentUser->getValue('usr_id') == $user->getValue('usr_id'))
                             {
                                 $roleMemHTML .= '<a href="'. $g_root_path. '/adm_program/modules/lists/lists_show.php?mode=html&amp;rol_id='. $member->getValue('mem_rol_id'). '" title="'. $role->getValue('rol_description'). '">'. $role->getValue('rol_name'). '</a>';
                             }

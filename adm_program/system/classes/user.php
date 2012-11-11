@@ -256,7 +256,7 @@ class User extends TableUsers
         }
         else
         {
-			return $this->mProfileFieldsData->getValue($field_name, $format);
+			return $this->mProfileFieldsData->getValue($field_name, $format, $this->getValue('usr_id'));
         }
     }
 
@@ -405,14 +405,14 @@ class User extends TableUsers
             // gesperrte Felder duerfen nur von Usern mit dem Rollenrecht 'alle Benutzerdaten bearbeiten' geaendert werden
             // bei Registrierung muss die Eingabe auch erlaubt sein
             if((  $this->mProfileFieldsData->getProperty($field_name, 'usf_disabled') == 1
-               && $gCurrentUser->editUsers() == true)
+               && ($gCurrentUser->editUsers() == true || $gCurrentUser->editProfile($this->getValue('usr_id'))))
             || $this->mProfileFieldsData->getProperty($field_name, 'usf_disabled') == 0
             || ($gCurrentUser->getValue('usr_id') == 0 && $this->getValue('usr_id') == 0))
             {
                 // versteckte Felder duerfen nur von Usern mit dem Rollenrecht 'alle Benutzerdaten bearbeiten' geaendert werden
                 // oder im eigenen Profil
                 if((  $this->mProfileFieldsData->getProperty($field_name, 'usf_hidden') == 1
-                   && $gCurrentUser->editUsers() == true)
+                   && ($gCurrentUser->editUsers() == true || $gCurrentUser->editProfile($this->getValue('usr_id'))))
                 || $this->mProfileFieldsData->getProperty($field_name, 'usf_hidden') == 0
                 || $gCurrentUser->getValue('usr_id') == $this->getValue('usr_id'))
                 {
@@ -493,18 +493,68 @@ class User extends TableUsers
             {
                 return true;
             }
-            else
+            else if ($this->editUsers() == true)
             {
-                return $this->editUsers();
+                return true;
             }
 
         }
-        else
+        else if ($this->editUsers() == true)
         {
-            return $this->editUsers();
+            return true;
         }
+        if ($this->isLeaderFor($profileID) && $this->isLGF())
+        {
+            return true;
+        }
+        return false;
     }
 
+    // Funktion prueft, ob der angemeldete User irgendwo LGF ist
+    public function isLGF()
+    {
+        $sql = "SELECT * FROM ". TBL_ROLES. " WHERE rol_id IN (SELECT mem_rol_id FROM ". TBL_MEMBERS. " WHERE mem_usr_id = " . $this->getValue("usr_id") . " AND mem_end >= curdate()) AND rol_name LIKE '%LGF%'";
+        $this->db->query($sql);
+        if($this->db->num_rows() > 0)
+        {
+            while($row = $this->db->fetch_array())
+            {
+            }
+            return true;
+        }
+        return false;
+    }
+
+    // Funktion prueft, ob der angemeldete User irgendwo Leiter ist
+    public function isLeader()
+    {
+        $sql = "SELECT mem_rol_id FROM ". TBL_MEMBERS. " WHERE mem_usr_id = " . $this->getValue("usr_id") . " AND mem_leader = 1 AND mem_end >= curdate()";
+        $this->db->query($sql);
+        if($this->db->num_rows() > 0)
+        {
+            while($row = $this->db->fetch_array())
+            {
+            }
+            return true;
+        }
+        return false;
+    }
+
+    // Funktion prueft, ob der angemeldete User irgendwo Leiter ist
+    public function isLeaderFor($profileID)
+    {
+        $sql = "SELECT * FROM ". TBL_MEMBERS. " WHERE mem_rol_id IN (SELECT mem_rol_id FROM ". TBL_MEMBERS. " WHERE mem_usr_id = " . $this->getValue("usr_id") . " AND mem_leader = 1 AND mem_end >= curdate()) AND mem_usr_id = " . $profileID . " AND mem_end >= curdate()";
+        $this->db->query($sql);
+        if($this->db->num_rows() > 0)
+        {
+            while($row = $this->db->fetch_array())
+            {
+            }
+            return true;
+        }
+        return false;
+    }
+    
     // Funktion prueft, ob der angemeldete User fremde Benutzerdaten bearbeiten darf
     public function editUsers()
     {

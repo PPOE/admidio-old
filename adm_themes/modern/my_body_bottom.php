@@ -100,7 +100,7 @@
                     style="vertical-align: middle;" src="'. THEME_PATH. '/icons/new_registrations.png" alt="'.$gL10n->get('NWU_NEW_REGISTRATIONS').'" title="'.$gL10n->get('NWU_NEW_REGISTRATIONS').'" /></a>
                     <a href="'. $g_root_path. '/adm_program/administration/new_user/new_user.php">'.$gL10n->get('NWU_NEW_REGISTRATIONS').'</a></span>';
                 }
-                if($gCurrentUser->editUsers())
+                if($gCurrentUser->editUsers() || $gCurrentUser->isLeader())
                 {
                     echo '<span class="menu"><a href="'. $g_root_path. '/adm_program/administration/members/members.php"><img
                     style="vertical-align: middle;" src="'. THEME_PATH. '/icons/user_administration.png" alt="'.$gL10n->get('MEM_USER_MANAGEMENT').'" title="'.$gL10n->get('MEM_USER_MANAGEMENT').'" /></a>
