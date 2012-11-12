@@ -123,7 +123,7 @@ function getFieldCode($fieldNameIntern, $user, $getNewUser)
     $disabled = '';
     if($gProfileFields->getProperty($fieldNameIntern, 'usf_disabled') == 1 && $gCurrentUser->editUsers() == false &&  ($gCurrentUser->editProfile($user->getValue('usr_id')) == false || $gCurrentUser->isLGF() == false) && $getNewUser == 0)
     {
-    $disabled = ' disabled="disabled" ';
+    $disabled = ' disabled="disabled" style="background=#AAA;" ';
     }
 
     // Code fuer die einzelnen Felder zusammensetzen    
@@ -459,7 +459,7 @@ echo '
                                     <input type="text" id="usr_login_name" name="usr_login_name" style="width: 200px;" maxlength="35" value="'. $user->getValue('usr_login_name'). '" ';
                                     if($gCurrentUser->isWebmaster() == false && $gCurrentUser->editProfile($user->getValue('usr_id')) == false && $getNewUser == 0)
                                     {
-                                        echo ' disabled="disabled" ';
+                                        echo ' disabled="disabled" style="background: #AAA;" ';
                                     }
                                     echo ' />';
                                     if($getNewUser > 0)
@@ -522,11 +522,15 @@ echo '
             }
 
             // bei schneller Registrierung duerfen nur die Pflichtfelder ausgegeben werden
-            //if($show_field == true)
-            if ($field->getValue('usf_disabled') == 0)
+            if($show_field == true)
+            //if ($field->getValue('usf_disabled') == 0)
             {
                 // Html des Feldes ausgeben
-                echo getFieldCode($field->getValue('usf_name_intern'), $user, $getNewUser);
+		$text = getFieldCode($field->getValue('usf_name_intern'), $user, $getNewUser);
+		if (strpos($text, 'disabled="disabled"'))
+                  echo str_replace('style="', 'style="background: #AAA;', $text);
+		else
+		  echo $text;
             }
         }
         
