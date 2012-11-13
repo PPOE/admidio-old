@@ -65,7 +65,9 @@ if(strlen($getSearch) > 0)
                               OR email.usd_value LIKE \''.$search_string.'\'
                               OR website.usd_value LIKE \''.$search_string.'\'
                               OR usr_id LIKE \''.$search_string.'\'
-                              OR first_name.usd_value || \' \' || last_name.usd_value  LIKE \''.$search_string.'\' ) ';
+                              OR first_name.usd_value LIKE \''.$search_string.'\'
+                              OR last_name.usd_value LIKE \''.$search_string.'\'
+                              OR first_name.usd_value || \' \' || last_name.usd_value LIKE \''.$search_string.'\' ) ';
 }
 else
 {
@@ -92,21 +94,22 @@ if($getMembers == 1)
 // Anzahl relevanter Datensaetze ermitteln
 $sql = 'SELECT COUNT(1) as count
 		  FROM '. TBL_USERS. '
-          JOIN '. TBL_USER_DATA. ' as last_name
+     LEFT JOIN '. TBL_USER_DATA. ' as last_name
             ON last_name.usd_usr_id = usr_id
            AND last_name.usd_usf_id = '. $gProfileFields->getProperty('LAST_NAME', 'usf_id'). '
-          JOIN '. TBL_USER_DATA. ' as first_name
+     LEFT JOIN '. TBL_USER_DATA. ' as first_name
             ON first_name.usd_usr_id = usr_id
            AND first_name.usd_usf_id = '. $gProfileFields->getProperty('FIRST_NAME', 'usf_id'). '
-          JOIN '. TBL_USER_DATA. ' as email
+     LEFT JOIN '. TBL_USER_DATA. ' as email
             ON email.usd_usr_id = usr_id
            AND email.usd_usf_id = '. $gProfileFields->getProperty('EMAIL', 'usf_id'). '
-          JOIN '. TBL_USER_DATA. ' as website
+     LEFT JOIN '. TBL_USER_DATA. ' as website
             ON website.usd_usr_id = usr_id
            AND website.usd_usf_id = '. $gProfileFields->getProperty('WEBSITE', 'usf_id'). '
          WHERE usr_valid = 1
                '.$member_condition.
                  $search_condition;
+echo $sql;
 $result = $gDb->query($sql);
 $row    = $gDb->fetch_array($result);
 $num_members = $row['count'];
