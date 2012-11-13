@@ -59,9 +59,12 @@ $_SESSION['navigation']->addUrl(CURRENT_URL);
 if(strlen($getSearch) > 0)
 {
     // Bedingung fuer die Suchanfrage
-    $search_string = str_replace(',', '', $getSearch). '%';
+    $search_string = '%' . str_replace(',', '', mysql_escape_string($getSearch)). '%';
     $search_condition = ' AND (  last_name.usd_value  || \' \' || first_name.usd_value LIKE \''.$search_string.'\'
                               OR usr_login_name LIKE \''.$search_string.'\'
+                              OR email.usd_value LIKE \''.$search_string.'\'
+                              OR website.usd_value LIKE \''.$search_string.'\'
+                              OR usr_id LIKE \''.$search_string.'\'
                               OR first_name.usd_value || \' \' || last_name.usd_value  LIKE \''.$search_string.'\' ) ';
 }
 else
@@ -95,6 +98,12 @@ $sql = 'SELECT COUNT(1) as count
           JOIN '. TBL_USER_DATA. ' as first_name
             ON first_name.usd_usr_id = usr_id
            AND first_name.usd_usf_id = '. $gProfileFields->getProperty('FIRST_NAME', 'usf_id'). '
+          JOIN '. TBL_USER_DATA. ' as email
+            ON email.usd_usr_id = usr_id
+           AND email.usd_usf_id = '. $gProfileFields->getProperty('EMAIL', 'usf_id'). '
+          JOIN '. TBL_USER_DATA. ' as website
+            ON website.usd_usr_id = usr_id
+           AND website.usd_usf_id = '. $gProfileFields->getProperty('WEBSITE', 'usf_id'). '
          WHERE usr_valid = 1
                '.$member_condition.
                  $search_condition;
