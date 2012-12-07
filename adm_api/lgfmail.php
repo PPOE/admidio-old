@@ -44,7 +44,7 @@ while ($row = mysql_fetch_array($query)) {
   echo "Mail for $lo $id\n";
   foreach ($mails[$lo] AS $mail)
   {
-    echo "Mail to $mail $lo $id\n";
+    echo "NEW Mail to $mail $lo $id\n";
     exec("/var/www/adm_api/info_new.sh $mail $id");
   }
 }
@@ -71,7 +71,7 @@ while ($row = mysql_fetch_array($query)) {
   $lo = $row["LO"];
   foreach ($mails[$lo] AS $mail)
   {
-    echo "Mail to $mail $lo $id\n";
+    echo "DEL Mail to $mail $lo $id\n";
     exec("/var/www/adm_api/info_del.sh $mail $id");
   }
 }
@@ -103,7 +103,7 @@ while ($row = mysql_fetch_array($query)) {
   $mb = $row["MB"];
   $akk = $row["Akk"];
   if ($akk != 1 && $mb == 1) {
-    echo "Mail to $mail $lo $id $mb\n";
+    echo "NOT AKK BUT MB Mail to $mail $lo $id $mb\n";
     exec("/var/www/adm_api/info_not_akk_but_mb.sh $mail $id");
   }
 }

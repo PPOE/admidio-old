@@ -104,10 +104,17 @@ if($getNewUser == 2)
 foreach($gProfileFields->mProfileFields as $field)
 {
     $post_id = 'usf-'. $field->getValue('usf_id');    
-    
-	// check and save only fields that aren't disabled
-	if($gCurrentUser->editUsers() == true || $gCurrentUser->editProfile($getUserId) || $field->getValue('usf_disabled') == 0 || ($field->getValue('usf_disabled') == 1 && $getNewUser > 0))
+    $fieldNameIntern = $field->getValue('usf_name_intern');
+/*	// check and save only fields that aren't disabled
+    if($gProfileFields->getProperty($fieldNameIntern, 'usf_disabled') == 1 && $gCurrentUser->editUsers() == false &&  ($gCurrentUser->editProfile($user->getValue('usr_id')) == false || $gCurrentUser->isLGF() == false) && $getNewUser == 0)
+    {
+	echo $gProfileFields->getProperty($fieldNameIntern, 'usf_disabled') .' == 1 && '. $gCurrentUser->editUsers() .' == false &&  ('.$gCurrentUser->editProfile($user->getValue('usr_id')).' == false || '.$gCurrentUser->isLGF().' == false) && '.$getNewUser.' == 0<br>';
+	echo $gCurrentUser->editUsers() .'== true || '.$gCurrentUser->editProfile($getUserId).' || '.$field->getValue('usf_disabled').' == 0 || ('.$field->getValue('usf_disabled').' == 1 && '.$getNewUser.' > 0)<br>';
+    }*/
+//echo $fieldNameIntern . "?? <br>\n";
+	if($getNewUser == 2 || $gCurrentUser->editUsers() == true || ($gCurrentUser->editProfile($getUserId) && ($field->getValue('usf_disabled') == 0 || $gCurrentUser->isLGF())) || ($field->getValue('usf_disabled') == 1 && $getNewUser > 0))
 	{
+//echo " YES!!<br>\n";
 		if(isset($_POST[$post_id])) 
 		{
 			// Pflichtfelder muessen gefuellt sein

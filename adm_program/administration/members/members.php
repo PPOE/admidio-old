@@ -44,7 +44,7 @@ if (!$gCurrentUser->editUsers() && !$gCurrentUser->isLeader())
 }
 
 // lokale Variablen initialisieren
-$members_per_page = 25; // Anzahl der Mitglieder, die auf einer Seite angezeigt werden
+$members_per_page = 50; // Anzahl der Mitglieder, die auf einer Seite angezeigt werden
 
 // Die zum Caching in der Session zwischengespeicherten Namen werden beim
 // neu laden der Seite immer abgeraeumt...
@@ -76,7 +76,7 @@ else
 
 $member_condition = '';
 
-if($getMembers == 1)
+if($getMembers == 1 || !($gCurrentUser->isWebmaster() || $gCurrentUser->assignRoles() || $gCurrentUser->approveUsers() || $gCurrentUser->editUsers()))
 {
     $member_condition = ' AND EXISTS 
         (SELECT 1
@@ -88,7 +88,20 @@ if($getMembers == 1)
             AND rol_valid  = 1
             AND rol_cat_id = cat_id
             AND (  cat_org_id = '. $gCurrentOrganization->getValue('org_id'). '
-                OR cat_org_id IS NULL )) ';
+                OR cat_org_id IS NULL )';
+if(!($gCurrentUser->isWebmaster() || $gCurrentUser->assignRoles() || $gCurrentUser->approveUsers() || $gCurrentUser->editUsers()))
+{
+    $member_condition .= ' AND (SELECT 1 FROM ' . TBL_MEMBERS . ' WHERE mem_usr_id = '.$gCurrentUser->getValue('usr_id').'
+            AND mem_rol_id = rol_id
+            AND mem_begin <= \''.DATE_NOW.'\'
+            AND mem_end    > \''.DATE_NOW.'\'
+            AND rol_valid  = 1
+            AND mem_leader = 1)) ';
+}
+else
+{
+    $member_condition .= ') ';
+}
 }
 
 // Anzahl relevanter Datensaetze ermitteln
@@ -109,7 +122,6 @@ $sql = 'SELECT COUNT(1) as count
          WHERE usr_valid = 1
                '.$member_condition.
                  $search_condition;
-echo $sql;
 $result = $gDb->query($sql);
 $row    = $gDb->fetch_array($result);
 $num_members = $row['count'];

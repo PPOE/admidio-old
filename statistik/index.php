@@ -1,4 +1,5 @@
 <?php
+exit 0;
 include_once('functions.inc.php');
 include_once('config.read.php');
 include_once('mysql.class.php');
