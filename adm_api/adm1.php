@@ -16,7 +16,7 @@ select T1.usr_id
 from `adm_users` T1 INNER JOIN `adm_user_data` T2
 WHERE T1.usr_id = T2.usd_usr_id
 AND   T2.usd_usf_id = 26
-AND   T2.usd_value >= curdate()
+AND   T2.usd_value + interval 7 day >= curdate()
 )
 and G1.usr_id IN (
 select T3.usr_id

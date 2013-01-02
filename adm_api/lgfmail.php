@@ -7,15 +7,15 @@ mysql_select_db($g_adm_db,$link);
 $los    = array(38 => 'Burgenland', 40 => 'K&auml;rnten', 39 => 'Nieder&ouml;sterreich', 41 => 'Ober&ouml;sterreich', 42 => 'Salzburg', 43 => 'Steiermark', 44 => 'Tirol', 45 => 'Vorarlberg', 37 => 'Wien');
 
 $mails = array(
-37 => array("lgf-wien@piratenpartei.at"),
-38 => array("lgf-burgenland@piratenpartei.at"),
-39 => array("lgf-noe@piratenpartei.at"),
-40 => array("lgf-kaernten@piratenpartei.at"),
-41 => array("lgf-ooe@piratenpartei.at"),
-42 => array("lgf-sbg@piratenpartei.at"),
-43 => array("lgf-steiermark@piratenpartei.at"),
-44 => array("lgf-tirol@piratenpartei.at"),
-45 => array("lgf-vorarlberg@piratenpartei.at")
+37 => array("bv@piratenpartei.at","bgf@piratenpartei.at","lv-wien@piratenpartei.at","lgf-wien@piratenpartei.at"),
+38 => array("bv@piratenpartei.at","bgf@piratenpartei.at","lv-burgenland@piratenpartei.at","lgf-burgenland@piratenpartei.at"),
+39 => array("bv@piratenpartei.at","bgf@piratenpartei.at","lv-noe@piratenpartei.at","lgf-noe@piratenpartei.at"),
+40 => array("bv@piratenpartei.at","bgf@piratenpartei.at","lv-kaernten@piratenpartei.at","lgf-kaernten@piratenpartei.at"),
+41 => array("bv@piratenpartei.at","bgf@piratenpartei.at","lv-ooe@piratenpartei.at","lgf-ooe@piratenpartei.at"),
+42 => array("bv@piratenpartei.at","bgf@piratenpartei.at","lv-sbg@piratenpartei.at","lgf-sbg@piratenpartei.at"),
+43 => array("bv@piratenpartei.at","bgf@piratenpartei.at","lv-steiermark@piratenpartei.at","lgf-steiermark@piratenpartei.at"),
+44 => array("bv@piratenpartei.at","bgf@piratenpartei.at","lv-tirol@piratenpartei.at","lgf-tirol@piratenpartei.at"),
+45 => array("bv@piratenpartei.at","bgf@piratenpartei.at","lv-vorarlberg@piratenpartei.at","lgf-vorarlberg@piratenpartei.at")
 );
 
 $refill = false;

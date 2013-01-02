@@ -44,7 +44,7 @@ foreach($_POST as $key=>$value)
 }
 
 // if no role is selected than show notice
-if($roleCount == 0)
+/*if($roleCount == 0)
 {
 	if($getInline == 0)
 	{
@@ -54,7 +54,7 @@ if($roleCount == 0)
 	{
 		die($gL10n->get('PRO_ROLE_NOT_ASSIGNED'));
 	}
-}
+}*/
 
 if($gCurrentUser->assignRoles())
 {
