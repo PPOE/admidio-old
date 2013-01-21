@@ -1,1 +1,0 @@
-sendemail -f mv@piratenpartei.at -t $1 -u "[Admidio] Neues Mitglied zugeordnet" -m "Es wurde ein neues Mitglied deiner LO zugeordnet:\n\nhttps://mitglieder.piratenpartei.at/adm_program/modules/profile/profile.php?user_id=$2\n\nDu musst eingeloggt sein um diesen Link zu oeffnen."
