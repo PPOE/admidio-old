@@ -17,16 +17,16 @@ echo <<<END
 <table class="sortable">
 
 <tr>
-<th> Landesorganisation </th>
-<th> Mitglieder </th>
+<th> Land </th>
+<th> Mitglied </th>
 <th> zahlend </th>
 <th> zahlend in&#160;% </th>
-<th> stimmberechtigt </th>
+<th> Stimmrecht </th>
 <th> stimmber. in&#160;% </th>
 <th> Einwohner in 1000 </th>
-<th> Mitgl. pro Mio. Einw. </th>
+<th> Mitgl. / Mio. Einw. </th>
 <th> Fl&auml;che (km&sup2;) </th>
-<th> Mitglieder pro 1000 km&sup2;
+<th> Mitgl. / 1000 km&sup2;
 </th></tr>
 END;
 
