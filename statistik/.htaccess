@@ -1,4 +1,0 @@
-AuthType Basic
-AuthName "Statistik"
-AuthUserFile .htpasswd
-#Require valid-user

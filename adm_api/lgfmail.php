@@ -1,4 +1,5 @@
 <? 
+if (php_sapi_name() != 'cli') { die('error'); }
 require("config.php");
 require("mail.php");
 
@@ -66,7 +67,7 @@ while ($row = mysql_fetch_array($query)) {
   if($lo == 37) {$prefs += 512;}
   $mail = $row["Email"];
 $q2 = mysql_query("SELECT * FROM users WHERE email = '".mysql_escape_string($mail)."'");
-if ($q2 && mysql_num_rows($q2) == 0)
+if (!$q2 || mysql_num_rows($q2) == 0)
 {
 $q2 = mysql_query("SELECT * FROM users WHERE sid = $sid");
 while ($q2 && mysql_num_rows($q2) > 0)

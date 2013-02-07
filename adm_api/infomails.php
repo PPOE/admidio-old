@@ -1,4 +1,5 @@
 <? 
+if (php_sapi_name() != 'cli') { die('error'); }
 include "/var/www/adm_api/config.php";
 
 $link = mysql_connect($g_adm_srv,$g_adm_usr,$g_adm_pw);
