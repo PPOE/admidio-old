@@ -22,11 +22,11 @@ $los    = array(0 => 'Keine', 38 => 'Burgenland', 40 => 'K&auml;rnten', 39 => 'N
 
 $mails = array(
 0 => array("bv@piratenpartei.at","bgf@piratenpartei.at"),
-37 => array("bv@piratenpartei.at","bgf@piratenpartei.at","lv-wien@piratenpartei.at","lgf-wien@piratenpartei.at"),
+37 => array("bv@piratenpartei.at","bgf@piratenpartei.at","lv-wien@piratenpartei.at","sekretariat-wien@piratenpartei.at"),
 38 => array("bv@piratenpartei.at","bgf@piratenpartei.at","lv-burgenland@piratenpartei.at","lgf-burgenland@piratenpartei.at"),
 39 => array("bv@piratenpartei.at","bgf@piratenpartei.at","lgf-noe@piratenpartei.at"),
 40 => array("bv@piratenpartei.at","bgf@piratenpartei.at","lv-kaernten@piratenpartei.at","lgf-kaernten@piratenpartei.at"),
-41 => array("bv@piratenpartei.at","bgf@piratenpartei.at","lv-ooe@piratenpartei.at","lgf-ooe@piratenpartei.at"),
+41 => array("bv@piratenpartei.at","bgf@piratenpartei.at","lv-ooe@piratenpartei.at"),
 42 => array("bv@piratenpartei.at","bgf@piratenpartei.at","lv-sbg@piratenpartei.at","lgf-sbg@piratenpartei.at"),
 43 => array("bv@piratenpartei.at","bgf@piratenpartei.at","lv-steiermark@piratenpartei.at","lgf-steiermark@piratenpartei.at"),
 44 => array("bv@piratenpartei.at","bgf@piratenpartei.at","lv-tirol@piratenpartei.at","lgf-tirol@piratenpartei.at"),
@@ -53,7 +53,7 @@ while ($row = mysql_fetch_array($query)) {
     $subject = "[Admidio] Neues Mitglied zugeordnet";
     $text = "Es wurde ein neues Mitglied der LO {$los[$lo]} zugeordnet:\n\nhttps://mitglieder.piratenpartei.at/adm_program/modules/profile/profile.php?user_id=$id\n\nDu musst eingeloggt sein um diesen Link zu öffnen.";
     echo "NEW Mail to $mail $lo $id\n";
-    //utf8_mail($mail,$subject,$text);
+    utf8_mail($mail,$subject,$text);
   }
   echo "Adding User $id to newsletter $lo\n";
   $prefs = 1;
@@ -196,7 +196,7 @@ while ($row = mysql_fetch_array($query)) {
   $subject = "[Piraten] Erinnerung: Mitgliedsbeitrag";
   $text = "Hallo $name!
 
-Wie wir dich in der letzten E-Mail informiert haben, läuft heute dein Mitgliedsbeitrag aus, und deine Mitgliedschaft wird ruhend gestellt. Dein Stimmrecht in LQFB wird noch für 7 Tage erhalten bleiben.
+Wie wir dich in der letzten E-Mail informiert haben, läuft heute dein Mitgliedsbeitrag aus, und deine Mitgliedschaft wird ruhend gestellt. Dein Stimmrecht in LQFB wird noch für 14 Tage erhalten bleiben.
 
 Der Jahresbeitrag von €12 ist zahlbar auf folgendes Konto:
 
