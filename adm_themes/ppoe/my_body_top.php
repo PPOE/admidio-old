@@ -17,9 +17,9 @@
 				</ul>
 			<div class="menu-header">
 				<ul id="menu-topnav" class="menu">
-					<li id="menu-item-250" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-255"><a target="_blank" href="https://piratenpartei.at/">Piratenpartei Österreichs</a></li>
+					<li id="menu-item-250" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-255"><a target="_blank" href="http://piratenpartei.at/">Piratenpartei Österreichs</a></li>
 					<li id="menu-item-255" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-255"><a target="_blank" href="http://wiki.piratenpartei.at/wiki/Hauptseite">Wiki</a></li>
-					<li id="menu-item-254" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-254"><a href="/rechtliches/kontakt/">Kontakt</a></li>
+					<li id="menu-item-254" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-254"><a href="http://piratenpartei.at/rechtliches/kontakt/">Kontakt</a></li>
 				</ul>
 			</div>
 			</div>

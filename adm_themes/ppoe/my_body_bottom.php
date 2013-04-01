@@ -125,15 +125,15 @@ if(strpos($_SERVER['REQUEST_URI'], 'index.php') === false)
 					<div class="widget">
 						<h3 class="widget-title">Landesorganisationen</h3>
 						<ul class='xoxo blogroll'>
-							<li><a href="https://www.facebook.com/pages/Piratenpartei-Burgenland/208287709278361" title="Piratenpartei Burgenland auf Facebook" target="_blank">Burgenland</a></li>
-							<li><a href="https://www.facebook.com/pages/Piratenpartei-K%C3%A4rnten/369462009750963" title="Piratenpartei Kärnten auf Facebook" target="_blank">Kärnten</a></li>
-							<li><a href="http://piratenpartei-noe.at/" title="Piratenpartei Niederösterreich" target="_blank">Niederösterreich</a></li>
+							<li><a href="http://burgenland.piratenpartei.at" title="Piratenpartei Burgenland" target="_blank">Burgenland</a></li>
+							<li><a href="http://kaernten.piratenpartei.at" title="Piratenpartei Kärnten" target="_blank">Kärnten</a></li>
+							<li><a href="http://niederoesterreich.piratenpartei.at" title="Piratenpartei Niederösterreich" target="_blank">Niederösterreich</a></li>
 							<li><a href="http://oberoesterreich.piratenpartei.at" title="Piratenpartei Oberösterreich" target="_blank">Oberösterreich</a></li>
-							<li><a href="http://piratenpartei-sbg.at/" title="WEbpage der LO Salzburg">Salzburg</a></li>
-							<li><a href="http://piratenpartei-steiermark.at/" title="Landesorganisation der Piratenpartei">Steiermark</a></li>
+							<li><a href="http://salzburg.piratenpartei.at/" title="Piratenpartei Salzburg" target="_blank">Salzburg</a></li>
+							<li><a href="http://steiermark.piratenpartei.at/" title="Landesorganisation der Piratenpartei">Steiermark</a></li>
 							<li><a href="http://www.piratenpartei-tirol.org" title="Piratenpartei Tirol" target="_blank">Tirol</a></li>
 							<li><a href="http://vorarlberg.piratenpartei.at" title="Piratenpartei Vorarlberg" target="_blank">Vorarlberg</a></li>
-							<li><a href="http://wien.piratenpartei.at" target="_blank">Wien</a></li>
+							<li><a href="http://wien.piratenpartei.at" title="Piratenpartei Wien" target="_blank">Wien</a></li>
 						</ul>
 					</div>
 				</div>
