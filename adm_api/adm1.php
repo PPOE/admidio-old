@@ -8,7 +8,8 @@ $query = mysql_query("select G1.usr_id,
 (select G2.usd_value from `adm_user_data` G2 where G1.usr_id = G2.usd_usr_id AND G2.usd_usf_id = 12) as Email,
 (select G2.usd_value from `adm_user_data` G2 where G1.usr_id = G2.usd_usr_id AND G2.usd_usf_id = 33) as BackupEmail,
 (SELECT G3.mem_rol_id FROM ppoe_mitglieder.adm_members G3 WHERE G1.usr_id = G3.mem_usr_id AND G3.mem_end >= curdate() AND G3.mem_begin <= curdate() AND G3.mem_rol_id >= 37 AND G3.mem_rol_id <= 45 LIMIT 1) AS LO,
-(SELECT G3.mem_rol_id FROM ppoe_mitglieder.adm_members G3 WHERE G1.usr_id = G3.mem_usr_id AND G3.mem_end >= curdate() AND G3.mem_begin <= curdate() AND G3.mem_rol_id IN (90) LIMIT 1) AS OO,
+(SELECT nuts FROM ppoe_mitglieder.adm_user_data G3 LEFT JOIN ppoe_mitglieder.nutsplz ON usd_value = plz WHERE usd_usf_id IN (4,39) AND G1.usr_id = G3.usd_usr_id GROUP BY nuts ORDER BY nuts ASC LIMIT 1 OFFSET 0) AS RO1,
+(SELECT nuts FROM ppoe_mitglieder.adm_user_data G3 LEFT JOIN ppoe_mitglieder.nutsplz ON usd_value = plz WHERE usd_usf_id IN (4,39) AND G1.usr_id = G3.usd_usr_id GROUP BY nuts ORDER BY nuts ASC LIMIT 1 OFFSET 1) AS RO2,
 (select G2.usd_value from `adm_user_data` G2 where G1.usr_id = G2.usd_usr_id AND G2.usd_usf_id = 35 AND G2.usd_value <= curdate()) as AkkDate,
 (select G2.usd_value from `adm_user_data` G2 where G1.usr_id = G2.usd_usr_id AND G2.usd_usf_id = 26 AND G2.usd_value + interval 14 day >= curdate()) as Paid
 from `adm_users` G1
@@ -22,9 +23,8 @@ while ($row = mysql_fetch_assoc($query)) {
   if ($row['Email'] == "mitglied@piratenpartei.at" && strlen($row['BackupEmail']) > 4)
     $row['Email'] = $row['BackupEmail'];
   $row['AkkDate'] = ($row['AkkDate'] != null);
-  $lines .= "$i\t".$row['usr_id']."\t".$row['Email']."\t".$row['LO']."\t".$row['OO']."\t".$row['AkkDate']."\t".$row['Paid']."\n";
+  $lines .= "$i\t".$row['usr_id']."\t".$row['Email']."\t".$row['LO']."\t".$row['RO1'].",".$row['RO2']."\t".$row['AkkDate']."\t".$row['Paid']."\n";
 }
-
 $encrypted2 = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, md5($key2), $lines, MCRYPT_MODE_CBC, md5(md5($key2))));
 echo $encrypted2;
 mysql_close($link);
