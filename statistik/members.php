@@ -4,6 +4,16 @@ include "../adm_api/config.php";
 $link = mysql_connect($g_adm_srv,$g_adm_usr,$g_adm_pw);
 mysql_select_db($g_adm_db,$link);
 
+$lo = 0;
+if (isset($_GET['lo']))
+{
+  $lo = intval($_GET['lo']);
+}
+if ($lo == 0)
+{
+  $lo = 2;
+}
+
 echo <<<END
 <!DOCTYPE html>
 <html lang="de-at" dir="ltr" class="client-nojs">
@@ -14,16 +24,19 @@ echo <<<END
 <script type="text/javascript" src="sorttable.js"></script>
 </head>
 <body>
+
+<a href="table.php">Bundesl&auml;nder</a> &bull; <a href="nuts.php">NUTS-Regionen</a> &bull; <a href="members.php">Altersstatistik, etc.</a> <br />
+
 <table>
 <tr><th>Merkmal</th><th>Häufigkeit und Wert</th></tr>
 END;
 $members = 0;
-$query = mysql_query("SELECT COUNT(*) AS c FROM adm_members WHERE mem_rol_id = 2 AND mem_begin <= curdate() AND mem_end >= curdate();");
+$query = mysql_query("SELECT COUNT(*) AS c FROM adm_members WHERE mem_rol_id = $lo AND mem_begin <= curdate() AND mem_end >= curdate();");
 if ($query && ($row = mysql_fetch_assoc($query))) {
 $members = $row['c'];
 }
 echo "<tr><td>Geschlecht</td><td><table border=1><tr><th>Wert</th><th>Häufigkeit</th></tr>";
-$query = mysql_query("SELECT * FROM (SELECT usd_value AS v,COUNT(*) AS c FROM ppoe_mitglieder.adm_user_data WHERE usd_usf_id = 11 AND usd_usr_id IN (SELECT mem_usr_id FROM adm_members WHERE mem_rol_id = 2 AND mem_begin <= curdate() AND mem_end >= curdate()) GROUP BY usd_value ORDER BY c DESC LIMIT 10) A WHERE c >= 25;");
+$query = mysql_query("SELECT * FROM (SELECT usd_value AS v,COUNT(*) AS c FROM ppoe_mitglieder.adm_user_data WHERE usd_usf_id = 11 AND usd_usr_id IN (SELECT mem_usr_id FROM adm_members WHERE mem_rol_id = $lo AND mem_begin <= curdate() AND mem_end >= curdate()) GROUP BY usd_value ORDER BY c DESC LIMIT 10) A WHERE c >= 25;");
 $members_c = $members;
 while ($query && ($row = mysql_fetch_assoc($query))) {
 echo "<tr><td>".str_replace(array('1','2'),array('männlich','weiblich'),$row['v'])."</td><td>{$row['c']}</td></tr>";
@@ -33,7 +46,7 @@ echo "<tr><td>Rest</td><td>$members_c</td>";
 echo "</tr></table></tr>";
 
 echo "<tr><td>Vorname</td><td><table border=1><tr><th>Wert</th><th>Häufigkeit</th></tr>";
-$query = mysql_query("SELECT * FROM (SELECT usd_value AS v,COUNT(*) AS c FROM ppoe_mitglieder.adm_user_data WHERE usd_usf_id = 2 AND usd_usr_id IN (SELECT mem_usr_id FROM adm_members WHERE mem_rol_id = 2 AND mem_begin <= curdate() AND mem_end >= curdate()) GROUP BY usd_value ORDER BY c DESC LIMIT 10) A WHERE c >= 25;");
+$query = mysql_query("SELECT * FROM (SELECT usd_value AS v,COUNT(*) AS c FROM ppoe_mitglieder.adm_user_data WHERE usd_usf_id = 2 AND usd_usr_id IN (SELECT mem_usr_id FROM adm_members WHERE mem_rol_id = $lo AND mem_begin <= curdate() AND mem_end >= curdate()) GROUP BY usd_value ORDER BY c DESC LIMIT 10) A WHERE c >= 25;");
 $members_c = $members;
 while ($query && ($row = mysql_fetch_assoc($query))) {
 echo "<tr><td>{$row['v']}</td><td>{$row['c']}</td></tr>";
@@ -43,7 +56,7 @@ echo "<tr><td>Rest</td><td>$members_c</td>";
 echo "</tr></table></tr>";
 
 echo "<tr><td>PLZ</td><td><table border=1><tr><th>Wert</th><th>Häufigkeit</th></tr>";
-$query = mysql_query("SELECT * FROM (SELECT usd_value AS v,COUNT(*) AS c FROM ppoe_mitglieder.adm_user_data WHERE usd_usf_id = 4 AND usd_usr_id IN (SELECT mem_usr_id FROM adm_members WHERE mem_rol_id = 2 AND mem_begin <= curdate() AND mem_end >= curdate()) GROUP BY usd_value ORDER BY c DESC LIMIT 10) A WHERE c >= 25;");
+$query = mysql_query("SELECT * FROM (SELECT usd_value AS v,COUNT(*) AS c FROM ppoe_mitglieder.adm_user_data WHERE usd_usf_id = 4 AND usd_usr_id IN (SELECT mem_usr_id FROM adm_members WHERE mem_rol_id = $lo AND mem_begin <= curdate() AND mem_end >= curdate()) GROUP BY usd_value ORDER BY c DESC LIMIT 10) A WHERE c >= 25;");
 $members_c = $members;
 while ($query && ($row = mysql_fetch_assoc($query))) {
 echo "<tr><td>{$row['v']}</td><td>{$row['c']}</td></tr>";
@@ -53,7 +66,7 @@ echo "<tr><td>Rest</td><td>$members_c</td>";
 echo "</tr></table></td></tr>";
 
 echo "<tr><td>Ort</td><td><table border=1><tr><th>Wert</th><th>Häufigkeit</th></tr>";
-$query = mysql_query("SELECT * FROM (SELECT usd_value AS v,COUNT(*) AS c FROM ppoe_mitglieder.adm_user_data WHERE usd_usf_id = 5 AND usd_usr_id IN (SELECT mem_usr_id FROM adm_members WHERE mem_rol_id = 2 AND mem_begin <= curdate() AND mem_end >= curdate()) GROUP BY usd_value ORDER BY c DESC LIMIT 10) A WHERE c >= 25;");
+$query = mysql_query("SELECT * FROM (SELECT usd_value AS v,COUNT(*) AS c FROM ppoe_mitglieder.adm_user_data WHERE usd_usf_id = 5 AND usd_usr_id IN (SELECT mem_usr_id FROM adm_members WHERE mem_rol_id = $lo AND mem_begin <= curdate() AND mem_end >= curdate()) GROUP BY usd_value ORDER BY c DESC LIMIT 10) A WHERE c >= 25;");
 $members_c = $members;
 while ($query && ($row = mysql_fetch_assoc($query))) {
 echo "<tr><td>{$row['v']}</td><td>{$row['c']}</td></tr>";
@@ -63,7 +76,7 @@ echo "<tr><td>Rest</td><td>$members_c</td>";
 echo "</tr></table></td></tr>";
 
 echo "<tr><td>Land</td><td><table border=1><tr><th>Wert</th><th>Häufigkeit</th></tr>";
-$query = mysql_query("SELECT * FROM (SELECT usd_value AS v,COUNT(*) AS c FROM ppoe_mitglieder.adm_user_data WHERE usd_usf_id = 6 AND usd_usr_id IN (SELECT mem_usr_id FROM adm_members WHERE mem_rol_id = 2 AND mem_begin <= curdate() AND mem_end >= curdate()) GROUP BY usd_value ORDER BY c DESC LIMIT 10) A WHERE c >= 25;");
+$query = mysql_query("SELECT * FROM (SELECT usd_value AS v,COUNT(*) AS c FROM ppoe_mitglieder.adm_user_data WHERE usd_usf_id = 6 AND usd_usr_id IN (SELECT mem_usr_id FROM adm_members WHERE mem_rol_id = $lo AND mem_begin <= curdate() AND mem_end >= curdate()) GROUP BY usd_value ORDER BY c DESC LIMIT 10) A WHERE c >= 25;");
 $members_c = $members;
 while ($query && ($row = mysql_fetch_assoc($query))) {
 echo "<tr><td>{$row['v']}</td><td>{$row['c']}</td></tr>";
@@ -73,7 +86,7 @@ echo "<tr><td>Rest</td><td>$members_c</td>";
 echo "</tr></table></td></tr>";
 
 echo "<tr><td>Altersdurchschnitt</td><td>";
-$query = mysql_query("SELECT AVG(v) AS v FROM (SELECT (TO_DAYS(NOW()) - TO_DAYS(usd_value)) / 365.25 AS v FROM ppoe_mitglieder.adm_user_data WHERE usd_usf_id = 10 AND usd_usr_id IN (SELECT mem_usr_id FROM adm_members WHERE mem_rol_id = 2 AND mem_begin <= curdate() AND mem_end >= curdate())) A WHERE v >= 10 AND v <= 110;");
+$query = mysql_query("SELECT AVG(v) AS v FROM (SELECT (TO_DAYS(NOW()) - TO_DAYS(usd_value)) / 365.25 AS v FROM ppoe_mitglieder.adm_user_data WHERE usd_usf_id = 10 AND usd_usr_id IN (SELECT mem_usr_id FROM adm_members WHERE mem_rol_id = $lo AND mem_begin <= curdate() AND mem_end >= curdate())) A WHERE v >= 10 AND v <= 110;");
 if ($query && ($row = mysql_fetch_assoc($query))) {
 echo round($row['v'],1);
 }
@@ -89,7 +102,7 @@ echo <<<END
 $(function () {
 	var members = [
 END;
-$query = mysql_query("SELECT v,COUNT(v) AS c FROM (SELECT ROUND((TO_DAYS(NOW()) - TO_DAYS(usd_value)) / 365.25) AS v FROM ppoe_mitglieder.adm_user_data WHERE usd_usf_id = 10 AND usd_usr_id IN (SELECT mem_usr_id FROM adm_members WHERE mem_rol_id = 2 AND mem_begin <= curdate() AND mem_end >= curdate())) A WHERE v >= 10 AND v <= 110 GROUP BY v;");
+$query = mysql_query("SELECT v,COUNT(v) AS c FROM (SELECT ROUND((TO_DAYS(NOW()) - TO_DAYS(usd_value)) / 365.25) AS v FROM ppoe_mitglieder.adm_user_data WHERE usd_usf_id = 10 AND usd_usr_id IN (SELECT mem_usr_id FROM adm_members WHERE mem_rol_id = $lo AND mem_begin <= curdate() AND mem_end >= curdate())) A WHERE v >= 10 AND v <= 110 GROUP BY v;");
 $comma = false;
 while ($query && ($row = mysql_fetch_assoc($query))) {
 if ($comma)
@@ -101,13 +114,15 @@ echo <<<END
 	];
         var members2 = [
 END;
-$query = mysql_query("SELECT v,COUNT(v) AS c FROM (SELECT ROUND((TO_DAYS(NOW()) - TO_DAYS(usd_value)) / 365.25 / 5) * 5 AS v FROM ppoe_mitglieder.adm_user_data WHERE usd_usf_id = 10 AND usd_usr_id IN (SELECT mem_usr_id FROM adm_members WHERE mem_rol_id = 2 AND mem_begin <= curdate() AND mem_end >= curdate())) A WHERE v >= 10 AND v <= 110 GROUP BY v;");
+$query = mysql_query("SELECT v,COUNT(v) AS c FROM (SELECT ROUND((TO_DAYS(NOW()) - TO_DAYS(usd_value)) / 365.25 / 5) * 5 AS v FROM ppoe_mitglieder.adm_user_data WHERE usd_usf_id = 10 AND usd_usr_id IN (SELECT mem_usr_id FROM adm_members WHERE mem_rol_id = $lo AND mem_begin <= curdate() AND mem_end >= curdate())) A WHERE v >= 10 AND v <= 110 GROUP BY v;");
 $comma = false;
+$memmax = 0;
 while ($query && ($row = mysql_fetch_assoc($query))) {
 if ($comma)
         echo ",";
 $comma = true;
 echo "[{$row['v']},{$row['c']}]";
+$memmax = max($memmax,intval($row['c']));
 }
 echo <<<END
         ];
@@ -162,11 +177,11 @@ echo <<<END
 		yaxis: {
 			show: true,
 			min: 0,
-			max: 160,
+			max: $memmax,
 			minTickSize: 1
 		},
 		legend: {
-			position: "nw"
+			position: "ne"
 		}
 	};
     

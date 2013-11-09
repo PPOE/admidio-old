@@ -4,13 +4,23 @@ include "../adm_api/config.php";
 $link = mysql_connect($g_adm_srv,$g_adm_usr,$g_adm_pw);
 mysql_select_db($g_adm_db,$link);
 
+$gcopy = $_GET;
+foreach ($gcopy as $g => $v)
+{
+  if (strpos("=", $g) !== false)
+  {
+    $pair = explode("=", $g, 2);
+    $_GET[$pair[0]] = $pair[1];
+  }
+}
+
 // Anzeige-Optionen
 if(isset($_GET['width']) && strlen($_GET['width'])>0 && isset($_GET['height']) && strlen($_GET['height'])>0){
         $page_width = intval($_GET['width']);
         $page_height = intval($_GET['height']);
 } else {
-        $page_width = 918;
-        $page_height = 600;
+        $page_width = 665;
+        $page_height = 320;
 }
 
 $all = 0;
@@ -71,15 +81,15 @@ foreach($laender as $name=>$count){
 <script type="text/javascript">
 $(function () {
 	var imgs = {
-		"Burgenland":"https://piratenpartei.at/wp-content/uploads/laender/Burgenland.png",
-		"K&auml;rnten":"https://piratenpartei.at/wp-content/uploads/laender/Kaernten.png",
-		"Ober&ouml;sterreich":"https://piratenpartei.at/wp-content/uploads/laender/Oberoesterreich.png",
-		"Nieder&ouml;sterreich":"https://piratenpartei.at/wp-content/uploads/laender/Niederoesterreich.png",
-		"Salzburg":"https://piratenpartei.at/wp-content/uploads/laender/Salzburg.png",
-		"Steiermark":"https://piratenpartei.at/wp-content/uploads/laender/Steiermark.png",
-		"Tirol":"https://piratenpartei.at/wp-content/uploads/laender/Tirol.png",
-		"Vorarlberg":"https://piratenpartei.at/wp-content/uploads/laender/Vorarlberg.png",
-		"Wien":"https://piratenpartei.at/wp-content/uploads/laender/Wien.png"
+		"Burgenland":"https://archiv.piratenpartei.at/wp-content/uploads/laender/Burgenland.png",
+		"K&auml;rnten":"https://archiv.piratenpartei.at/wp-content/uploads/laender/Kaernten.png",
+		"Ober&ouml;sterreich":"https://archiv.piratenpartei.at/wp-content/uploads/laender/Oberoesterreich.png",
+		"Nieder&ouml;sterreich":"https://archiv.piratenpartei.at/wp-content/uploads/laender/Niederoesterreich.png",
+		"Salzburg":"https://archiv.piratenpartei.at/wp-content/uploads/laender/Salzburg.png",
+		"Steiermark":"https://archiv.piratenpartei.at/wp-content/uploads/laender/Steiermark.png",
+		"Tirol":"https://archiv.piratenpartei.at/wp-content/uploads/laender/Tirol.png",
+		"Vorarlberg":"https://archiv.piratenpartei.at/wp-content/uploads/laender/Vorarlberg.png",
+		"Wien":"https://archiv.piratenpartei.at/wp-content/uploads/laender/Wien.png"
 	};
 	var doptions = {
 		series: {

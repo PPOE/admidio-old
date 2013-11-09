@@ -3,14 +3,23 @@ include "../adm_api/config.php";
 
 $link = mysql_connect($g_adm_srv,$g_adm_usr,$g_adm_pw);
 mysql_select_db($g_adm_db,$link);
+$gcopy = $_GET;
+foreach ($gcopy as $g => $v)
+{
+  if (strpos("=",$g) !== false)
+  {
+    $pair = explode("=", $g, 2);
+    $_GET[$pair[0]] = $pair[1];
+  }
+}
 
 // Anzeige-Optionen
 if(isset($_GET['width']) && strlen($_GET['width'])>0 && isset($_GET['height']) && strlen($_GET['height'])>0){
 	$page_width = intval($_GET['width']);
 	$page_height = intval($_GET['height']);
 } else {
-	$page_width = 918;
-	$page_height = 600;
+	$page_width = 665;
+	$page_height = 320;
 }
 
 $page_width -= 50; // make it work with the iframe
@@ -28,15 +37,24 @@ $container_height = $page_height - $copy_height;
 
 $c = 0;
 $stat = array();
-$query = mysql_query("SELECT * FROM ppoe_mv_info.mv_statistik WHERE LO = $lo ORDER BY timestamp ASC;");
+$q = "";
+/*if ($lo == 0)
+{
+  $q = "SELECT * FROM ppoe_mv_info.mv_statistik GROUP BY timestamp ORDER BY timestamp ASC;";
+}
+else*/
+{
+  $q = "SELECT * FROM ppoe_mv_info.mv_statistik WHERE LO = $lo ORDER BY timestamp ASC;";
+}
+$query = mysql_query($q);
 while ($query && ($row = mysql_fetch_array($query))) {
 	$stat[$c++] = array(
 			"members" => $row["members"],
+                        "akk" => $row["akk"],
 			"users" => $row["users"],
 			"datum" => $row["timestamp"]
 			);
 }
-
 mysql_close($link);
 
 $c = count($stat);
@@ -52,7 +70,9 @@ foreach($stat as $id=>$data){
 }
 $datastr2 = "";
 $c1=1;
+$memmax = 20;
 foreach($stat as $id=>$data){
+        $memmax = max($memmax,intval($data["users"] * 1.2));
 	$mtime = strtotime($data["datum"])*1000;
 	$datastr2.= "[".$mtime.",".$data["users"]."]";
 	if($c1!==$c){
@@ -60,6 +80,17 @@ foreach($stat as $id=>$data){
 	}
 	$c1++;
 }
+$datastr3 = "";
+$c1=1;
+foreach($stat as $id=>$data){
+	$mtime = strtotime($data["datum"])*1000;
+	$datastr3.= "[".$mtime.",".$data["akk"]."]";
+	if($c1!==$c){
+		$datastr3 .= ",";
+	}
+	$c1++;
+}
+
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -75,11 +106,17 @@ foreach($stat as $id=>$data){
 $(function () {
 	var members = [<?php echo $datastr1; ?>];
 	var users = [<?php echo $datastr2; ?>];
+	var akk = [<?php echo $datastr3; ?>];
 	var memdata = {	label: "Stimmberechtigt", data: members };
 	var userdata = { label: "Mitglieder", data: users };
-	var data = 	[ memdata , userdata ];
+	var akkdata = { label: "Liquid", data: akk };
+	var data = 	[ memdata , userdata, akkdata ];
 
 	var datasets = {
+		"Liquid": {
+			label: "Liquid Accounts",
+			data: akk
+		},
 		"Mitglieder": {
 			label: "Stimmberechtigt",
 			data: members
@@ -128,7 +165,8 @@ $(function () {
 		yaxis: {
 			show: true,
 			min: 0,
-			minTickSize: 1
+			minTickSize: 1,
+			max: <?echo $memmax;?>
 		},
 		legend: {
 			position: "nw"
