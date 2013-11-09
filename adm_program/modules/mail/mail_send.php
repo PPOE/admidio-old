@@ -45,6 +45,8 @@ $_SESSION['mail_request'] = $_REQUEST;
 
 // Pruefungen, ob die Seite regulaer aufgerufen wurde
 
+$members_in_region = false;
+
 if ($getUserId > 0)
 {
     // Falls eine Usr_id uebergeben wurde, muss geprueft werden ob der User ueberhaupt
@@ -76,7 +78,6 @@ if ($getUserId > 0)
 elseif ($postRoleId > 0)
 {
     // wird eine bestimmte Rolle aufgerufen, dann pruefen, ob die Rechte dazu vorhanden sind
-
     $sql = 'SELECT rol_mail_this_role, rol_name, rol_id 
               FROM '. TBL_ROLES. ', '. TBL_CATEGORIES. '
              WHERE rol_cat_id    = cat_id
@@ -94,6 +95,11 @@ elseif ($postRoleId > 0)
     || $row['rol_id']  == null)
     {
         $gMessage->show($gL10n->get('SYS_INVALID_PAGE_VIEW'));
+    }
+    if ($row['rol_name'] == 'Mitglieder in meiner Nähe')
+    {
+      $members_in_region = true;
+      $_POST['show_members'] = 2;
     }
 }
 
@@ -120,10 +126,18 @@ if(strlen($_POST['name']) == 0)
     $gMessage->show($gL10n->get('SYS_FIELD_EMPTY', $gL10n->get('SYS_NAME')));
 }
 
+$nuts = '';
+
+    $sql = 'SELECT nuts FROM nutsplz WHERE plz = ' . $gCurrentUser->getValue('POSTCODE');
+    $result = $gDb->query($sql);
+    $row    = $gDb->fetch_array($result);
+$nuts = $row['nuts'];
+
 //Absenderangaben checken falls der User eingeloggt ist, damit ein paar schlaue User nicht einfach die Felder aendern koennen...
-if ( $gValidLogin 
+if (( $gValidLogin 
 && (  $_POST['mailfrom'] != $gCurrentUser->getValue('EMAIL') 
-   || $_POST['name'] != $gCurrentUser->getValue('FIRST_NAME').' '.$gCurrentUser->getValue('LAST_NAME')) )
+   || $_POST['name'] != $gCurrentUser->getValue('FIRST_NAME').' '.$gCurrentUser->getValue('LAST_NAME')))
+|| strlen($nuts) != 5 )
 {
     $gMessage->show($gL10n->get('SYS_INVALID_PAGE_VIEW'));
 }
@@ -279,7 +293,13 @@ else
           $sqlConditions .= ' AND 1 = 0 ';
       } 
     }
-
+    $region_join = '';
+    if ($members_in_region)
+    {
+      $postRoleId = 2;
+      $sqlConditions .= " AND nuts = '$nuts'";
+      $region_join = 'LEFT JOIN nutsplz ON plz.usd_value = nutsplz.plz';
+    }
     
     $sql   = 'SELECT first_name.usd_value as first_name, last_name.usd_value as last_name, 
                      email.usd_value as email, rol_name
@@ -305,6 +325,7 @@ else
                 LEFT JOIN '. TBL_USER_DATA. ' as plz
                   ON plz.usd_usr_id = usr_id
                  AND plz.usd_usf_id = '. $gProfileFields->getProperty('POSTCODE', 'usf_id'). '
+                '.$region_join.'
                WHERE rol_id      = '.$postRoleId.'
                  AND rol_cat_id  = cat_id
                  AND (  cat_org_id  = '. $gCurrentOrganization->getValue('org_id'). '
@@ -320,7 +341,7 @@ else
 	if ($gValidLogin)
 	{
 		$sql =$sql. ' AND usr_id <> '. $gCurrentUser->getValue('usr_id');
-        } 
+        }
     $result = $gDb->query($sql . " GROUP BY email");
     $sentmails = $gDb->num_rows($result);
     if($gDb->num_rows($result) > 0)
@@ -352,7 +373,7 @@ if (isset($_POST['carbon_copy']) && $_POST['carbon_copy'] == true)
     $email->setCopyToSenderFlag();
 
     //Falls der User eingeloggt ist, werden die Empfaenger der Mail in der Kopie aufgelistet
-    if ($gValidLogin)
+    if ($gValidLogin && $gCurrentUser->editUsers())
     {
         $email->setListRecipientsFlag();
     }

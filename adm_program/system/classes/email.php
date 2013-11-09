@@ -67,6 +67,8 @@
  *
  *****************************************************************************/
 
+require_once(SERVER_PATH . "/adm_program/system/qmail.php");
+
 class Email
 {
 private $countBoundaries;   // number of boundaries in email
@@ -611,7 +613,7 @@ public function sendEmail()
 
                 // Mail wird jetzt versendet...
                 // das Versenden in UTF8 funktioniert noch nicht bei allen Mailclients (Outlook, GMX)
-                if (!mail($recipient, $subject, $this->mail_body, $this->mail_properties))
+                if (!qmail($recipient, $subject, $this->mail_body, $this->mail_properties))
                 {
                      return false;
                 }
@@ -635,8 +637,8 @@ public function sendEmail()
 
         // Mail wird jetzt versendet...
         // das Versenden in UTF8 funktioniert noch nicht bei allen Mailclients (Outlook, GMX)
-        if (!mail($recipient, $subject, $this->mail_body, $this->mail_properties))
-//        if (!mail(utf8_decode($recipient), utf8_decode($subject),  $this->mail_body, utf8_decode($this->mail_properties)))
+        if (!qmail($recipient, $subject, $this->mail_body, $this->mail_properties))
+//        if (!qmail(utf8_decode($recipient), utf8_decode($subject),  $this->mail_body, utf8_decode($this->mail_properties)))
         {
              return false;
         }
@@ -683,7 +685,7 @@ public function sendEmail()
         }
         // Kopie versenden an den originalen Absender...
          // das Versenden in UTF8 funktioniert noch nicht bei allen Mailclients (Outlook, GMX)
-         if (!mail($mailto, $subject, $this->mail_body, $this->mail_properties))
+         if (!qmail($mailto, $subject, $this->mail_body, $this->mail_properties))
          {
              return false;
          }

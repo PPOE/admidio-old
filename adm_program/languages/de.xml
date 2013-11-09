@@ -1203,7 +1203,7 @@
     <text id="SYS_PWACT_CODE_INVALID" development="new" translation="todo">Es wurde entweder schon das Passwort aktiviert oder der Aktivierungscode ist falsch!</text>
     <text id="SYS_RECIPIENT" development="new" translation="todo">Empfänger</text>
     <text id="SYS_REGISTERED_AS" development="new" translation="todo">Angemeldet als</text>
-    <text id="SYS_REGISTRATION" development="new" translation="todo">Mitglied werden!</text>
+    <text id="SYS_REGISTRATION" development="new" translation="todo">Mitglied der Piratenpartei Österreichs werden!</text>
     <text id="SYS_REMEMBER_ME" development="new" translation="todo">Angemeldet bleiben</text>
     <text id="SYS_REMOVE" development="new" translation="todo">Entfernen</text>
     <text id="SYS_REMOVE_ROLE" development="new" translation="todo">Rolle entfernen</text>

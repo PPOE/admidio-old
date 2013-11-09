@@ -306,7 +306,7 @@ function admFuncEmailNotification($recipient, $reference, $message, $senderName,
 	   $senderName = utf8_decode($senderName);
     }
 
-	mail($recipient, $reference, $message, 'From: '.$senderName.' <'.$senderEmail.'>');
+	qmail($recipient, $reference, $message, 'From: '.$senderName.' <'.$senderEmail.'>');
 	//echo "Empfänger: $empfaenger<br>Betreff: $betreff<br>Nachricht: $nachricht<br>Absender Name: $absender<br>Absender Mail: $absendermail";
 }
 

@@ -15,6 +15,7 @@
 require_once('../../system/common.php');
 require_once('../../system/login_valid.php');
 require_once('backup.functions.php');
+require_once('../../system/qmail.php');
 
 // only webmaster are allowed to start backup
 if($gCurrentUser->isWebmaster() == false)
@@ -182,7 +183,7 @@ $starttime = getmicrotime();
 				}
 
 				if (!empty($repairresult)) {
-					mail(ADMIN_EMAIL, 'backupDB: MySQL Table Error Report', $repairresult);
+					qmail(ADMIN_EMAIL, 'backupDB: MySQL Table Error Report', $repairresult);
 					echo '<pre>'.$repairresult.'</pre>';
 					if (!$CanContinue) {
 						if ($SuppressHTMLoutput) {
@@ -489,7 +490,7 @@ $starttime = getmicrotime();
 							if (($currentrow % MYSQL_RECONNECT_INTERVAL) == 0) {
 								$gDb->close();
 								if (!@$gDb->connect(DB_HOST, DB_USER, DB_PASS)) {
-									mail(ADMIN_EMAIL, 'backupDB: FAILURE! Failed to connect to MySQL database (line '.__LINE__.')', 'Failed to reconnect to SQL database (row #'.$currentrow.') on line '.__LINE__.' in file '.@$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].LINE_TERMINATOR.$gDb->db_error());
+									qmail(ADMIN_EMAIL, 'backupDB: FAILURE! Failed to connect to MySQL database (line '.__LINE__.')', 'Failed to reconnect to SQL database (row #'.$currentrow.') on line '.__LINE__.' in file '.@$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].LINE_TERMINATOR.$gDb->db_error());
 									die('There was a problem connecting to the database:<br>'.LINE_TERMINATOR.$gDb->db_error());
 								}
 								$gDb->select_db($dbname);

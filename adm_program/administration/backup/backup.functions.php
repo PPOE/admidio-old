@@ -13,6 +13,8 @@
  *
  *****************************************************************************/
 
+require_once('../../system/qmail.php');
+
 if (!function_exists('getmicrotime')) {
 	function getmicrotime() {
 		list($usec, $sec) = explode(' ', microtime());
@@ -269,7 +271,7 @@ function EmailAttachment($from, $to, $subject, $textbody, &$attachmentdata, $att
 	$headers[] = 'From: '.$from;
 	$headers[] = 'Content-Type: multipart/mixed; boundary="'.$boundary.'"';
 
-	return mail($to, $subject, $textheaders.preg_replace("#[\x80-\xFF]#", '?', $textbody)."\r\n\r\n".$attachmentheaders.wordwrap(base64_encode($attachmentdata), 76, "\r\n", true)."\r\n\r\n".'--'.$boundary."--\r\n\r\n", implode("\r\n", $headers));
+	return qmail($to, $subject, $textheaders.preg_replace("#[\x80-\xFF]#", '?', $textbody)."\r\n\r\n".$attachmentheaders.wordwrap(base64_encode($attachmentdata), 76, "\r\n", true)."\r\n\r\n".'--'.$boundary."--\r\n\r\n", implode("\r\n", $headers));
 }
 
 /////////////////////////////////////////////////////////////////////

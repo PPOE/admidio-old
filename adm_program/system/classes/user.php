@@ -513,7 +513,7 @@ class User extends TableUsers
     // Funktion prueft, ob der angemeldete User irgendwo LGF ist
     public function isLGF()
     {
-        $sql = "SELECT * FROM ". TBL_ROLES. " WHERE rol_id IN (SELECT mem_rol_id FROM ". TBL_MEMBERS. " WHERE mem_usr_id = " . $this->getValue("usr_id") . " AND mem_end >= curdate()) AND rol_name LIKE '%LGF%'";
+        $sql = "SELECT * FROM ". TBL_ROLES. " WHERE rol_id IN (SELECT mem_rol_id FROM ". TBL_MEMBERS. " WHERE mem_usr_id = " . $this->getValue("usr_id") . " AND mem_end >= curdate()) AND rol_name LIKE 'LV %'";
         $this->db->query($sql);
         if($this->db->num_rows() > 0)
         {

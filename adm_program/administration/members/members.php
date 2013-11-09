@@ -44,7 +44,7 @@ if (!$gCurrentUser->editUsers() && !$gCurrentUser->isLeader())
 }
 
 // lokale Variablen initialisieren
-$members_per_page = 50; // Anzahl der Mitglieder, die auf einer Seite angezeigt werden
+$members_per_page = 150; // Anzahl der Mitglieder, die auf einer Seite angezeigt werden
 
 // Die zum Caching in der Session zwischengespeicherten Namen werden beim
 // neu laden der Seite immer abgeraeumt...
@@ -62,6 +62,10 @@ if(strlen($getSearch) > 0)
     $search_string = '%' . str_replace(',', '', mysql_escape_string($getSearch)). '%';
     $search_condition = ' AND (  last_name.usd_value  || \' \' || first_name.usd_value LIKE \''.$search_string.'\'
                               OR usr_login_name LIKE \''.$search_string.'\'
+                              OR plz.usd_value LIKE \''.$search_string.'\'';
+    if (substr($search_string,0,3) == '%AT')
+      $search_condition .= '     OR nuts LIKE \''.$search_string.'\'';
+    $search_condition .= '
                               OR email.usd_value LIKE \''.$search_string.'\'
                               OR website.usd_value LIKE \''.$search_string.'\'
                               OR usr_id LIKE \''.$search_string.'\'
@@ -105,8 +109,8 @@ else
 }
 
 // Anzahl relevanter Datensaetze ermitteln
-$sql = 'SELECT COUNT(1) as count
-		  FROM '. TBL_USERS. '
+$sql = 'SELECT COUNT(*) as count
+		  FROM (SELECT usr_id FROM '. TBL_USERS. '
      LEFT JOIN '. TBL_USER_DATA. ' as last_name
             ON last_name.usd_usr_id = usr_id
            AND last_name.usd_usf_id = '. $gProfileFields->getProperty('LAST_NAME', 'usf_id'). '
@@ -119,9 +123,16 @@ $sql = 'SELECT COUNT(1) as count
      LEFT JOIN '. TBL_USER_DATA. ' as website
             ON website.usd_usr_id = usr_id
            AND website.usd_usf_id = '. $gProfileFields->getProperty('WEBSITE', 'usf_id'). '
+     LEFT JOIN '. TBL_USER_DATA. ' as plz
+            ON plz.usd_usr_id = usr_id
+           AND plz.usd_usf_id = 4';
+    if (substr($search_string,0,3) == '%AT')
+$sql .= '     LEFT JOIN nutsplz AS nuts
+            ON plz.usd_value = nuts.plz';
+$sql .= '
          WHERE usr_valid = 1
                '.$member_condition.
-                 $search_condition;
+                 $search_condition.' GROUP BY usr_id) A';
 $result = $gDb->query($sql);
 $row    = $gDb->fetch_array($result);
 $num_members = $row['count'];
@@ -129,9 +140,11 @@ $num_members = $row['count'];
 // alle Mitglieder zur Auswahl selektieren
 // unbestaetigte User werden dabei nicht angezeigt
 $sql    = 'SELECT usr_id, last_name.usd_value as last_name, first_name.usd_value as first_name,
-                  email.usd_value as email, website.usd_value as website,
-                  usr_login_name, COALESCE(usr_timestamp_change, usr_timestamp_create) as timestamp,
-                  (SELECT count(*)
+                  email.usd_value as email, website.usd_value as website, plz.usd_value as plz,
+                  usr_login_name, COALESCE(usr_timestamp_change, usr_timestamp_create) as timestamp,';
+    if (substr($search_string,0,3) == '%AT')
+      $sql .= '  nuts, ';
+$sql .= '                  (SELECT count(*)
                      FROM '. TBL_ROLES. ', '. TBL_CATEGORIES. ', '. TBL_MEMBERS. '
                     WHERE rol_valid   = 1
                       AND rol_cat_id  = cat_id
@@ -163,10 +176,16 @@ $sql    = 'SELECT usr_id, last_name.usd_value as last_name, first_name.usd_value
              LEFT JOIN '. TBL_USER_DATA. ' as website
                ON website.usd_usr_id = usr_id
               AND website.usd_usf_id = '. $gProfileFields->getProperty('WEBSITE', 'usf_id'). '
-            WHERE usr_valid = 1
+             LEFT JOIN '. TBL_USER_DATA. ' as plz
+               ON plz.usd_usr_id = usr_id
+              AND plz.usd_usf_id = 4';
+    if (substr($search_string,0,3) == '%AT')
+$sql .= '             LEFT JOIN nutsplz AS nuts
+               ON plz.usd_value = nuts.plz';
+$sql .= '            WHERE usr_valid = 1
                   '.$member_condition.
-                    $search_condition.'
-            ORDER BY last_name.usd_value, first_name.usd_value 
+                    $search_condition.' GROUP BY usr_id
+            ORDER BY last_name.usd_value, first_name.usd_value
 			LIMIT '.$members_per_page.' OFFSET '.$getStart;
 $result_mgl  = $gDb->query($sql);
 
@@ -228,7 +247,7 @@ else
 
 echo'
     <ul class="iconTextLinkList" style="margin-bottom: 0px;">
-    <li>
+';/*    <li>
         <span class="iconTextLink">
             <a rel="lnkNewUser" href="'.$g_root_path.'/adm_program/administration/members/members_new.php"><img
             src="'. THEME_PATH. '/icons/add.png" alt="'.$gL10n->get('MEM_CREATE_USER').'" /></a>
@@ -241,7 +260,7 @@ echo'
             src="'. THEME_PATH. '/icons/database_in.png" alt="'.$gL10n->get('MEM_IMPORT_USERS').'" /></a>
             <a href="'.$g_root_path.'/adm_program/administration/members/import.php">'.$gL10n->get('MEM_IMPORT_USERS').'</a>
         </span>
-    </li>';
+    </li>';*/
 	if($gCurrentUser->isWebmaster())
 	{
 		echo '<li>
@@ -424,7 +443,7 @@ if($num_members > 0)
 					&& $row['usr_id'] != $gCurrentUser->getValue('usr_id'))       // das eigene Profil darf keiner entfernen
 					{
 						echo '
-						<a class="iconLink" href="'.$g_root_path.'/adm_program/administration/members/members_function.php?usr_id='.$row['usr_id'].'&amp;mode=6"><img
+						<a class="iconLink" href="'.$g_root_path.'/adm_program/administration/members/members_function.php?usr_id='.$row['usr_id'].'&amp;my_usr_id='.$gCurrentUser->getValue('usr_id').'&amp;mode=6"><img
 							src="'. THEME_PATH. '/icons/delete.png" alt="'.$gL10n->get('MEM_REMOVE_USER').'" title="'.$gL10n->get('MEM_REMOVE_USER').'" /></a>';
 					}
 					else

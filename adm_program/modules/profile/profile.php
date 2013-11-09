@@ -245,7 +245,7 @@ echo '
                                                             if(strlen($user->getValue('ADDRESS')) > 0
                                                             && ($gCurrentUser->editProfile($user->getValue('usr_id')) == true || $gCurrentUser->isLeaderFor($user->getValue('usr_id')) == true || $gProfileFields->getProperty('ADDRESS', 'usf_hidden') == 0))
                                                             {
-                                                                $address   .= '<div>'.$user->getValue('ADDRESS'). '</div>';
+								$address   .= '<div>'.$user->getValue('ADDRESS'). '</div>';
                                                                 $map_url   .= urlencode($user->getValue('ADDRESS'));
                                                                 $route_url .= urlencode($user->getValue('ADDRESS'));
                                                             }
@@ -253,7 +253,7 @@ echo '
                                                             if(strlen($user->getValue('POSTCODE')) > 0
                                                             && ($gCurrentUser->editProfile($user->getValue('usr_id')) == true || $gCurrentUser->isLeaderFor($user->getValue('usr_id')) == true || $gProfileFields->getProperty('POSTCODE', 'usf_hidden') == 0))
                                                             {
-                                                                $address   .= '<div>'.$user->getValue('POSTCODE');
+                                                                $address   .= '<div><a href="https://mitglieder.piratenpartei.at/adm_program/modules/map/map.php?plz='.$user->getValue('POSTCODE').'">'.$user->getValue('POSTCODE').'</a>';
                                                                 $map_url   .= ',%20'. urlencode($user->getValue('POSTCODE'));
                                                                 $route_url .= ',%20'. urlencode($user->getValue('POSTCODE'));
 
@@ -283,6 +283,13 @@ echo '
                                                             && ($gCurrentUser->editProfile($user->getValue('usr_id')) == true || $gCurrentUser->isLeaderFor($user->getValue('usr_id')) == true || $gProfileFields->getProperty('COUNTRY', 'usf_hidden') == 0))
                                                             {
 																$country    = $user->getValue('COUNTRY');
+								if ($user->getValue('POSTCODE'))
+								{
+									$usr_id = $user->getValue('usr_id');
+									$result = $gDb->query("SELECT nuts FROM adm_user_data LEFT JOIN nutsplz ON usd_value = plz WHERE usd_usf_id IN (4,39) AND usd_usr_id = {$usr_id} GROUP BY usd_usr_id;");
+									$row = $gDb->fetch_array($result);
+									$country .= " ({$row['nuts']})";
+								}
                                                                 $address   .= '<div>'.$country. '</div>';
                                                                 $map_url   .= ',%20'. urlencode($country);
                                                                 $route_url .= ',%20'. urlencode($country);
@@ -659,6 +666,7 @@ echo '
 
         // Infos der Benutzer, die diesen DS erstellt und geaendert haben
         echo '<div class="editInformation">';
+            echo '<a href="https://initiative.piratenpartei.at/acc/index.php?action=search&member='.$user->getValue('usr_id').'" target="_blank">Nach diesem Nutzer im Buchungssystem suchen</a><br />';
             $user_create = new User($gDb, $gProfileFields, $user->getValue('usr_usr_id_create'));
             echo $gL10n->get('SYS_CREATED_BY', $user_create->getValue('FIRST_NAME'). ' '. $user_create->getValue('LAST_NAME'), $user->getValue('usr_timestamp_create'));
 

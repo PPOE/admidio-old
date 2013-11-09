@@ -40,7 +40,6 @@ License URI: http://creativecommons.org/licenses/by-sa/3.0/de/deed.de
   font-weight: normal;
   font-style: normal; }
 
-/* reset --------------------------------------------------------------------*/
 html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
   margin: 0;
   padding: 0;
@@ -58,7 +57,6 @@ blockquote:before, blockquote:after, q:before, q:after {
   content: none; }
 
 html {
-  font-size: 62.5%;
   overflow-y: scroll;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%; }
@@ -72,7 +70,9 @@ img {
   max-width: 100%;
   border: 0;
   -ms-interpolation-mode: bicubic; }
-
+.ie8 img {
+    max-width: none; 
+} 
 article, aside, details, figcaption, figure, footer, header, hgroup, nav, section, summary {
   display: block; }
 
@@ -95,7 +95,6 @@ audio:not([controls]) {
     left: -999em;
     width: 1px;
 }
-
 .visuallyhidden {
   border: 0;
   clip: rect(0 0 0 0);
@@ -118,50 +117,63 @@ audio:not([controls]) {
   float: right;
   margin: 0 0 10px 10px; }
 
-.wp-caption {
-  text-align: center;
-  background: #eeeeee;
-  padding: 5px;
-  margin: 5px; }
+
 
 .video-container {
   position: relative;
   padding-bottom: 56.25%;
   padding-top: 30px;
   height: 0;
-  overflow: hidden; }
+  overflow: hidden;
+}
   .video-container iframe, .video-container object, .video-container embed {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%; }
+    height: 100%; 
+  }
+
+ .no-js {
+    display: none;
+    
+}
 
 /* Typography -------------------------------------------------------------- */
-body, select, input, textarea, button {
-  font-family: "DroidSans", "Aller", Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  line-height: 19px;
-  color: black; }
+body {
+    font-size: 0.8em;
+    font-family: "FontPiratenkleiderDefault", Helvetica, Arial, sans-serif;
+    line-height: 18px;
+}
+select, input, textarea, button {
+  font-family: "FontPiratenkleiderDefault", Helvetica, Arial, sans-serif;
+  font-size: 0.8em;
+  line-height: 18px;
+  color: black; 
+}
 
 h1, h2, h3, h4, h5, h6 {
   margin-bottom: 9px;
-  font-weight: normal; }
+  font-weight: normal; 
+}
 
-h1, h2, h3 {
-  font-family: "BebasNeueRegular", Helvetica, Arial, sans-serif;
-  letter-spacing: 1px; }
+h1, h2, h3, .bebas, .cifont {
+  font-family: "FontPiratenkleiderHeadlines", Helvetica, Arial, sans-serif;
+  letter-spacing: 1px; 
+}
 
 h1 {
   font-size: 26.4px;
-  line-height: 23.6px; }
+  line-height: 21.6px; }
 
 h2 {
   font-size: 22.8px;
-  line-height: 23px; }
+  line-height: 22px;
+}
 
 h3 {
-  font-size: 20px; }
+  font-size: 20px; 
+}
 
 h4 {
   font-size: 14.4px; }
@@ -176,18 +188,25 @@ a {
   vertical-align: baseline;
   position: relative;
   text-decoration: none;
-  color: #2d7dc5;
-  -webkit-tap-highlight-color: #2d7dc5; }
+  color: #06C;
+  -webkit-tap-highlight-color: #2d7dc5; 
+}
   a:visited {
-    color: #2d7dc5; }
+    color: #2d7dc5;
+  }
   a:active {
-    top: 1px; }
+    top: 1px;
+  }
   a:hover {
-    color: #111; }
-  a:hover, a.active {
-    outline: 0px solid !important; }
+    color: #111;
+  }
+  a:hover, 
+  a.active {
+    outline: 0px solid;
+  }
   a:focus {
-    outline: 1px dotted black; }
+    outline: 1px dotted black; 
+  }
 
 p {
   margin-bottom: 0; }
@@ -196,31 +215,43 @@ blockquote {
   margin: 18px;
   padding: 0 0 0 18px;
   text-indent: 18px;
-  border-left: 2px solid #eeeeee; }
+  border-left: 2px solid #eeeeee; 
+}
   blockquote p {
-    margin-bottom: 0; }
+    margin-bottom: 0; 
+  }
 
 b, strong {
   font-weight: bold; }
 
 q, i, em, cite, blockquote {
-  font-style: italic; }
+  font-style: italic; 
+}
 
 ins, mark {
-  background-color: #4c2582;
+  background-color: #ff8800;
   color: black;
   text-decoration: none;
   font-style: italic; }
 
 del {
-  text-decoration: line-through; }
+  text-decoration: line-through; 
+}
 
+img {
+  vertical-align: bottom;
+  height: auto;
+  max-width: 100%;
+  border: 0;
+  -ms-interpolation-mode: bicubic;
+}  
 abbr[title], dfn[title] {
   border-bottom: 1px dotted;
   cursor: help; }
 
 small {
   font-size: 85%; }
+
 
 sub, sup {
   font-size: 75%;
@@ -242,14 +273,11 @@ pre {
 code, kbd, samp, pre, tt, var {
   font-family: consolas, "courier new", courier, monospace; }
 
-abbr, acronym {
-  font-size: 85%;
-  text-transform: uppercase;
-  letter-spacing: .1em; }
 
 abbr[title], acronym[title], dfn[title] {
   border-bottom: 1px dotted;
-  cursor: help; }
+  cursor: help; 
+}
 
 hr {
   display: block;
@@ -257,7 +285,7 @@ hr {
   padding: 0;
   margin-bottom: 15px;
   margin-top: 5px;
-  background: url("../images/jolly.png") no-repeat center center;
+  background: url("https://archiv.piratenpartei.at/wp-content/themes/Piratenkleider-PPOE/assets/jolly.png") no-repeat center center;
   height: 26px; }
 
 ::selection {
@@ -266,7 +294,8 @@ hr {
 
 ::-moz-selection {
   background: #2d7dc5;
-  color: white; }
+  color: white;
+}
 
 img::selection {
   background: transparent; }
@@ -301,16 +330,18 @@ caption, th, thead, legend {
 
 tr:hover {
   background: rgba(0, 0, 0, 0.02);
-  -moz-transition: all 0.2s ease-in-out;
-  -o-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out; 
   transition: all 0.2s ease-in-out; }
 
 th, td {
   text-align: left;
   line-height: inherit;
   padding: 5px;
-  border-top: solid 1px #eeeeee; }
+  border-top: solid 1px #eeeeee; 
+}
 
 td {
   vertical-align: top; }
@@ -337,8 +368,6 @@ legend {
   margin-top: -3px;
   font-weight: bold; }
 
-.ie6 legend, .ie7 legend {
-  margin-left: -7px; }
 
 label, input[type="button"], input[type="submit"], input[type="image"], select, button {
   cursor: pointer;
@@ -356,16 +385,20 @@ input[type="checkbox"] {
   vertical-align: bottom; }
 
 .ie7 input[type="checkbox"] {
-  vertical-align: baseline; }
+  vertical-align: baseline; 
+}
 
-input[type="text"], input[type="password"], input[type="select"], input[type="search"], input[type="file"], input[type="submit"], input[type="reset"], input[type="button"] {
+input[type="text"], input[type="password"], input[type="select"], 
+input[type="search"], input[type="file"], input[type="submit"],
+input[type="reset"], input[type="button"] {
   margin: 0 5px 5px 0; }
 
 input[type="text"] {
   padding: 5px; }
 
 .ie6 input {
-  vertical-align: text-bottom; }
+  vertical-align: text-bottom; 
+}
 
 label {
   position: relative;
@@ -387,451 +420,884 @@ textarea {
   width: 100%; }
 
 input, select, textarea {
-  padding: 5px;
-  border: 1px solid #eeeeee;
   background: white;
-  background: rgba(255, 255, 255, 0.6); }
+  background: rgba(255, 255, 255, 0.6); 
+}
 
 button, input, select, textarea {
-  font-size: 100%;
   margin: 0;
   vertical-align: baseline;
   *vertical-align: middle; }
 
-input:focus, input:active, select:focus, select:active, textarea:focus, textarea:active {
+input:focus, input:active, 
+select:focus, select:active, 
+textarea:focus, textarea:active {
   border: 1px solid black;
   background: white; }
 
-button, input[type="submit"], .post-edit-link {
+button, input[type="submit"], 
+.post-edit-link {
   padding: 5px 10px;
   overflow: visible;
   position: relative;
   background: #2d7dc5;
-  color: white !important;
+  color: white;
   margin: 0 2px 2px 0;
   border: 1px solid #2d7dc5;
   text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.1);
   border-top: 1px solid #4e96d7;
   border-bottom: 1px solid #1a4872;
   display: inline-block;
-  border-radius: 2px;
-  -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
   text-shadow: 0 -1px 0 #112e48;
   background-color: #2d7dc5;
   background-image: -moz-linear-gradient(top, #2d7dc5, #24639b);
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #2d7dc5), color-stop(1, #24639b));
   background-image: linear-gradient(top, #2d7dc5, #24639b); }
-  button:hover, input[type="submit"]:hover, .post-edit-link:hover {
+
+  button:hover, 
+  input[type="submit"]:hover, 
+  .post-edit-link:hover {
     background-color: #2d7dc5;
     background-image: -moz-linear-gradient(top, #2d7dc5, #1a4872);
     background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #2d7dc5), color-stop(1, #1a4872));
     background-image: linear-gradient(top, #2d7dc5, #1a4872);
-    -moz-transition: all 0.2s ease-in-out;
-    -o-transition: all 0.2s ease-in-out;
     -webkit-transition: all 0.2s ease-in-out;
-    transition: all 0.2s ease-in-out; }
-  button:active, input[type="submit"]:active, .post-edit-link:active {
-    top: 1px; }
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;    
+    transition: all 0.2s ease-in-out; 
+  }
+  
+  button:active, 
+  input[type="submit"]:active, 
+  .post-edit-link:active {
+    top: 1px; 
+  }
 
 body {
-  background: white url("../images/bg-tags_gray.jpg") -20% 0 fixed; }
+  background: white url("https://archiv.piratenpartei.at/wp-content/themes/Piratenkleider-PPOE/images/int/bg-tags_gray.jpg") -20% 0 fixed; 
+}
 
 .section {
   padding: 0 10px; }
 
 .skin {
-  padding: 20px; }
+  padding: 20px; 
+  margin-left: 10px;
+}
 
 .row {
-  max-width: 958px;
-  overflow: hidden;
-  margin: 0 auto; }
-
+  max-width: 1052px;
+  overflow: hidden; 
+  margin: 0 auto;
+} 
+ 
 .skiplinks {
   margin: 0; }
-  .skiplinks li {
+ .skiplinks li {
     list-style: none;
     width: 100%; }
-    .skiplinks li a {
-      position: absolute;
-      display: block;
-      top: -100px; }
-      .skiplinks li a:focus, .skiplinks li a:active {
-        position: static;
-        width: 100%;
-        display: block;
-        border: 0px solid;
-        background: #2d7dc5;
-        color: white;
-        outline: 0px;
-        text-align: center;
-        padding: 5px; }
-      .skiplinks li a:hover {
-        background: #4c2582;
-        color: black; }
+ .skiplinks li a {
+    position: absolute;
+    display: block;
+    top: -100px; 
+ }
+ .skiplinks li a:focus, 
+ .skiplinks li a:active {
+    position: static;
+    width: 100%;
+    display: block;
+    border: 0px solid;
+    background: #2d7dc5;
+    color: white;
+    outline: 0px;
+    text-align: center;
+    padding: 5px; 
+ }
+ .skiplinks li a:hover {
+    background: #ff8800;
+    color: black; 
+ }
 
+/**
+* ----------------------------------------------------------------------- #
+*
+* Generic Content Classes
+*
+* (en) standard classes for positioning and highlighting
+* (de) Standardklassen zur Positionierung und Hervorhebung
+*
+* @section content-generic-classes
+*/
+.highlight {
+        color:#c30;
+}
+
+.dimmed {
+        color:#888;
+}
+
+.box {
+        border-radius: 0.3em;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #888;
+        border-color: rgba(0,0,0,.3);
+        -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2) inset;
+        -moz-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2) inset;
+        -ms-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2) inset;
+        -o-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2) inset;
+        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2) inset;
+        color: #444;
+        color: rgba(0,0,0,.8);
+        padding: 1.4286em;
+        margin: 1.5em 0 0 0;
+}
+
+.box > *:first-child {
+        margin-top: 0;
+}
+
+.label {
+        font-family: Verdana, Geneva, sans-serif;
+        padding: 1px 6px 2px;
+        display: inline-block;
+        vertical-align:middle;
+        letter-spacing: normal;
+        white-space:nowrap;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        -ms-border-radius: 3px;
+        -o-border-radius: 3px;
+        border-radius: 3px;
+        background: #06C;
+        color: #fff;
+        font-size: 10px;
+        line-height: 12px;
+}
+
+.info {
+        background:#f4f4f4;
+}
+
+.success {
+        background:#8c8;
+}
+
+.warning {
+        background:#cc8;
+}
+
+.error {
+        background:#c88;
+}
+
+.float-left {
+        float:left;
+        display:inline;
+        margin: 1.5em 1em 0 0;
+}
+
+.float-right {
+        float:right;
+        display:inline;
+        margin: 1.5em 0 0 1em;
+}
+
+.center {
+        display:block;
+        text-align:center;
+        margin: 1.5em auto 0 auto;
+}
+
+  
+  
+  
 .header {
   position: relative;
   background-color: #eeeeee;
-  background-image: url("../images/darkwave.png"), url("../images/boat.png");
+  background-image: url("https://archiv.piratenpartei.at/wp-content/themes/Piratenkleider-PPOE/assets/darkwave.png"), url("https://archiv.piratenpartei.at/wp-content/themes/Piratenkleider-PPOE/assets/boat.png");
   background-position: -20% bottom, 56% bottom;
   background-repeat: repeat-x, no-repeat; }
-  .header .branding {
-    padding: 10px 0 0px 0; }
-  .header input[type="text"] {
-    border-color: silver;
-    width: 100% !important; }
 
+
+.header .branding {
+    padding: 10px 0 0px 0; 
+}
+.header input[type="text"] {
+    border-color: silver;
+}
+.branding p.slogan {
+    display: none;
+}
 .logo {
   display: inline-block;
-  overflow: hidden; }
+  overflow: hidden; 
+}
 
 .nav-top ul {
   display: none; }
 
-.nav-top ul.menu, .nav-main ul.menu {
+.nav-top ul.menu {
   background: #f7f7f7;
-  background: rgba(255, 255, 255, 0.5); }
-  .nav-top ul.menu a, .nav-main ul.menu a {
-    display: block; }
-    .nav-top ul.menu a:hover, .nav-main ul.menu a:hover {
-      background: white; }
-  .nav-top ul.menu li.has_children ul.sub-menu, .nav-main ul.menu li.has_children ul.sub-menu {
+  background: rgba(255, 255, 255, 0.5); 
+}
+.nav-top ul.menu a {
+    display: block; 
+}
+.nav-top ul.menu a:hover, 
+.nav-top ul.menu a:focus {
+    background: white; 
     z-index: 999;
+}
+.nav-top ul.menu li.has_children ul.sub-menu {
     position: absolute;
-    top: -999em; }
+    top: -999em; 
+}
 
-#searchform {
+.searchform {
   padding: 10px 10px 5px 10px;
   background: #f7f7f7;
   background: rgba(255, 255, 255, 0.5);
-  position: relative; }
-  #searchform #searchsubmit {
+  position: relative;
+}
+.searchform input#s {
+    width: 160px;
+    line-height: 1em;      
+    margin-top: 2px;
+}
+.searchform .searchsubmit {
     position: absolute;
     top: 10px;
     right: 8px;
-    background: #2d7dc5 url("../images/lupe.png") no-repeat center center;
+    background: #2d7dc5 url("https://archiv.piratenpartei.at/wp-content/themes/Piratenkleider-PPOE/assets/lupe.png") no-repeat center center;
     width: 30px;
     height: 30px;
     overflow: hidden;
-    text-indent: -999em; }
+    text-indent: -999em; 
+}
+.searchform .searchsubmit:hover {
+    background: #24639b url("https://archiv.piratenpartei.at/wp-content/themes/Piratenkleider-PPOE/assets/lupe.png") no-repeat center center;
+}
+ 
+.content .searchform .searchsubmit {
+  right: auto;    
+}   
 
-.fullwidth #searchform input[type="text"] {
-  width: 100%; }
+.fullwidth .searchform input[type="text"] {
+  width: 100%; 
+}
 
 ul.socialmedia {
   overflow: hidden;
-  margin-right: 30px; }
-  ul.socialmedia li {
-    float: left; }
-    ul.socialmedia li a {
-      display: block;
-      width: 30px;
-      height: 30px;
-      overflow: hidden;
-      text-indent: -999em; }
-  ul.socialmedia li.twitter a {
-    background: url("../images/sm-icons.png") no-repeat scroll 0 0 transparent; }
-    ul.socialmedia li.twitter a:hover {
-      background: url("../images/sm-icons.png") no-repeat scroll 0 -30px transparent; }
-  ul.socialmedia li.facebook a {
-    background: url("../images/sm-icons.png") no-repeat scroll -30px 0 transparent; }
-    ul.socialmedia li.facebook a:hover {
-      background: url("../images/sm-icons.png") no-repeat scroll -30px -30px transparent; }
-  ul.socialmedia li.youtube a {
-    background: url("../images/sm-icons.png") no-repeat scroll -60px 0 transparent; }
-    ul.socialmedia li.youtube a:hover {
-      background: url("../images/sm-icons.png") no-repeat scroll -60px -30px transparent; }
-  ul.socialmedia li.gplus a {
-    background: url("../images/sm-icons.png") no-repeat scroll -90px 0 transparent; }
-    ul.socialmedia li.gplus a:hover {
-      background: url("../images/sm-icons.png") no-repeat scroll -90px -30px transparent; }
-  ul.socialmedia li.diaspora a {
-    background: url("../images/sm-icons.png") no-repeat scroll -120px 0 transparent; }
-    ul.socialmedia li.diaspora a:hover {
-      background: url("../images/sm-icons.png") no-repeat scroll -120px -30px transparent; }
-  ul.socialmedia li.identica a {
-    background: url("../images/sm-icons.png") no-repeat scroll -150px 0 transparent; }
-    ul.socialmedia li.identica a:hover {
-      background: url("../images/sm-icons.png") no-repeat scroll -150px -30px transparent; }
+  margin-right: 0;
+  margin-top: 2px;
+}
+ul.socialmedia li {
+    float: left; 
+    width: 30px;
+}
+ul.socialmedia li a {
+    display: block;
+    padding: 0;
+}
+ul.socialmedia li a img {
+    margin: 2px;    
+    border: 2px solid #eee;
+    -webkit-transition: all 0.15s ease-in-out; 
+    -moz-transition: all 0.15s ease-in-out; 
+    -ms-transition: all 0.15s ease-in-out;
+    -o-transition: all 0.15s ease-in-out;     
+    transition: all 0.15s ease-in-out;
+}
+
+ul.socialmedia li a:hover img  {
+   border: 2px solid white;
+    -webkit-transform: scale(1.3);
+    -moz-transform: scale(1.3);
+    -ms-transform: scale(1.3);
+    -o-transform: scale(1.3);
+    transform: scale(1.3);
+}
+ul.socialmedia li a:focus img  {
+    border: 2px solid #ff8800;
+    background:  #ff8800;
+}    
+
+#socialmedia_iconbar {
+         position: fixed;
+         display: block;
+         top: 251px;
+         left: 0px;
+         width: 36px ;
+         background: black;
+         border-radius: 3px ; 
+         z-index: 10 ;
+         padding: 2px;
+         margin: 0px;
+         text-align: center;
+     }
+.home #socialmedia_iconbar { 
+    top: 234px;
+}    
+#socialmedia_iconbar ul {
+    margin: 0;
+}
+#socialmedia_iconbar ul.socialmedia li {
+    margin:0;
+    padding: 0;
+}
+#socialmedia_iconbar ul.socialmedia li a {
+    height: auto;
+}
+#socialmedia_iconbar ul.socialmedia li img  {
+    border: 2px solid black;
+}
+#socialmedia_iconbar ul.socialmedia li a:hover img  {
+    border: 2px solid black;
+}
+
 
 .sticker {
-  width: 299px;
-  margin: 0 auto; }
-  .sticker .skin {
-    padding: 0; }
-    .sticker .skin a {
-      background: url("../images/pirat-icons.png") no-repeat scroll 0 0 transparent;
-      width: 129px;
-      height: 77px;
-      float: left;
-      overflow: hidden;
-      text-indent: -999em;
-      display: block; }
-      .sticker .skin a.member:hover {
-        background: url("../images/pirat-icons.png") no-repeat scroll 0 -77px transparent; }
-      .sticker .skin a.spenden {
-        background: url("../images/pirat-icons.png") no-repeat scroll -129px 0 transparent; }
-        .sticker .skin a.spenden:hover {
-          background: url("../images/pirat-icons.png") no-repeat scroll -129px -77px transparent; }
+    position: absolute;
+    right: 8%;
+    top: 40px; 
+    margin: 0 auto;
+}
+.sticker ul li {
+    float: left;
+    text-align: center;
+    font-size: 34px;
+    font-family: "FontPiratenkleiderHeadlines",Helvetica,Arial,sans-serif;
+    letter-spacing: 1px;
+    margin: 10px;
+    line-height: 0.9em;     
+    border: 2px solid transparent;
+    display: inline-block;
+    width: auto; 
+}
 
-.newsletter .skin {
+.sticker ul li a {    
+    color: #666;       
+}
+.sticker ul li a:hover,
+.sticker ul li a:focus {
+    color: #1a4872; 
+} 
+
+.sticker ul li a .cicolor {        
+    color: #ff8800;    
+}
+
+.sticker ul li a:hover .cicolor,
+.sticker ul li a:focus .cicolor {
+    color: #2d7dc5;  
+}
+.sticker ul li a .small {
+   font-size: 25px;
+   line-height: 25px;
+} 
+.sticker ul li a .tiny { 
+   font-size: 20px;
+   line-height: 20px;
+
+} 
+.sticker ul li a .shadow {        
+     text-shadow: 1px 1px 1px #333; 
+}
+
+.sticker ul li a .animate {  
+    -webkit-transition: all 0.15s ease-in-out;
+    -moz-transition: all 0.15s ease-in-out;
+    -o-transition: all 0.15s ease-in-out;
+    -ms-transition: all 0.15s ease-in-out;
+    transition: all 0.15s ease-in-out;          
+}    
+.sticker ul li a:hover .animate ,
+.sticker ul li a:focus .animate {
+    -webkit-transform: rotate(1deg) scale(1.2);
+    -moz-transform: rotate(1deg) scale(1.2);
+    -ms-transform: rotate(1deg) scale(1.2);
+    -o-transform: rotate(1deg) scale(1.2);
+    transform: rotate(1deg) scale(1.2); 
+}
+
+.sticker ul li a .orange {        
+ color: #ff8800;    
+}
+
+.sticker ul li a:hover .orange,
+.sticker ul li a:focus .orange {
+    color: #2d7dc5;  
+}
+
+.sticker ul li a .cyan {        
+     color: #00B7B2;    
+}
+
+.sticker ul li a:hover .cyan,
+.sticker ul li a:focus .cyan {
+    color: #2d7dc5;  
+}
+
+.sticker ul li a .violet {        
+     color: #983298;    
+}
+
+.sticker ul li a:hover .violet,
+.sticker ul li a:focus .violet {
+    color: #2D7DC5;  
+}
+
+
+.sticker li a img {
+    border: 2px solid transparent;
+    max-width: none;
+}
+
+.sticker li a img {
+    -webkit-transition: all 0.15s ease-in-out;
+    -moz-transition: all 0.15s ease-in-out;
+    -o-transition: all 0.15s ease-in-out;
+    -ms-transition: all 0.15s ease-in-out;
+    transition: all 0.15s ease-in-out; 
+}
+
+.sticker li a:hover img {
+    border: 2px solid #ff8800;
+    -webkit-transform: rotate(5deg) scale(1.3);
+    -moz-transform: rotate(5deg) scale(1.3);
+    -ms-transform: rotate(5deg) scale(1.3);
+    -o-transform: rotate(5deg) scale(1.3);
+    transform: rotate(5deg) scale(1.3);
+}
+.sticker li a:focus img {
+    border: 2px solid #ff8800;
+    -webkit-transform: rotate(5deg) scale(1.3);
+    -moz-transform: rotate(5deg) scale(1.3);
+    -ms-transform: rotate(5deg) scale(1.3);
+    -o-transform: rotate(5deg) scale(1.3);
+    transform: rotate(5deg) scale(1.3);
+}
+
+.sticker ul li a span {
+display: inline-block;
+}
+.sticker ul li a .gedreht  {
+    -webkit-transform: rotate(355deg);
+    -moz-transform: rotate(355deg);
+    -ms-transform: rotate(355deg);
+    -o-transform: rotate(355deg);
+    transform: rotate(355deg);
+    text-shadow: 0px 2px 1px #666;
+    font-weight: 900;
+}
+.sticker ul li a .gedreht .tiny {
+     text-shadow: 0px 1px 1px #999;
+      font-weight: normal;
+}
+.sticker ul li a .gedreht .small {
+     text-shadow: 0px 1px 1px #777;
+      font-weight: 500;
+}
+
+.header .newsletter .skin {
   padding: 10px 10px 5px 10px;
   background: #f7f7f7;
   background: rgba(255, 255, 255, 0.5);
+  -webkit-border-radius-topleft: 3px;
+  -webkit-border-radius-topright: 3px;
+  -webkit-border-radius-bottomright: 3px;
+  -webkit-border-radius-bottomleft: 3px;
   -moz-border-radius-topleft: 3px;
   -moz-border-radius-topright: 3px;
   -moz-border-radius-bottomright: 3px;
   -moz-border-radius-bottomleft: 3px;
+  -ms-border-radius-topleft: 3px;
+  -ms-border-radius-topright: 3px;
+  -ms-border-radius-bottomright: 3px;
+  -ms-border-radius-bottomleft: 3px;
+  -o-border-radius-topleft: 3px;
+  -o-border-radius-topright: 3px;
+  -o-border-radius-bottomright: 3px;
+  -o-border-radius-bottomleft: 3px;  
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
-  border-bottom-left-radius: 3px; }
-  .newsletter .skin form {
+  border-bottom-left-radius: 3px; 
+}
+.header .newsletter .skin form {
     overflow: hidden;
-    position: relative; }
-    .newsletter .skin form legend {
-      color: gray;
-      font-weight: lighter; }
-    .newsletter .skin form input[type="text"] {
-      width: 100% !important; }
-    .newsletter .skin form input[type="submit"] {
-      position: absolute;
-      right: -2px;
-      top: 15px; }
-      .newsletter .skin form input[type="submit"]:active {
-        top: 0; }
+    position: relative; 
+    width: 100%;
+}
+.header .newsletter .skin form label {
+      font-weight: lighter; 
+}
+ .header .newsletter .skin form input[type="text"] {
+      max-width: 15em;
+ }
+ 
 
 .breadcrumbs {
   background: black;
-  color: #eeeeee; }
-  .breadcrumbs .skin {
+  color: #eeeeee; 
+}
+.breadcrumbs .skin {
     padding: 5px 20px 5px 15px;
-    color: silver; }
-    .breadcrumbs .skin a {
-      color: #CCC;
+    color: silver; 
+}
+.breadcrumbs .skin a {
+      color: white;
       display: inline-block;
       padding: 0 5px;
-      background: rgba(255, 255, 255, 0.2); }
-      .breadcrumbs .skin a:hover {
-		background-color:#CCC;
-        color: #444; }
+      background: rgba(255, 255, 255, 0.2); 
+}
+ .breadcrumbs .skin a:hover {
+        color: #ff8800; 
+ }
 
 .teaser {
-  background: #4c2582 url("../images/bg-tags.png") -20% top fixed; }
+  background: #ff8800 url("https://archiv.piratenpartei.at/wp-content/themes/Piratenkleider-PPOE/images/int/bg-tags.png") -20% top fixed; 
+  height: 240px;
+}
   .teaser .row {
-    background: #4c2582;
-    background: rgba(0, 0, 0, 0.3) -20% 0 fixed; }
-
-  .teaser .first-teaser-widget-area {
-    background: #111;
+    background: #c96a00;
+    background: rgba(0, 0, 0, 0.3) -20% 0 fixed; 
+  }
+  
+   .first-teaser-widget-area .slide .textslider  {
+    background: #ff8800;  
+  } 
+  
+  .teaser .first-teaser-widget-area {   
     float: left;
     width: 100%; }
   .teaser .second-teaser-widget-area {
     float: right;
     width: 100%; }
+  
 
-.flexslider {
+.second-teaser-widget-area .skin {
+  padding: 10px; 
+}
+
+.second-teaser-widget-area li {
+  margin-bottom: 1px;
+  background: orange;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;  
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  -ms-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  -o-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); 
+}
+
+
+  .second-teaser-widget-area li a {
+    padding: 1em 10px 1em 20px;
+    list-style: none outside none;
+    border: 0px solid;
+    color: white;  
+    font-size: 14px;     
+    display: block;
+    text-shadow: 0 0 0; 
+
+  }
+    .second-teaser-widget-area li a div {
+      color: black;
+      font-family: "FontPiratenkleiderHeadlines",  Helvetica, Arial, sans-serif;
+      letter-spacing: 1px;
+      text-shadow: 0 -1px 1px #c36800;
+      font-size: 19px; 
+    }
+   
+
+  .second-teaser-widget-area li a:focus,  
+  .second-teaser-widget-area li a:hover {    
+        background: #c96a00;
+        background: rgba(0, 0, 0, 0.2);  
+        color: white;
+  }
+  
+  .second-teaser-widget-area .textwidget {      
+        margin-bottom: 1px;
+        background: orange;
+        border-radius: 2px;
+        -webkit-border-radius: 2px;
+        -moz-border-radius: 2px;
+        -ms-border-radius: 2px;
+        -o-border-radius: 2px;
+        -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        -moz-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        -ms-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        -o-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); 
+        padding: 1em 10px 1em 20px;
+        list-style: none outside none;
+        color: white; 
+        font-size: 14px;     
+        display: block;
+        text-shadow: 0 0 0; 
+  }
+   .second-teaser-widget-area li.recentcomments {
+       color: white;
+       font-style: italic;
+       padding-left: 10px;
+   }
+   .second-teaser-widget-area li.recentcomments a {
+        font-style: normal;
+         padding: 0.3em 10px 0.5em 20px;
+   }
+ 
+ 
+ .teaserlinks ul {
+     margin: 0;
+     padding: 0;
+     
+ }
+ .teaserlinks ul li {
+     margin: 0;
+     padding: 0;
+     min-height: 70px;
+ }
+ .teaserlinks ul li {
+    background: none repeat scroll 0 0 orange;
+    border-radius: 2px 2px 2px 2px;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    margin-top: 1px;
+    margin-bottom: 1px;
+  }
+ .teaserlinks ul li a {
+    color: white;
+    font-family: "FontPiratenkleiderHeadlines", Helvetica, Arial, sans-serif;
+    letter-spacing: 1px;
+    text-shadow: 0 -1px 1px #c36800;
+    font-size: 22px;     
+    padding-top: 14px;
+    padding-bottom: 0px;     
+    padding-left: 50px;
+    margin: 0;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;           
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;    
+ }
+  .teaserlinks ul li a:hover,
+  .teaserlinks ul li a:focus{
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    padding-left: 60px;
+    color: white;
+    background: none repeat scroll 0 0 orange;
+  }
+    
+  .teaserlinks ul li a span {
+    padding-top: 4px;
+    font-size: 16px;
+    display: block;    
+    color: black;
+    text-shadow: 0 0 0; 
+    font-family: "FontPiratenkleiderDefault", Helvetica, Arial, sans-serif;
+ 
+  }
+.teaserlinks ul li a:hover span,
+.teaserlinks ul li a:focus span { 
+       color: black;
+ }    
+
+ #main-content {
+     position: relative;
+ } 
+.content {
+  background: #ff8800 url("https://archiv.piratenpartei.at/wp-content/themes/Piratenkleider-PPOE/images/int/bg-tags.png") -20% top fixed;
+ }
+.content .row {
+    overflow: hidden;
+    background: #ff8800;
+    background: rgba(255, 136, 0, 0.7);
+}
+
+.content p, .content form {
+    margin-bottom: 18px; }
+.content img {
+    /*margin: 0 10px 10px 0; */
+    margin: 10px; 
+
+}
+.content img.aligncenter {
+    display: block;
+    margin: 10px auto;
+}
+.content ul {
+    margin: 0 0 18px 25px;
+}
+.content ul li {
+      margin-bottom: 5px;
+      list-style:  cross-fade;
+}
+.content ul li ul li {
+    list-style: circle;
+}    
+.content ul li ol li {
+    list-style: decimal; 
+} 
+.content ol {
+    margin: 0 0 18px 20px; 
+}
+.content ol li {
+      margin-bottom: 5px;
+      list-style: decimal; 
+}
+.content ol li ul li {
+      list-style: circle;
+}
+.content ol li ol li {
+      list-style: lower-alpha;
+}
+.content .startpage-widget-area ul li, 
+.content .startpage-widget-area ol li {
+    list-style: none;
+    margin-bottom: 0; }
+.content .startpage-widget-area, 
+.first-startpage-widget-area ul li {
+    margin-bottom: 5px; }
+.content .startpage-widget-area ul.children {
+    margin: 0 0 0 5px ; 
+}
+.content .content-aside p, .content 
+.content-aside table, .content 
+.content-aside blockquote, 
+.content .content-aside form {
+    margin-bottom: 20px; 
+}
+.content .content-aside ul, .content .content-aside ol {
+    margin: 0 0 20px 0; }
+.content .content-aside ul li,
+.content .content-aside ol li {
+      list-style: none;
+}
+.content ul {
+    list-style: disc; 
+}
+.content ul ul, .content ol ol, 
+.content ul ol, .content ol ul {
+    margin-bottom: 0; 
+  }
+  
+.content-primary h2 {
+    margin-top: 1em;
+  }
+ .content-primary h3 {
+    margin-top: 0.8em;
+  }
+.content-primary .post-title h2,
+ .content-primary .post-title h3 {
+    margin-top: 0.5em;
+  }
+ 
+  
+.content .symbolbild {
   width: 100%;
   margin: 0;
   padding: 0;
-  position: relative; }
-
-.flexslider .slides > li {
-  display: none; }
-
-.slides:after {
-  content: ".";
-  display: block;
-  clear: both;
-  visibility: hidden;
-  line-height: 0;
-  height: 0; }
-
-html[xmlns] .slides {
-  display: block; }
-
-* html .slides {
-  height: 1%; }
-
-.no-js .slides > li:first-child {
-  display: block; }
-
-.flex-direction-nav {
-  display: none; }
-
-.flex-control-nav {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  overflow: hidden;
-  z-index: 800; }
-  .flex-control-nav li {
-    float: left;
-    margin-right: 1px; }
-    .flex-control-nav li a {
-      display: block;
-      padding: 0px 5px;
-      background: white;
-      background: rgba(255, 255, 255, 0.5);
-      cursor: pointer;
-      color: black; }
-      .flex-control-nav li a.active {
-        background: white; }
-
-.slide h2 {
-  margin-left: -5px; }
-  .slide h2 a {
-    background: #2d7dc5 !important;
-    padding: 2px 5px 0px 5px !important; }
-    .slide h2 a:hover {
-      background: #4c2582 !important; }
-.slide h3 {
-  display: inline-block;
-  font-size: 18px !important; }
-.slide .caption {
-  background: transparent;
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  padding: 10px 20px;
-  text-align: right; }
-  .slide .caption h2, .slide .caption h3, .slide .caption h4, .slide .caption h5, .slide .caption p {
-    margin-bottom: 0; }
-  .slide .caption h3 {
+  background: black;  
+}
+.content .symbolbild img {
+   display: block;
+  margin: 0 auto; 
+    
+}
+ 
+.content .symbolbild .caption {
+    background: transparent;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 10px 20px;
+    text-align: right; 
+}
+.content .symbolbild .aaarh {
+    background: transparent;
+    color: black;
+    font-family: "FontPiratenkleiderHeadlines", Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    position: absolute;
+    font-size: 2em;
+    left: 350px;
+    line-height: 1.3em;
+    position: absolute;
+    text-transform: uppercase;
+    top: 40px;
+    width: 250px;
+}
+.content .symbolbild h2 {
+    margin-bottom: 0; 
+}
+.content .symbolbild h3{
     font-size: 12px;
-    margin-bottom: 5px; }
-  .slide .caption a {
-    background: #2d7dc5;
-    color: white;
-    display: inline-block;
-    padding: 0 5px; }
-
-.second-teaser-widget-area .skin {
-  padding: 10px; }
-.second-teaser-widget-area li {
-  margin-bottom: 1px;
-  background: #5c388f;
-  border-radius: 2px;
-  -moz-border-radius: 2px;
-  -webkit-border-radius: 2px;
-  -moz-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-  -webkit-box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); }
-  .second-teaser-widget-area li a {
-    padding: 1.5em 10px 1em 50px;
-    border: 0px solid;
-    color: white;
-    display: block;
-    text-shadow: 0 0 0; }
-    .second-teaser-widget-area li a div {
-      color: white;
-      font-family: "BebasNeueRegular", Helvetica, Arial, sans-serif;
-      letter-spacing: 1px;
-      text-shadow: 0 -1px 1px #5c388f;
-      font-size: 19px; }
-    .second-teaser-widget-area li a:hover {
-      -moz-transition: all 0.2s ease-in-out;
-      -o-transition: all 0.2s ease-in-out;
-      -webkit-transition: all 0.2s ease-in-out;
-      transition: all 0.2s ease-in-out;
-      padding-left: 55px !important; }
-  .second-teaser-widget-area li:hover {
-    background: #643d9c; 
-    -moz-transition: all 0.2s ease-in-out;
-    -o-transition: all 0.2s ease-in-out;
-    -webkit-transition: all 0.2s ease-in-out;
-    transition: all 0.2s ease-in-out; }
-.second-teaser-widget-area li.first a {
-  background: url("../images/cta-icons.png") no-repeat scroll 10px 10px transparent; }
-  .second-teaser-widget-area li.first a:hover {
-    background: url("../images/cta-icons.png") no-repeat scroll 10px 10px transparent; }
-.second-teaser-widget-area li.second a {
-  background: url("../images/cta-icons.png") no-repeat scroll 10px -90px transparent; }
-  .second-teaser-widget-area li.second a:hover {
-    background: url("../images/cta-icons.png") no-repeat scroll 10px -90px transparent; }
-.second-teaser-widget-area li.third a {
-  background: url("../images/cta-icons.png") no-repeat scroll 10px -190px transparent; }
-  .second-teaser-widget-area li.third a:hover {
-    background: url("../images/cta-icons.png") no-repeat scroll 10px -190px transparent; }
-
-.content {
-  background: #4c2582 url("../images/bg-tags.png") -20% top fixed; }
-  .content .row {
-    overflow: hidden;
-    background: #4c2582;
-    background: rgba(0, 0, 0, 0.2) !important; }
-  .content p, .content form {
-    margin-bottom: 18px; }
-  .content img {
-    margin: 0 10px 10px 0; }
-  .content ul {
-    margin: 0 0 18px 25px; }
-    .content ul li {
-      margin-bottom: 5px;
-      slist-style: url("../images/listitem.png") !important; }
-	.content ul.vorstand li {
-	  margin-bottom: 1.6em;
-	  slist-style: url("../images/listitem.png") !important;
-	}
-    .content ul.vorstand li a{
-      vertical-align:top;
-      slist-style: url("../images/listitem.png") !important;
-    }
-  .content ol {
-    margin: 0 0 18px 20px; }
-    .content ol li {
-      margin-bottom: 5px; }
-  .content .startpage-widget-area ul li, .content .startpage-widget-area ol li {
-    list-style: none !important;
-    margin-bottom: 0; }
-  .content .startpage-widget-area .first-startpage-widget-area ul li {
-    margin-bottom: 5px; }
-  .content .startpage-widget-area ul.children {
-    margin: 0 0 0 5px !important; }
-  .content .content-aside p, .content .content-aside table, .content .content-aside blockquote, .content .content-aside form, .content .content-aside img {
-    margin-bottom: 20px; }
-  .content .content-aside ul, .content .content-aside ol {
-    margin: 0 0 20px 0; }
-    .content .content-aside ul li, .content .content-aside ol li {
-      list-style: none !important; }
-  .content ul {
-    list-style: disc; }
-  .content ul ul, .content ol ol, .content ul ol, .content ol ul {
-    margin-bottom: 0; }
-
+    margin-bottom: 5px; 
+}  
+  
+  
 .content-primary {
   overflow: hidden;
-  background: white; }
-  .content-primary input[type="text"], .content-primary select, .content-primary textarea {
-    border: 1px solid silver; }
+  background: white; 
+
+}
+  .content-primary input[type="text"], 
+  .content-primary select, 
+  .content-primary textarea {
+    border: 1px solid silver; 
+    font-size: 1em;
+  }
+  .content-primary input[type="text"]:hover, 
+  .content-primary textarea:hover,
+  .content-primary input[type="text"]:focus, 
+  .content-primary textarea:focus {
+    border: 1px solid black; 
+    background-color: beige;
+  }
   .content-primary .columns {
-    float: left; }
-    .content-primary .columns .column1, .content-primary .columns .column2 {
+    float: left; 
+  }
+  .content-primary .columns .column1, .content-primary .columns .column2 {
       margin-bottom: 20px; }
-      .content-primary .columns .column1 hr, .content-primary .columns .column2 hr {
+  .content-primary .columns .column1 hr, .content-primary .columns .column2 hr {
         display: none; }
-    .content-primary .columns .column1 {
+  .content-primary .columns .column1 {
       float: left; }
-    .content-primary .columns .column2 {
+  .content-primary .columns .column2 {
       float: right; }
   .content-primary .post-nav {
     margin-bottom: 20px;
     overflow: hidden; }
     .content-primary .post-nav a {
-      font-family: "BebasNeueRegular", Helvetica, Arial, sans-serif;
+      font-family: "FontPiratenkleiderHeadlines", Helvetica, Arial, sans-serif;
       font-size: 20px; }
     .content-primary .post-nav ul li {
-      list-style: none !important; }
+      list-style: none; }
     .content-primary .post-nav .back a {
-      background: url("../images/bigback.png") no-repeat center left;
+      background: url("https://archiv.piratenpartei.at/wp-content/themes/Piratenkleider-PPOE/assets/bigback.png") no-repeat center left;
       display: block;
       padding-left: 25px; }
     .content-primary .post-nav .forward a {
-      background: url("../images/bigforward.png") no-repeat center right;
+      background: url("https://archiv.piratenpartei.at/wp-content/themes/Piratenkleider-PPOE/assets/bigforward.png") no-repeat center right;
       display: block;
       padding-right: 25px; }
     .content-primary .post-nav .related {
@@ -839,137 +1305,264 @@ html[xmlns] .slides {
       .content-primary .post-nav .related li {
         list-style: none; }
         .content-primary .post-nav .related li img {
-          display: none !important; }
+          display: none; }
   .content-primary ol.az {
     margin: 0 !important;
     overflow: hidden;
     width: 100%; }
-    .content-primary ol.az h2 {
-      background: #eeeeee;
-      float: left;
-      padding: 5px 10px;
-      -moz-box-shadow: 1px 1px 2px #444444;
-      -webkit-box-shadow: 1px 1px 2px #444444;
-      box-shadow: 1px 1px 2px #444444; }
-    .content-primary ol.az dl {
-      float: left; }
-      .content-primary ol.az dl dt {
-        font-family: "BebasNeueRegular", Helvetica, Arial, sans-serif;
-        font-size: 20px;
-        font-weight: lighter;
-        letter-spacing: 1px; }
-      .content-primary ol.az dl dd {
-        margin-bottom: 5px; }
-    .content-primary ol.az li {
-      list-style: none !important; }
-  .content-primary .grid-3cols .figure {
+.content-primary ol.az h2 {
+    background: #eeeeee;
+    float: left;
+    padding: 5px 10px;
+    -webkit-box-shadow: 1px 1px 2px #444444;
+    -moz-box-shadow: 1px 1px 2px #444444;
+    -ms-box-shadow: 1px 1px 2px #444444;
+    -o-box-shadow: 1px 1px 2px #444444;
+    box-shadow: 1px 1px 2px #444444; 
+}
+.content-primary ol.az dl {
+    float: left; }
+.content-primary ol.az dl dt {
+    font-family: "FontPiratenkleiderHeadlines", Helvetica, Arial, sans-serif;
+    font-size: 20px;
+    font-weight: lighter;
+    letter-spacing: 1px; }
+.content-primary ol.az dl dd {
+    margin-bottom: 5px; }
+.content-primary ol.az li {
+    list-style: none; }
+.content-primary .grid-3cols .figure {
     float: left;
     width: 33%;
     padding: 0 20px 0 0; }
-  .content-primary .sprungmarken {
+.content-primary .sprungmarken {
     padding: 5px;
     margin: 0 0 20px 20px;
     text-align: right;
     float: right;
-    border-radius: 2px;
+    -webkit-border-radius: 2px; 
     -moz-border-radius: 2px;
-    -webkit-border-radius: 2px; }
-    .content-primary .sprungmarken ol {
-      margin: 0;
-      padding: 0;
-      overflow: hidden; }
-      .content-primary .sprungmarken ol li {
-        list-style: none !important;
-        margin: 0;
-        padding: 0; }
-        .content-primary .sprungmarken ol li a {
-          padding: 2px 5px;
-          background: #2d7dc5;
-          margin: 0 2px 2px 0;
-          color: white;
-          display: inline-block;
-          border-radius: 2px;
-          -moz-border-radius: 2px;
-          -webkit-border-radius: 2px; }
-          .content-primary .sprungmarken ol li a:hover {
-            background: #4c2582;
-            color: black; }
-    .content-primary .sprungmarken ol.azjumper li {
+    -ms-border-radius: 2px; 
+    -o-border-radius: 2px; 
+    border-radius: 2px;
+}
+.content-primary .sprungmarken ol {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; }
+.content-primary .sprungmarken ol li {
+    list-style: none;
+    margin: 0;
+    padding: 0; }
+.content-primary .sprungmarken ol li a {
+    padding: 2px 5px;
+    background: #2d7dc5;
+    margin: 0 2px 2px 0;
+    color: white;
+    display: inline-block;        
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -o-border-radius: 2px;
+    border-radius: 2px;
+}
+.content-primary .sprungmarken ol li a:hover {
+    background: #ff8800;
+    color: black;
+ }
+.content-primary .sprungmarken ol.azjumper li {
       float: left; }
 
-.page .content-header {
+ .content-header {
   position: relative;
-  height: 150px; }
-  .page .content-header #page-title {
+  height: 150px; 
+  overflow: hidden;
+}
+.content-header-big {
+  position: relative;
+  height: 240px; 
+  overflow: hidden;
+}
+.content-header #page-title,
+.content-header h1,
+.content-header-big h1  {
     position: absolute;
-    left: 15px;
-    top: 18px;
+    left: 25px;
+    top: 1.5em;
     display: inline-block;
     background: white;
-    padding: 3px 5px 1px 5px; }
+    padding: 3px 5px 1px 5px;    
+}
+.content-aside a img {
+    margin: 0;
+    padding: 0; 
+}
 
+
+.content-aside #steckbrief {    
+    background-color: white;
+    cursor: pointer;
+    display: inline-block;
+    padding: 10px 10px 15px;
+    z-index: 1;
+    box-shadow: 0 1px 8px #999999;
+    margin: 0 0 20px -20px;
+    -webkit-transform: rotate(2deg);
+    -moz-transform: rotate(2deg);
+    -ms-transform: rotate(2deg);
+    -o-transform: rotate(2deg);
+    transform: rotate(2deg);
+    -webkit-transition: all 406ms ease-out 0s;
+    -moz-transition: all 406ms ease-out 0s;
+    -ms-transition: all 406ms ease-out 0s;
+    -o-transition: all 406ms ease-out 0s;
+    transition: all 406ms ease-out 0s;                    
+}
+  .content-aside #steckbrief:hover,
+  .content-aside #steckbrief:focus,
+  .content-aside #steckbrief:active {
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    transform: scale(1.1);
+    z-index: 9;
+	}   
+  .content-aside #steckbrief img {
+    background-position: center center;
+    background-repeat: no-repeat;
+    border: 1px solid #EEEEEE; 
+    display: block;
+    margin: 0 0 15px;
+  } 
+    
+   .content-aside #steckbrief .text {
+      background-color: white;
+      padding: 0.4em 0.8em 0.3em 0.8em;
+   } 
+  
+ .content-aside .newsletter {     
+    background: none repeat scroll 0 0 #ffa500;
+    border-radius: 2px 2px 2px 2px;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    margin-bottom: 1px;     
+    -webkit-border-radius-topleft: 3px;
+    -webkit-border-radius-topright: 3px;
+    -webkit-border-radius-bottomright: 3px;
+    -webkit-border-radius-bottomleft: 3px;
+    -moz-border-radius-topleft: 3px;
+    -moz-border-radius-topright: 3px;
+    -moz-border-radius-bottomright: 3px;
+    -moz-border-radius-bottomleft: 3px;
+    -ms-border-radius-topleft: 3px;
+    -ms-border-radius-topright: 3px;
+    -ms-border-radius-bottomright: 3px;
+    -ms-border-radius-bottomleft: 3px;
+    -o-border-radius-topleft: 3px;
+    -o-border-radius-topright: 3px;
+    -o-border-radius-bottomright: 3px;
+    -o-border-radius-bottomleft: 3px;    
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;     
+    padding: 10px;
+    margin-bottom: 20px;
+ } 
+
+.content-aside .newsletter  form {
+    overflow: hidden;
+    position: relative; 
+    width: 100%;
+    margin: 0 5px 5px 5px;
+}
+.content-aside .newsletter  form label {
+      font-weight: lighter; 
+      font-size:0.9em;
+}
+.content-aside .newsletter form input[type="text"] {
+      width: 150px;
+ }
+ 
+ .content-aside .newsletter p {
+    display: block;
+    height: auto;
+    font-size: 0.8em;
+    padding: 0;
+    margin-bottom: 0px;
+ }  
+ 
+
+ 
 .subnav {
-  margin: 0 !important;
-  padding: 0 !important;
+  margin: 0;
+  padding: 0;
   max-width: 50%;
   float: right;
-  margin: 0 0 10px 10px !important; }
-  .subnav ul {
-    margin: 0 !important;
-    padding: 0 !important; }
-  .subnav li {
-    list-style: none !important;
-    margin: 0 0 0 0 !important;
-    padding: 0 !important;
+  margin: 0 0 10px 10px; }
+.subnav ul {
+    margin: 0;
+    padding: 0; }
+.subnav li {
+    list-style: none;
+    margin: 0 0 0 0;
+    padding: 0;
     text-align: right; }
-    .subnav li a {
-      background: #eee;
-      color: #000;
-      padding: 2px 5px;
-      margin-bottom: 1px;
-      display: block;
-      margin-bottom: 2px; }
-      .subnav li a:hover {
-        background: #4c2582;
-        color: black;
-        -moz-transition: all 0.2s ease-in-out;
-        -o-transition: all 0.2s ease-in-out;
-        -webkit-transition: all 0.2s ease-in-out;
-        transition: all 0.2s ease-in-out; }
+.subnav li a {
+    background: #eee;
+    color: #000;
+    padding: 2px 5px;
+    margin-bottom: 1px;
+    display: block;
+    margin-bottom: 2px; 
+}
+.subnav li a:hover {
+    background: #ff8800;
+    color: black;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out; 
+}
 
 .single .post {
-  position: relative; }
-.single .social_share_privacy ul {
-  margin: 0; }
-  .single .social_share_privacy ul li {
-    list-style: none !important;
+  position: relative; 
+}
+ .single .social_share_privacy ul {
+     margin: 0; }
+ .single .social_share_privacy ul li {
+    list-style: none;
     height: auto; }
-    .single .social_share_privacy ul li .dummy_btn {
-      margin-left: 0; }
-    .single .social_share_privacy ul li .switch {
-      background: white;
-      width: 0; }
-  .single .social_share_privacy ul li.facebook, .single .social_share_privacy ul li.twitter {
+ .single .social_share_privacy ul li .dummy_btn {
+    margin-left: 0; }
+ .single .social_share_privacy ul li .switch {
+    background: white;
+    width: 0; }
+ .single .social_share_privacy ul li.facebook, .single .social_share_privacy ul li.twitter {
     width: 120px; }
-  .single .social_share_privacy ul .help_info.icon {
-    background: #2d7dc5 url("../images/info.png") no-repeat center center scroll;
+ .single .social_share_privacy ul .help_info.icon {
+    background: #2d7dc5 url("https://archiv.piratenpartei.at/wp-content/themes/Piratenkleider-PPOE/assets/info.png") no-repeat center center scroll;
     border: 2px solid;
     width: 0;
     height: 0;
     padding: 6px 10px 8px 4px;
-    margin-top: 2px; }
+    margin-top: 2px; 
+    }
 .single .post-edit-link {
   margin-top: 20px; }
-
+.post {
+    display: inline-block;
+}
 .post .post-title {
   position: relative;
   float: left;
   width: 100%;
   margin-bottom: 18px; }
   .post .post-title h1 {
-    line-height: 24px; }
-  .post .post-title h2 {
-    display: inline; }
+    line-height: 24px; 
+  }
+
 .post .post-info {
   float: left;
   position: relative;
@@ -979,53 +1572,109 @@ html[xmlns] .slides {
     position: absolute;
     top: -5px;
     right: 0; }
-    .post .post-info .commentbubble a {
-      background: #4c2582;/*  642A73 4c2582 8E42AD*/
-      color: white;
-      display: block;
-      line-height: 13px;
-      font-size: 10px;
-      height: 13px;
-      padding: 0 4px;
-      font-weight: bold;
-      text-align: center;
-      border-radius: 14px;
-      -moz-border-radius: 14px;
-      -webkit-border-radius: 14px; }
+  .post .post-info .commentbubble a {
+    background: #ff8800;
+    color: white;
+    display: block;
+    line-height: 13px;
+    font-size: 10px;
+    height: 13px;
+    padding: 0 4px;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+    -webkit-border-radius: 14px; 
+    -moz-border-radius: 14px;
+    -ms-border-radius: 14px; 
+    -o-border-radius: 14px; 
+    border-radius: 14px; 
+  }
+  .post .post-info .infoimage {
+    width: 130px;
+    height: auto;
+    max-height: 250px;
+    margin: 5px;
+    overflow: hidden;
+  }
   .post .post-info .cal-icon {
-    background: #eeeeee;
-    margin-left: -20px;
+    background: #eeeeee;   
     padding: 10px;
     margin-right: 10px;
     margin-bottom: 5px;
     overflow: hidden;
-    -moz-box-shadow: 1px 1px 2px #444444;
     -webkit-box-shadow: 1px 1px 2px #444444;
-    box-shadow: 1px 1px 2px #444444; }
-    .post .post-info .cal-icon span {
+    -moz-box-shadow: 1px 1px 2px #444444;
+    -ms-box-shadow: 1px 1px 2px #444444;
+    -o-box-shadow: 1px 1px 2px #444444;
+    box-shadow: 1px 1px 2px #444444; 
+  }
+  .post .post-info .cal-icon span {
       display: block;
       text-align: center;
-      line-height: 10px; }
+      line-height: 10px; 
+  }
     .post .post-info .cal-icon .day {
       font-size: 24px;
-      font-family: "BebasNeueRegular", Helvetica, Arial, sans-serif;
+      font-family: "FontPiratenkleiderHeadlines", Helvetica, Arial, sans-serif;
       line-height: 18px; }
     .post .post-info .cal-icon .month {
       font-size: 10px; }
     .post .post-info .cal-icon .year {
       font-size: 10px; }
-.post .post-entry {
-  padding-top: 10px; }
+    .post .post-entry {
+    padding-top: 10px; 
+    }
+
 .post .post-meta {
   overflow: hidden;
-  font-size: 10px !important;
-  color: gray;
-  width: 100%; }
-  .post .post-meta a {
-    color: black; }
+  font-size: 10px;
+  color: #222;
+  width: 100%; 
+}
+
   .post .post-meta .post-edit-link {
     float: left;
     font-size: 12px; }
+
+.post .disclaimer, 
+.sticky {
+    border-radius: 0.3em;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #888;
+    border-color: rgba(0,0,0,.3);
+    -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2) inset;
+    -moz-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2) inset;
+    -ms-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2) inset;
+    -o-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2) inset;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2) inset;
+    color: #444;
+    color: rgba(0,0,0,.8);
+    background: url("https://archiv.piratenpartei.at/wp-content/themes/Piratenkleider-PPOE/images/int/bg-tags.png") repeat fixed -20% top #FF8800;
+    padding: 5px;
+    margin: 10px 20px 30px;    
+    position: relative;
+}
+.post .disclaimer {
+    clear: both;
+}
+.sticky {
+    padding: 5px 5px 20px 5px;
+    margin: 10px;
+}
+.post .disclaimer a, 
+.sticky a {
+    color: black;
+    background: #f38100;
+    padding: 0 2px;
+}      
+.post .disclaimer a:hover, 
+.post .disclaimer a:focus,
+.sticky a:hover,
+.sticky a:focus {    
+    color: #000;
+    background: #d97300;
+}      
 
 .post-comments #comments-title {
   margin-bottom: 20px; }
@@ -1038,59 +1687,75 @@ html[xmlns] .slides {
     float: left;
     width: 100%; }
     .post-comments ol li p {
-      margin-bottom: 0; }
+      margin-bottom: 0; 
+    }
     .post-comments ol li .comment-details {
       float: left;
       width: 30%;
+      max-width: 180px;
       text-align: right;
-      color: gray;
+      color: #222;
       padding-right: 2%;
-      font-size: 10px; }
-      .post-comments ol li .comment-details .comment-author a {
-        color: black; }
+      font-size: 0.9em; 
+    }
+
       .post-comments ol li .comment-details .comment-author img {
         float: left;
-        margin: 0 10px 10px 0; }
-    .post-comments ol li .comment-body {
+        margin: 0 10px 10px 0;
+      }
+
+      
+.post-comments ol li .comment-body {
       float: left;
       width: 68%; }
-    .post-comments ol li .reply a {
-      float: right;
-      padding: 5px 10px;
-      overflow: visible;
-      position: relative;
-      background: #2d7dc5;
-      color: white !important;
-      margin: 0 2px 2px 0;
-      border: 1px solid #2d7dc5;
-      text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.1);
-      border-top: 1px solid #4e96d7;
-      border-bottom: 1px solid #1a4872;
-      display: inline-block;
-      border-radius: 2px;
-      -moz-border-radius: 2px;
-      -webkit-border-radius: 2px;
-      text-shadow: 0 -1px 0 #112e48;
-      background-color: #2d7dc5;
-      background-image: -moz-linear-gradient(top, #2d7dc5, #24639b);
-      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #2d7dc5), color-stop(1, #24639b));
-      background-image: linear-gradient(top, #2d7dc5, #24639b); }
-      .post-comments ol li .reply a:hover {
+.post-comments ol li .reply a {
+    float: right;
+    padding: 5px 10px;
+    overflow: visible;
+    position: relative;
+    background: #2d7dc5;
+    color: white !important;
+    margin: 0 2px 2px 0;
+    border: 1px solid #2d7dc5;
+    text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.1);
+    border-top: 1px solid #4e96d7;
+    border-bottom: 1px solid #1a4872;
+    display: inline-block;      
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -o-border-radius: 2px;
+    border-radius: 2px;
+    text-shadow: 0 -1px 0 #112e48;
+    background-color: #2d7dc5;
+    background-image: -moz-linear-gradient(top, #2d7dc5, #24639b);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #2d7dc5), color-stop(1, #24639b));
+    background-image: linear-gradient(top, #2d7dc5, #24639b); 
+    }
+.post-comments ol li .reply a:hover {
         background-color: #2d7dc5;
         background-image: -moz-linear-gradient(top, #2d7dc5, #1a4872);
         background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #2d7dc5), color-stop(1, #1a4872));
         background-image: linear-gradient(top, #2d7dc5, #1a4872);
-        -moz-transition: all 0.2s ease-in-out;
-        -o-transition: all 0.2s ease-in-out;
         -webkit-transition: all 0.2s ease-in-out;
+        -moz-transition: all 0.2s ease-in-out;
+        -ms-transition: all 0.2s ease-in-out;
+        -o-transition: all 0.2s ease-in-out;
         transition: all 0.2s ease-in-out; }
-      .post-comments ol li .reply a:active {
+.post-comments ol li .reply a:active {
         top: 1px; }
 .post-comments .respond span.required {
-  color: #4c2582;
+  color: #ff8800;
   display: inline-block;
   margin: -5px 0 0 -10px;
   position: absolute; }
+
+img.wp-smiley {
+  margin: 0 0 5px 0;
+} 
+
+.bypostauthor {}
+
 
 .post-nav ul {
   list-style: none;
@@ -1110,30 +1775,106 @@ html[xmlns] .slides {
 .single .post-entry p {
   margin-bottom: 20px; }
 
+.entry-date, 
+.meta-prep {
+  font-size: 10px;
+  color: #222;
+}
+
+.wp-caption {
+  text-align: center;
+  padding: 5px;
+  margin: 5px;
+  max-width: 100%;
+}
+.wp-caption img {    
+    margin: 0;
+}
+.wp-caption  p.wp-caption-text {
+  position: relative;
+  top: 0px;      
+  left: 0px;
+  line-height: 2em;
+  padding: 0.2em;
+  text-align: left;
+  display: block;
+  background: transparent;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  margin: 0;  
+}
+
+.wp-caption  p.wp-caption-text a {
+    color: white;
+   
+}
+
+.wp-caption  p.wp-caption-text a:focus,
+.wp-caption  p.wp-caption-text a:hover {
+    color: white;
+    text-transform: underline;
+    outline: 1px dotted white;    
+}
+
+ .gallery {
+	margin: 10px 10px 10px 50px;        
+}
+ .gallery .gallery-item {
+	float: left;
+	margin-top: 10px;
+	text-align: center;
+	width: 33%;
+}
+
+ .gallery .gallery-caption {
+	margin-left: 0;
+}
+ .gallery dl {
+	margin: 0;
+}
+ .gallery img {
+	border: 5px solid #f1f1f1;
+}
+.gallery img:hover {
+	border: 5px solid #ff8800;
+}
+ .gallery-caption {
+	color: #888;
+	font-size: 12px;
+	margin: 0px 0 24px 0;
+}
+ .gallery br+br {
+	display: none; 
+}
+                                          
+
 .first-startpage-widget-area {
   float: left;
   width: 100%;
   overflow: hidden;
   padding-top: 30px; }
-  .first-startpage-widget-area .skin {
+.first-startpage-widget-area .skin {
     padding: 0 20px 0 0; }
-  .first-startpage-widget-area ul {
+.first-startpage-widget-area ul {
     margin: 0; }
-  .first-startpage-widget-area li {
+.first-startpage-widget-area li {
     list-style: none; }
-    .first-startpage-widget-area li span.date {
+.first-startpage-widget-area li span.date {
       margin-left: 0px;
       opacity: .5;
       -moz-transition: all 0.2s ease-in-out;
       -o-transition: all 0.2s ease-in-out;
       -webkit-transition: all 0.2s ease-in-out;
       transition: all 0.2s ease-in-out; }
-    .first-startpage-widget-area li a {
-      font-family: "BebasNeueRegular", Helvetica, Arial, sans-serif;
+.first-startpage-widget-area li a {
+      font-family: "FontPiratenkleiderHeadlines", Helvetica, Arial, sans-serif;
       font-size: 20px; }
-  .first-startpage-widget-area li:hover span.date {
-    opacity: 1; }
-  .first-startpage-widget-area a.all-articles {
+    
+.first-startpage-widget-area li:hover span.date,
+.first-startpage-widget-area li:focus span.date {
+    opacity: 1;
+  }
+.first-startpage-widget-area a.all-articles {
     padding: 5px 10px;
     overflow: visible;
     position: relative;
@@ -1144,182 +1885,264 @@ html[xmlns] .slides {
     text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.1);
     border-top: 1px solid #4e96d7;
     border-bottom: 1px solid #1a4872;
-    display: inline-block;
-    border-radius: 2px;
-    -moz-border-radius: 2px;
+    display: inline-block;   
     -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -o-border-radius: 2px;
+    border-radius: 2px;
     text-shadow: 0 -1px 0 #112e48;
     background-color: #2d7dc5;
     background-image: -moz-linear-gradient(top, #2d7dc5, #24639b);
     background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #2d7dc5), color-stop(1, #24639b));
     background-image: linear-gradient(top, #2d7dc5, #24639b); }
-    .first-startpage-widget-area a.all-articles:hover {
+
+  .first-startpage-widget-area a.all-articles:hover {
       background-color: #2d7dc5;
       background-image: -moz-linear-gradient(top, #2d7dc5, #1a4872);
       background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #2d7dc5), color-stop(1, #1a4872));
       background-image: linear-gradient(top, #2d7dc5, #1a4872);
-      -moz-transition: all 0.2s ease-in-out;
-      -o-transition: all 0.2s ease-in-out;
       -webkit-transition: all 0.2s ease-in-out;
+      -moz-transition: all 0.2s ease-in-out;
+      -ms-transition: all 0.2s ease-in-out;
+      -o-transition: all 0.2s ease-in-out;
       transition: all 0.2s ease-in-out; }
-    .first-startpage-widget-area a.all-articles:active {
-      top: 1px; }
+ .first-startpage-widget-area a.all-articles:active {
+      top: 1px; 
+ }
 
 .second-startpage-widget-area .skin {
   padding: 0 0 0 20px; }
 
 .tagcloud {
-  font-family: "BebasNeueRegular", Helvetica, Arial, sans-serif; }
+  font-family: "FontPiratenkleiderHeadlines", Helvetica, Arial, sans-serif;
+  line-height: 1.8em;
+  text-align: center;
+  margin-top: 1em;      
+}
 
-.content-aside .flex-control-nav {
-  display: none; }
 .content-aside a {
-  color: #EEE;
-  background: #4c2582;  /* 6F3184 4c2582 8E42AD */
-  padding: 0 2px; }
-  .content-aside a:hover {
-    color: #FFF;
-    background: rgb(147,124,180); /* 6F3184 4c2582 8E42AD */ }
+  color: black;
+  padding: 0 2px; 
+}
+.content-aside a:hover {
+    color: #000;
+   /* background: #d97300;  */
+   text-decoration: underline;
+}
+
 .content-aside ul {
-  margin: 0 0 18px 0; }
-  .content-aside ul li {
+  margin: 0 0 18px 0; 
+}
+.content-aside ul li {
     margin-bottom: 0;
-    list-style: none !important;
+    list-style: none;
     margin-bottom: 2px; }
 .content-aside table {
   background: #c96a00;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.2);
   padding: 5px;
   border-radius: 2px;
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px; }
-  .content-aside table td, .content-aside table th {
-    border-top: 1px solid #4c2582; }
+.content-aside table td,
+.content-aside table th {
+    border-top: 1px solid #ff8800; 
+}
 .content-aside blockquote {
   margin: 0 0 20px 0;
   border: 0 solid;
   background: #c96a00;
   background: rgba(0, 0, 0, 0.2);
   padding: 20px;
-  overflow: hidden;
-  border-radius: 2px;
+  overflow: hidden; 
+  -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
-  -webkit-border-radius: 2px; }
-  .content-aside blockquote footer {
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+   border-radius: 2px;
+}
+.content-aside blockquote footer {
     margin-top: 5px;
     float: right;
     text-align: right; }
-    .content-aside blockquote footer img {
+.content-aside blockquote footer img {
       float: right;
       margin: 0; }
 
 .content-aside ul.menu li {
-  display: none; }
-.content-aside ul.menu li.current-menu-item, .content-aside ul.menu li.current-menu-ancestor {
+/*  display: none;   */
+}
+.content-aside ul.menu li.current_page_item, 
+.content-aside ul.menu li.current_page_ancestor,
+.content-aside ul.menu li.current-menu-item, 
+.content-aside ul.menu li.current-menu-ancestor {
   display: block; }
-  .content-aside ul.menu li.current-menu-item li, .content-aside ul.menu li.current-menu-ancestor li {
+.content-aside ul.menu li.current_page_item li, 
+.content-aside ul.menu li.current_page_ancestor li, 
+.content-aside ul.menu li.current-menu-item li, 
+.content-aside ul.menu li.current-menu-ancestor li {
     display: block; }
-  .content-aside ul.menu li.current-menu-item .sub-menu .sub-menu, .content-aside ul.menu li.current-menu-ancestor .sub-menu .sub-menu {
+.content-aside ul.menu li.current_page_item .children .children 
+.content-aside ul.menu li.current_page_ancestor .children .children,
+.content-aside ul.menu li.current-menu-item .sub-menu .sub-menu, 
+.content-aside ul.menu li.current-menu-ancestor .sub-menu .sub-menu {
     display: none; }
-.content-aside ul.menu li.current-menu-item > .sub-menu, .content-aside ul.menu li.current-menu-ancestor > .sub-menu {
-  display: block !important; }
+.content-aside ul.menu li.current_page_item > .children, 
+.content-aside ul.menu li.current_page_ancestor > .children,
+.content-aside ul.menu li.current-menu-item > .sub-menu, 
+.content-aside ul.menu li.current-menu-ancestor > .sub-menu {
+  display: block !important; 
+}
 
 .content-aside ul.menu {
-  background: #c96a00;
-  background: rgba(0, 0, 0, 0.2);
-  padding: 5px;
-  margin: 0 0 20px 0;
-  border-radius: 2px;
-  -moz-border-radius: 2px;
-  -webkit-border-radius: 2px; }
-  .content-aside ul.menu hr {
+    background: #c96a00;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 5px;
+    margin: 0 0 20px 0;
+    -webkit-border-radius: 2px; 
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px; 
+    -o-border-radius: 2px; 
+    border-radius: 2px;
+}
+.content-aside ul.menu hr {
     height: 0;
     margin: 0; }
-  .content-aside ul.menu li {
+.content-aside ul.menu li {
     margin-bottom: 0; }
-    .content-aside ul.menu li a {
-      display: inline-block;
-      background: rgba(255,255,255,.1);
-      padding: 0 5px;
-      margin-bottom: 2px;
-      color: #EEE;
-      border-radius: 2px;
-      -moz-border-radius: 2px;
-      -webkit-border-radius: 2px; }
-      .content-aside ul.menu li a:hover {
-        color: white !important;
-        background: #2d7dc5; }
-  .content-aside ul.menu li.current-menu-item > a {
-    background: #2d7dc5 url("../images/plus-left.gif") center left no-repeat;
+.content-aside ul.menu li a {
+    display: inline-block;
+    background: white;
+    padding: 0 5px;
+    margin-bottom: 2px;
+    color: #2d7dc5;     
+    -webkit-border-radius: 2px; 
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px; 
+    -o-border-radius: 2px; 
+    border-radius: 2px;
+     
+}
+.content-aside ul.menu li.active a,
+.content-aside ul.menu li a:hover,
+.content-aside ul.menu li a:focus {
+        color: white;
+        background: #2d7dc5; 
+}
+      
+.content-aside ul.menu li.current_page_item > a,
+.content-aside ul.menu li.current-menu-item > a {
+    background: #2d7dc5 url("https://archiv.piratenpartei.at/wp-content/themes/Piratenkleider-PPOE/assets/plus-left.gif") center left no-repeat;
     color: white;
     padding-left: 14px; }
-  .content-aside ul.menu ul.sub-menu {
-    margin: 0 0 0 5px; }
+.content-aside ul.menu ul.children,
+.content-aside ul.menu ul.sub-menu {
+    margin: 0 0 0 5px; 
+}
+
+
+
 
 .subcontent {
-  background: black url("../images/bg-tags_gray.jpg") -20% top fixed; }
-  .subcontent .row {
+  background: black url("https://archiv.piratenpartei.at/wp-content/themes/Piratenkleider-PPOE/images/int/bg-tags_gray.jpg") -20% top fixed; }
+.subcontent .row {
     background: rgba(0, 0, 0, 0.2);
     color: #eeeeee; }
-  .subcontent p, .subcontent form {
+.subcontent p, .subcontent form {
     margin-bottom: 18px; }
-  .subcontent h2, .subcontent h3, .subcontent h4 {
+.subcontent h2, 
+.subcontent h3, 
+.subcontent h4 {
     margin-bottom: 10px; }
-  .subcontent a {
+.subcontent a {
     background: black;
     color: #2d7dc5;
     padding: 0 5px;
     display: inline-block;
     margin: 0 2px 2px 0; }
-    .subcontent a:hover {
-      background: #2d7dc5;
-      color: white;
-      -moz-transition: all 0.2s ease-in-out;
-      -o-transition: all 0.2s ease-in-out;
-      -webkit-transition: all 0.2s ease-in-out;
-      transition: all 0.2s ease-in-out; }
-  .subcontent ul {
+.subcontent a:hover {
+    background: #2d7dc5;
+    color: white;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out; 
+}
+.subcontent ul {
     margin: 0;
     list-style: none;
     margin-bottom: 10px; }
-    .subcontent ul li {
-      margin-bottom: 0; }
-
-.footer {
-  background: black url("../images/bg-tags_gray.jpg") -20% top fixed;
-  overflow: hidden; }
-  .footer .row {
-    background: rgba(0, 0, 0, 0.2);
-    color: #eeeeee; }
-  .footer ul li {
-    margin-bottom: 0 !important; }
-  .footer .second-footer-widget-area .widget {
+ .subcontent ul li {
     margin-bottom: 0; }
 
+    
+    
+    
+.footer {
+  background: black url("https://archiv.piratenpartei.at/wp-content/themes/Piratenkleider-PPOE/images/int/bg-tags_gray.jpg") -20% top fixed;
+  overflow: hidden; 
+}
+.footer .row {
+    background: rgba(0, 0, 0, 0.2);
+    color: #eeeeee;
+}
+
+.footer ul {
+    margin-left: 0;
+}
+.footer ul li {
+   margin-bottom: 0; 
+   text-wrap: none;
+   text-height: 1em;
+   display: inline-block;
+ }
+ 
+ .footer ul:before {
+    content:"";
+    display:table;
+	}
+ .footer ul:after {
+    clear:both;
+    content:".";
+    display:block;
+    font-size:0;
+    height:0;
+    visibility:hidden;
+    margin-bottom: 10px;
+}
+.first-footer-widget-area .widget li a img,
+.second-footer-widget-area .widget li a img, 
+.footer ul.default_footerlinks li a img {
+    vertical-align: baseline;
+    margin: 0;
+}
+ 
+ .footer .second-footer-widget-area .widget {
+    margin-bottom: 0; 
+ }
+  
 .footer .skin {
-  overflow: hidden; }
+  overflow: hidden; 
+}
 
 .footer a {
   background: black;
   color: #2d7dc5;
-  padding: 0 5px;
-  display: block;
-  margin: 0 2px 2px 0; }
-  .footer .first-footer-widget-area a {
-   display: inline;
-   width:auto;
-   }
+  padding: 0 5px; 
+  margin: 0 2px 2px 0; 
+}
 
 .footer a:hover {
   background: #2d7dc5;
   color: white;
-  -moz-transition: all 0.2s ease-in-out;
-  -o-transition: all 0.2s ease-in-out;
   -webkit-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out; }
-
-.footer ul li {
-  float: left; }
+  -moz-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out; 
+}
 
 /* Widgets --------------------------------------------------------------------*/
 .wpcf7-mail-sent-ok {
@@ -1328,28 +2151,116 @@ html[xmlns] .slides {
   font-weight: bold; }
 
 .widget {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   overflow: hidden; }
-  .widget .widget-title {
-    line-height: 25px; }
+.widget .widget-title {
+    line-height: 25px; 
+ }
+
+ .content-aside h2,
+ .footer h2  {
+     line-height: 25px; 
+     font-size: 20px; 
+ }
+
+ .content-aside .twitterwidget{
+     margin-top: 20px;
+     
+ }
+ .content-aside .twitterwidget h2 img, 
+ .content-aside h2 a.rsswidget img {
+    margin: 0 5px 0 0;
+    padding: 0;
+    vertical-align: middle;
+}
+ .content-aside .widget ul, 
+ .content-aside .twitterwidget ul {
+     margin-bottom: 5px;
+    overflow: hidden;
+ }  
+
+ .content-aside .widget li, 
+ .content-aside .twitterwidget li {
+  /*  color:#333333; */
+    background: #c96a00;
+    background: rgba(0, 0, 0, 0.1);
+    list-style: none outside none;
+    margin-bottom: 1px;
+    padding: 1px 5px;
+    display: block;
+ }
+ .content-aside .twitterwidget li {  
+        padding: 2px 5px;                                  
+ }                                        
+ .content-aside .widget li a.rsswidget {
+     background: transparent;
+ }
+ .content-aside .twitterwidget li a { 
+    font-weight: bold;
+    background: transparent; 
+ }
+ 
+ .content-aside .widget li:hover,
+ .content-aside .widget li:focus,
+#ics-calendar-widget li:hover, 
+#ics-calendar-widget li:focus, 
+ .content-aside .twitterwidget li:hover, 
+ .content-aside .twitterwidget li:focus {
+     background: #ff8800; 
+ }
+ .content-aside .twitterwidget li a:hover, 
+ .content-aside .twitterwidget li a:focus {
+     text-decoration: underline;
+ }
+ .content-aside .widget li .rss-date,
+ .content-aside .twitterwidget li .feed_date {
+     display: inline;
+     font-size: 0.9em;
+     font-style: oblique;
+     color: #222;
+     margin-left: 10px;
+ }
+ .content-aside .widget li .rss-date:before {
+     content: "(";
+ }
+  .content-aside .widget li .rss-date:after {
+     content: ")";
+ }
+ 
+ .content-aside .twitterwidget li .feed_date a {
+     font-weight: normal;     
+ }
+ .content-aside .widget li a.rsswidget:hover,
+ .content-aside .widget li a.rsswidget:focus {    
+       background: #ff8800;
+ }
+ .content-aside .widget li .rssSummary {
+    color:#333333;
+    list-style: none outside none;
+    margin-bottom: 1px;
+    padding: 1px 5px;
+    display: block;
+    font-style: italic;    
+ }
 
 #ics-calendar-widget {
   overflow: hidden;
   margin-bottom: 5px; }
-  #ics-calendar-widget li {
-    color: black !important;
+#ics-calendar-widget li {
+    color: black;
     background: #c96a00;
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.1);
     margin-bottom: 1px;
     padding: 1px 5px;
-    list-style: none !important; }
-    #ics-calendar-widget li strong {
+    list-style: none; }
+#ics-calendar-widget li strong {
       margin-right: 4px;
       display: block;
       height: 100%;
-      float: left; }
-
-#ics-calendar-widget-next, #ics-calendar-widget-prev {
+      float: left; 
+}
+#ics-calendar-widget-next, 
+#ics-calendar-widget-prev {
   padding: 5px 10px;
   overflow: visible;
   position: relative;
@@ -1360,25 +2271,31 @@ html[xmlns] .slides {
   text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.1);
   border-top: 1px solid #4e96d7;
   border-bottom: 1px solid #1a4872;
-  display: inline-block;
-  border-radius: 2px;
-  -moz-border-radius: 2px;
+  display: inline-block;  
   -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
   text-shadow: 0 -1px 0 #112e48;
   background-color: #2d7dc5;
   background-image: -moz-linear-gradient(top, #2d7dc5, #24639b);
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #2d7dc5), color-stop(1, #24639b));
   background-image: linear-gradient(top, #2d7dc5, #24639b); }
-  #ics-calendar-widget-next:hover, #ics-calendar-widget-prev:hover {
+#ics-calendar-widget-next:hover, 
+#ics-calendar-widget-prev:hover {
     background-color: #2d7dc5;
     background-image: -moz-linear-gradient(top, #2d7dc5, #1a4872);
     background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #2d7dc5), color-stop(1, #1a4872));
     background-image: linear-gradient(top, #2d7dc5, #1a4872);
-    -moz-transition: all 0.2s ease-in-out;
-    -o-transition: all 0.2s ease-in-out;
     -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -ms-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
     transition: all 0.2s ease-in-out; }
-  #ics-calendar-widget-next:active, #ics-calendar-widget-prev:active {
+
+#ics-calendar-widget-next:active, 
+#ics-calendar-widget-prev:active {
     top: 1px; }
 
 #ics-calendar-widget-next {
@@ -1388,36 +2305,39 @@ html[xmlns] .slides {
   float: left; }
 
 .ics-calendar-header {
-  padding: 0 0 20px 0 !important;
-  text-align: left !important; }
-  .ics-calendar-header a {
+  padding: 0 0 20px 0;
+  text-align: left; }
+ .ics-calendar-header a {
     padding: 5px 10px;
     overflow: visible;
     position: relative;
     background: #2d7dc5;
-    color: white !important;
+    color: white;
     margin: 0 2px 2px 0;
     border: 1px solid #2d7dc5;
     text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.1);
     border-top: 1px solid #4e96d7;
     border-bottom: 1px solid #1a4872;
-    display: inline-block;
-    border-radius: 2px;
-    -moz-border-radius: 2px;
+    display: inline-block;   
     -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -o-border-radius: 2px;
+    border-radius: 2px;
     text-shadow: 0 -1px 0 #112e48;
     background-color: #2d7dc5;
     background-image: -moz-linear-gradient(top, #2d7dc5, #24639b);
     background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #2d7dc5), color-stop(1, #24639b));
     background-image: linear-gradient(top, #2d7dc5, #24639b); }
-    .ics-calendar-header a:hover {
+  .ics-calendar-header a:hover {
       background-color: #2d7dc5;
       background-image: -moz-linear-gradient(top, #2d7dc5, #1a4872);
       background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #2d7dc5), color-stop(1, #1a4872));
       background-image: linear-gradient(top, #2d7dc5, #1a4872);
-      -moz-transition: all 0.2s ease-in-out;
-      -o-transition: all 0.2s ease-in-out;
       -webkit-transition: all 0.2s ease-in-out;
+      -moz-transition: all 0.2s ease-in-out;
+      -ms-transition: all 0.2s ease-in-out;
+      -o-transition: all 0.2s ease-in-out;
       transition: all 0.2s ease-in-out; }
     .ics-calendar-header a:active {
       top: 1px; }
@@ -1438,239 +2358,189 @@ div.ics-calendar-holder .ics-calendar-table td .old-date-holder {
   background: white;
   color: #999999; }
 div.ics-calendar-holder .ics-calendar-table td .ics-calendar-today {
-  background-color: #4c2582 /*#4c2582*/;
+  background-color: #ff8800;
   color: black;
   padding: 0 2px;
-  border-radius: 2px;
+  -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
-  -webkit-border-radius: 2px; }
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+   border-radius: 2px;
+}
 div.ics-calendar-holder .ics-calendar-event {
-  cursor: pointer;
-  width: 100%;
-  overflow: hidden;
-  white-space: nowrap;
-  font-size: 10px;
-  background: #2d7dc5 !important;
-  padding: 0 2px;
-  color: white;
-  border-radius: 2px;
-  -moz-border-radius: 2px;
-  -webkit-border-radius: 2px; }
+    cursor: pointer;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    font-size: 10px;
+    background: #2d7dc5;
+    padding: 0 2px;
+    color: white;  
+    -webkit-border-radius: 2px; 
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px; 
+    -o-border-radius: 2px; 
+    border-radius: 2px; 
+}
 
-@media only screen and (min-width: 479px) {
+
   .header {
-    height: 225px; }
+    height: 225px; 
+    width: 100%;
+  }
 
   .nav-top ul {
-    display: block; }
+    display: block; 
+  }
 
   .nav-top {
     position: absolute;
     top: 0;
     right: 0;
-    width: 100%;
-    height: 30px; }
-    .nav-top a {
+    width: auto;
+    height: 30px; 
+  }
+  
+  .nav-top a {
       height: 30px;
-      display: block; }
-    .nav-top ul.socialmedia {
-      float: right; }
-    .nav-top div.menu-header {
-      float: right; }
-      .nav-top div.menu-header ul.menu {
-        overflow: hidden; }
-        .nav-top div.menu-header ul.menu li {
-          float: left; }
-          .nav-top div.menu-header ul.menu li a {
-            line-height: 30px;
-            padding: 0 10px;
-            color: black; }
-            .nav-top div.menu-header ul.menu li a:hover {
-              color: #2d7dc5; }
-    .nav-top form#searchform {
-      float: right !important;
+      display: block; 
+  }
+  .nav-top ul.socialmedia {
+      float: left; 
+  }
+  .nav-top div.menu-header {
+      float: left;
+  }
+
+  .nav-top div.menu-header ul.menu li {
+          float: left; 
+  }
+  .nav-top div.menu-header ul.menu li a {
+        line-height: 30px;
+        padding: 0 10px;
+        color: black; 
+  }
+
+  .nav-top div.menu-header ul.menu li a:hover,
+  .nav-top div.menu-header ul.menu li a:focus {
+        color: #2d7dc5; 
+  }        
+        
+  .nav-top form.searchform {
+      float: left;
       width: 200px;
-      height: 30px;
-      padding: 3px 5px 0 5px; }
-      .nav-top form#searchform #s {
-        line-height: 18px;
-        width: 100%; }
-      .nav-top form#searchform #searchsubmit {
+      height: 30px;     
+      padding: 3px 5px 0 5px; 
+    }
+  
+   .nav-top form.searchform .searchsubmit {
         top: 3px;
         right: 3px;
         padding: 0;
         width: 24px;
-        height: 24px; }
-      .nav-top form#searchform input {
-        padding: 2px; }
+        height: 24px; 
+   }
+   .nav-top form.searchform input {
+        padding: 2px;        
+    }
 
   .sticker {
     position: absolute;
     top: 50px;
-    right: 8%; }
-    .sticker .skin {
-      padding: 10px; }
+    right: 8%; 
+  }
+  .sticker .skin {
+      padding: 10px; 
+  }
 
   .header .branding {
     padding-top: 40px;
-    padding-bottom: 20px; }
-  .header .newsletter {
-    float: right;
-    width: 33.3333%;
-    margin: 0; }
-    .header .newsletter .skin {
+    padding-bottom: 0px;
+    height: 180px;
+    
+  }
+  .header .newsletter {    
+    width: 340px;
+    margin: 0; 
+    position: absolute;
+    bottom: 0px;
+    right: 5%;        
+  }
+ .header .newsletter .skin {
+      -webkit-border-radius-topleft: 3px;
+      -webkit-border-radius-topright: 3px;
+      -webkit-border-radius-bottomright: 3px;
+      -webkit-border-radius-bottomleft: 3px;
       -moz-border-radius-topleft: 3px;
       -moz-border-radius-topright: 3px;
       -moz-border-radius-bottomright: 3px;
       -moz-border-radius-bottomleft: 3px;
+      -ms-border-radius-topleft: 3px;
+      -ms-border-radius-topright: 3px;
+      -ms-border-radius-bottomright: 3px;
+      -ms-border-radius-bottomleft: 3px;
+      -o-border-radius-topleft: 3px;
+      -o-border-radius-topright: 3px;
+      -o-border-radius-bottomright: 3px;
+      -o-border-radius-bottomleft: 3px;
       border-top-left-radius: 3px;
       border-top-right-radius: 3px;
       border-bottom-right-radius: 3px;
-      border-bottom-left-radius: 3px; }
-      .header .newsletter .skin form {
-        padding-bottom: 5px; }
-        .header .newsletter .skin form input[type="text"] {
-          float: left;
-          width: 90%;
-          margin-bottom: 0px; }
-
-  .nav-main {
-    position: absolute;
-    bottom: 0; }
-    .nav-main ul.menu {
-      float: left;
-      -moz-border-radius-topleft: 3px;
-      -moz-border-radius-topright: 3px;
-      -moz-border-radius-bottomright: 0;
-      -moz-border-radius-bottomleft: 0;
-      border-top-left-radius: 3px;
-      border-top-right-radius: 3px;
-      border-bottom-right-radius: 0;
-      border-bottom-left-radius: 0; }
-      .nav-main ul.menu li {
-        float: left; }
-        .nav-main ul.menu li a {
-          -moz-border-radius-topleft: 3px;
-          -moz-border-radius-topright: 3px;
-          -moz-border-radius-bottomright: 0;
-          -moz-border-radius-bottomleft: 0;
-          border-top-left-radius: 3px;
-          border-top-right-radius: 3px;
-          border-bottom-right-radius: 0;
-          border-bottom-left-radius: 0;
-          color: black;
-          font-family: "BebasNeueRegular", Helvetica, Arial, sans-serif;
-          font-weight: lighter;
-          font-size: 21.6px;
-          letter-spacing: 1px;
-		  white-space:nowrap;
-		  text-wrap:none;
-          padding: 12px 10px 10px 10px;
-          border-bottom: 0; }
-          .nav-main ul.menu li a:hover {
-            color: #2d7dc5; }
-      .nav-main ul.menu li.menu-item-home a {
-        padding-left: 25px;
-        padding-right: 25px;
-        text-indent: -999em;
-        background: url("../images/home.gif") no-repeat center 10px !important; }
-        .nav-main ul.menu li.menu-item-home a:hover {
-          background: white url("../images/home.gif") no-repeat center 10px !important; }
-      .nav-main ul.menu li.current-menu-item.menu-item-home a {
-        background: #111111 url("../images/home.gif") no-repeat center -107px !important; }
-        .nav-main ul.menu li.current-menu-item.menu-item-home a:hover {
-          background: #111111 url("../images/home.gif") no-repeat center 10px !important; }
-      .nav-main ul.menu li.has_children:hover {
-        background: white; }
-        .nav-main ul.menu li.has_children:hover ul.sub-menu {
-          top: 40px;
-          background: white;
-          width: 220px;
-          padding: 5px 0;
-          -moz-box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-          -webkit-box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-          box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-          -moz-border-radius-topleft: 0;
-          -moz-border-radius-topright: 3px;
-          -moz-border-radius-bottomright: 3px;
-          -moz-border-radius-bottomleft: 3px;
-          border-top-left-radius: 0;
-          border-top-right-radius: 3px;
-          border-bottom-right-radius: 3px;
-          border-bottom-left-radius: 3px; }
-          .nav-main ul.menu li.has_children:hover ul.sub-menu li.current-menu-item a {
-            background: white;
-            color: black; }
-          .nav-main ul.menu li.has_children:hover ul.sub-menu hr {
-            margin: 0 !important; }
-          .nav-main ul.menu li.has_children:hover ul.sub-menu li {
-            float: none;
-            position: relative; }
-            .nav-main ul.menu li.has_children:hover ul.sub-menu li a {
-              font-family: "DroidSans", "Aller", Helvetica, Arial, sans-serif;
-              letter-spacing: 0;
-              font-size: 12px;
-              padding: 2px 18px;
-              -moz-border-radius-topleft: 0;
-              -moz-border-radius-topright: 0;
-              -moz-border-radius-bottomright: 0;
-              -moz-border-radius-bottomleft: 0;
-              border-top-left-radius: 0;
-              border-top-right-radius: 0;
-              border-bottom-right-radius: 0;
-              border-bottom-left-radius: 0; }
-              .nav-main ul.menu li.has_children:hover ul.sub-menu li a:hover {
-                background: #2d7dc5;
-                color: white; }
-            .nav-main ul.menu li.has_children:hover ul.sub-menu li ul.sub-menu {
-              top: -999em; }
-          .nav-main ul.menu li.has_children:hover ul.sub-menu li.has_children a {
-            background: url("../images/plus_black.gif") center right no-repeat; }
-            .nav-main ul.menu li.has_children:hover ul.sub-menu li.has_children a:hover {
-              background: #2d7dc5 url("../images/plus.gif") center right no-repeat; }
-          .nav-main ul.menu li.has_children:hover ul.sub-menu li.has_children ul.sub-menu li a {
-            background: white !important; }
-            .nav-main ul.menu li.has_children:hover ul.sub-menu li.has_children ul.sub-menu li a:hover {
-              background: #2d7dc5 !important; }
-          .nav-main ul.menu li.has_children:hover ul.sub-menu li:hover ul.sub-menu {
-            top: -5px;
-            left: 190px; }
-      .nav-main ul.menu li.current-menu-item > a {
-        background: black;
-        color: white; }
-      .nav-main ul.menu li.current-menu-item:hover > a {
-        background: white;
-        color: black; }
-
-  .second-teaser-widget-area .skin ul li a {
-    padding: .8em 10px .3em 50px; }
+      border-bottom-left-radius: 3px; 
+}
+ 
+ .header .newsletter .skin form {
+        padding-bottom: 5px; 
+ }
+ .header .newsletter .skin form input[type="text"] {
+          margin-bottom: 0px; 
+ }
+      
 
   .teaser .first-teaser-widget-area {
-    width: 66.6666%; }
+    width: 67%; 
+  }
   .teaser .second-teaser-widget-area {
-    width: 33.3333%; }
+    width: 33%; 
+  }
 
   .content-primary {
     float: left;
-    width: 100%; }
-    .content-primary .first-startpage-widget-area {
+    width: 67%;
+    min-height: 500px;
+    background: white;
+    font-size: 1em;
+    position: relative; 
+  }
+  .content-primary .skin {
+      margin-left: 10px;
+  }    
+  .content-primary .first-startpage-widget-area {
       width: 50%;
       float: left;
-      padding-top: 10px; }
-      .content-primary .first-startpage-widget-area .skin {
-        padding-right: 10px; }
+      padding-top: 10px; 
+  }
+    .content-primary .first-startpage-widget-area .skin {
+        padding-right: 10px; 
+    }
     .content-primary .second-startpage-widget-area {
       width: 50%;
       float: right;
-      padding-top: 10px; }
-      .content-primary .second-startpage-widget-area .skin {
-        padding-left: 10px; }
+      padding-top: 10px; 
+    }
+    .content-primary .second-startpage-widget-area .skin {
+        padding-left: 10px; 
+    }
 
   .content-aside {
+      background: #ff8800 url("https://archiv.piratenpartei.at/wp-content/themes/Piratenkleider-PPOE/images/int/bg-tags.png") -20% top fixed; 
     float: right;
-    width: 100%;
-	color:#BBB; }
+    width: 33%; }
 
+  .content-aside .skin {
+   background: #ff8800;
+   background: rgba(255, 136, 0, 0.7); 
+  }
   .columns .column1 {
     width: 50%; }
     .columns .column1 .post {
@@ -1684,79 +2554,1058 @@ div.ics-calendar-holder .ics-calendar-event {
 
   .first-subcontent-widget-area {
     float: left;
-    width: 33.3333%; }
+    width: 33%; }
 
   .second-subcontent-widget-area {
     float: left;
-    width: 33.3333%; }
+    width: 33%; }
 
   .third-subcontent-widget-area {
     float: right;
-    width: 33.3333%; }
+    width: 33%; }
 
   .first-footer-widget-area {
     float: left;
-    width: 66.6666%; }
+    width: 67%; }
 
   .second-footer-widget-area {
     float: right;
-    width: 33.3333%; } }
-@media only screen and (min-width: 1024px) {
-  .second-teaser-widget-area .skin ul li a {
-    padding: 1.5em 10px 1em 50px; } }
-@media only screen and (max-width: 767px) {
-  .second-teaser-widget-area ul li a {
-    background: none !important;
-    padding: 5px 10px !important; }
-  .second-teaser-widget-area ul li div {
-    font-size: 16px !important;
-    letter-spacing: 0; }
-  .second-teaser-widget-area ul li span {
-    display: none; } }
-@media only screen and (max-width: 479px) {
-  .logo {
-    width: 100%; }
-    .logo img {
-      margin: 0 auto;
-      display: block; }
+    width: 33%; }
 
-  .flexslider .caption {
-    padding: 5px 10px; }
-    .flexslider .caption h2, .flexslider .caption h3 {
-      font-size: 12px !important;
-      font-family: "DroidSans", "Aller", Helvetica, Arial, sans-serif;
-      letter-spacing: 0px; }
 
-  .nav-top ul.menu li a, .nav-main ul.menu li a {
-    padding: 5px 18px;
-    margin-bottom: 2px;
-    overflow: visible;
-    position: relative;
+/* Besondere Tools-----------------------------------------------------------*/
+ ul.social_share_privacy_area {
+    list-style: none outside none;
+    
+}  
+
+.content-primary .switchoff,
+.content-primary .switchon { 
+    position: absolute;
+    top: 10px;
+    right: 10px;    
+    z-index: 99;
+    
+}    
+.content-primary .switchoff a img,
+.content-primary .switchon a img {
+    margin: 2px;
+    border: 2px dotted transparent;
+}
+.content-primary .switchoff a:hover,
+.content-primary .switchoff a:focus,
+.content-primary .switchon a:hover,
+.content-primary .switchon a:focus {
+    margin: 2px;
+    border: 2px dotted rgba(0,0,0,0.5);
+}
+
+.post-entry .kraehennestplayer {
+    float: right;
+    width: 185px;
+    padding: 0px 5px;
+  overflow: visible;
+  position: relative;
+background: none repeat scroll 0 0 #EEEEEE;
+    box-shadow: 1px 1px 2px #444444;
+    margin-bottom: 5px;
+}
+.post-entry .kraehennestplayer p,
+.kraehennestplayer p {
+    margin-bottom: 0px;
+}
+.post-entry p.kraehennestplayerTitle {
+  background: url('https://archiv.piratenpartei.at/wp-content/themes/Piratenkleider-PPOE/images/kraehennest-50.png') 5px 5px no-repeat;
+  padding-left: 60px;
+  min-height: 65px;
+}
+ 
+.kraehennestplayer object {
+    margin: 0 auto;
+}
+
+
+/* Flag Icons     -----------------------------------------------------------*/
+.flagicon-sprite, .flagicon-ar, .flagicon-at, .flagicon-au, .flagicon-be, .flagicon-bg, .flagicon-br, .flagicon-by, .flagicon-ca, .flagicon-ch, .flagicon-cl, .flagicon-co, .flagicon-cy, .flagicon-cz, .flagicon-de, .flagicon-dk, .flagicon-es, .flagicon-fi, .flagicon-fr, .flagicon-gr, .flagicon-gt, .flagicon-it, .flagicon-kr, .flagicon-kz, .flagicon-lt, .flagicon-lu, .flagicon-lv, .flagicon-ma, .flagicon-mx, .flagicon-nl, .flagicon-nz, .flagicon-pe, .flagicon-pl, .flagicon-pt, .flagicon-ro, .flagicon-rs, .flagicon-ru, .flagicon-se, .flagicon-si, .flagicon-sk, .flagicon-tn, .flagicon-tr, .flagicon-ua, .flagicon-uk, .flagicon-us, .flagicon-uy {
+  width: 16px;
+  height: 11px;
+  display: inline-block;
+  background: url('https://archiv.piratenpartei.at/wp-content/themes/Piratenkleider-PPOE/images/flags/flagicon.png') no-repeat;
+}
+
+.flagicon-ar {
+  background-position: 0 -234px;
+}
+
+.flagicon-at {
+  background-position: 0 -533px;
+}
+
+.flagicon-au {
+  background-position: 0 -13px;
+}
+
+.flagicon-be {
+  background-position: 0 -442px;
+}
+
+.flagicon-bg {
+  background-position: 0 -403px;
+}
+
+.flagicon-br {
+  background-position: 0 -78px;
+}
+
+.flagicon-by {
+  background-position: 0 -195px;
+}
+
+.flagicon-ca {
+  background-position: 0 -39px;
+}
+
+.flagicon-ch {
+  background-position: 0 -572px;
+}
+
+.flagicon-cl {
+  background-position: 0 -429px;
+}
+
+.flagicon-co {
+  background-position: 0 -338px;
+}
+
+.flagicon-cy {
+  background-position: 0 -481px;
+}
+
+.flagicon-cz {
+  background-position: 0 -364px;
+}
+
+.flagicon-de {
+  background-position: 0 -143px;
+}
+
+.flagicon-dk {
+  background-position: 0 -247px;
+}
+
+.flagicon-es {
+  background-position: 0 -377px;
+}
+
+.flagicon-fi {
+  background-position: 0 -312px;
+}
+
+.flagicon-fr {
+  background-position: 0 -156px;
+}
+
+.flagicon-gr {
+  background-position: 0 -325px;
+}
+
+.flagicon-gt {
+  background-position: 0 -286px;
+}
+
+.flagicon-it {
+  background-position: 0 -507px;
+}
+
+.flagicon-kr {
+  background-position: 0 -91px;
+}
+
+.flagicon-kz {
+  background-position: 0 -52px;
+}
+
+.flagicon-lt {
+  background-position: 0 -221px;
+}
+
+.flagicon-lu {
+  background-position: 0 -351px;
+}
+
+.flagicon-lv {
+  background-position: 0 -390px;
+}
+
+.flagicon-ma {
+  background-position: 0 -468px;
+}
+
+.flagicon-mx {
+  background-position: 0 -104px;
+}
+
+.flagicon-nl {
+  background-position: 0 -416px;
+}
+
+.flagicon-nz {
+  background-position: 0 -26px;
+}
+
+.flagicon-pe {
+  background-position: 0 -546px;
+}
+
+.flagicon-pl {
+  background-position: 0 -559px;
+}
+
+.flagicon-pt {
+  background-position: 0 -130px;
+}
+
+.flagicon-ro {
+  background-position: 0 -260px;
+}
+
+.flagicon-rs {
+  background-position: 0 -494px;
+}
+
+.flagicon-ru {
+  background-position: 0 -520px;
+}
+
+.flagicon-se {
+  background-position: 0 -169px;
+}
+
+.flagicon-si {
+  background-position: 0 -208px;
+}
+
+.flagicon-sk {
+  background-position: 0 -117px;
+}
+
+.flagicon-tn {
+  background-position: 0 -273px;
+}
+
+.flagicon-tr {
+  background-position: 0 -299px;
+}
+
+.flagicon-ua {
+  background-position: 0 -455px;
+}
+
+.flagicon-uk {
+  background-position: 0 0;
+}
+
+.flagicon-us {
+  background-position: 0 -65px;
+}
+
+.flagicon-uy {
+  background-position: 0 -182px;
+}
+
+/* IE Anpassungen -----------------------------------------------------------*/
+
+.ie6 .nav-top .searchsubmit, 
+.ie7 .nav-top .searchsubmit {
+  margin-top: -1px; }
+
+.ie6 hr, .ie7 hr {
+  background: #fff;
+  height: 1px;
+  margin-bottom: 20px; }
+
+
+
+.ie6 .columns, 
+.ie7 .columns {
+  width: 99%; 
+}
+.ie6 .columns .column1, 
+.ie7 .columns .column1 {
+    width: 45%;
+    float: left; 
+}
+.ie6 .columns .column1 .post, 
+.ie7 .columns .column1 .post {
+      padding: 0 0 20px 0; 
+}
+.ie6 .columns .column2, 
+.ie7 .columns .column2 {
+    width: 45%;
+    float: right; 
+}
+.ie6 .columns .column2 .post, 
+.ie7 .columns .column2 .post {
+      padding: 0 0 20px; }
+.ie6 .single .post-info, 
+.ie7 .single .post-info {
+  display: none; 
+}
+
+
+
+
+.ie7 .nav-top ul, 
+.ie8 .nav-top ul {
+  display: block; 
+}
+.ie7 .nav-top, 
+.ie8 .nav-top {
+  position: absolute;
+  top: 0;
+  right: 20px;
+  width: auto;
+  height: 30px; 
+}
+.ie7 .nav-top a, 
+.ie8 .nav-top a {
+    height: 30px;
+    display: block; }
+.ie7 .nav-top ul.socialmedia, 
+.ie8 .nav-top ul.socialmedia {
+    float: left; 
+}
+.ie7 .nav-top div.menu-header, 
+.ie8 .nav-top div.menu-header {
+    float: left; }
+
+
+.ie7 .nav-top div.menu-header ul.menu, 
+.ie8 .nav-top div.menu-header ul.menu {
+      overflow: hidden; }
+.ie7 .nav-top div.menu-header ul.menu li, 
+.ie8 .nav-top div.menu-header ul.menu li {
+        float: left; }
+.ie7 .nav-top div.menu-header ul.menu li a, 
+.ie8 .nav-top div.menu-header ul.menu li a {
+          line-height: 30px;
+          padding: 0 10px;
+          color: black; }
+.ie7 .nav-top div.menu-header ul.menu li a:hover,
+.ie8 .nav-top div.menu-header ul.menu li a:hover {
+            color: #2d7dc5; }
+.ie7 .nav-top form.searchform, 
+.ie8 .nav-top form.searchform {
+    float: left;
+    width: 200px;
+    height: 30px;
+    padding: 3px 5px 0 5px; }
+.ie7 .nav-top form.searchform #s, 
+.ie8 .nav-top form.searchform #s {
+      line-height: 18px;
+     }
+.ie7 .nav-top form.searchform .searchsubmit, 
+.ie8 .nav-top form.searchform .searchsubmit {
+      top: 3px;
+      right: 3px;
+      padding: 0;
+      width: 24px;
+      height: 24px; 
+}
+.ie7 .nav-top form.searchform input, 
+.ie8 .nav-top form.searchform input {
+      padding: 2px; }
+.ie7 .sticker, 
+.ie8 .sticker {
+  position: absolute;
+  top: 50px;
+  right: 8%; 
+}
+.ie7 .sticker .skin, 
+.ie8 .sticker .skin {
+    padding: 10px; 
+}
+.ie7 .header .branding, 
+.ie8 .header .branding {
+  padding-top: 40px;
+  padding-bottom: 20px; 
+}
+.ie7 .header .newsletter, 
+.ie8 .header .newsletter {
+  float: right;
+  width: 33%;
+  margin: 0; 
+}
+.ie7 .header .newsletter .skin,
+.ie8 .header .newsletter .skin {
+    background: #f7f7f7; }
+.ie7 .header .newsletter .skin form, 
+.ie8 .header .newsletter .skin form {
+      padding-bottom: 5px; }
+.ie7 .header .newsletter .skin form input[type="text"],
+.ie8 .header .newsletter .skin form input[type="text"] {
+        float: left;
+        width: 90%;
+        margin-bottom: 0px; }
+
+
+.ie7 .teaser .first-teaser-widget-area, 
+.ie8 .teaser .first-teaser-widget-area {
+  width: 67%; }
+.ie7 .teaser .second-teaser-widget-area, 
+.ie8 .teaser .second-teaser-widget-area {
+  width: 33%; }
+.ie7 .content-primary, .ie8 .content-primary {
+  float: left;
+  width: 67%; }
+  .ie7 .content-primary .first-startpage-widget-area, 
+  .ie8 .content-primary .first-startpage-widget-area {
+    width: 50%;
+    float: left;
+    padding-top: 10px; }
+    .ie7 .content-primary .first-startpage-widget-area .skin,
+    .ie8 .content-primary .first-startpage-widget-area .skin {
+      padding-right: 10px; }
+  .ie7 .content-primary .second-startpage-widget-area, 
+  .ie8 .content-primary .second-startpage-widget-area {
+    width: 50%;
+    float: right;
+    padding-top: 10px; }
+    .ie7 .content-primary .second-startpage-widget-area .skin,
+    .ie8 .content-primary .second-startpage-widget-area .skin {
+      padding-left: 10px; }
+.ie7 .content-aside, .ie8 .content-aside {
+  float: right;
+  width: 33%; }
+.ie7 .columns .column1, .ie8 .columns .column1 {
+  width: 50%; }
+  .ie7 .columns .column1 .post, .ie8 .columns .column1 .post {
+    padding-right: 20px; }
+.ie7 .columns .column2, .ie8 .columns .column2 {
+  width: 50%; }
+  .ie7 .columns .column2 .post, .ie8 .columns .column2 .post {
+    padding-left: 20px; }
+    .ie7 .columns .column2 .post .cal-icon,
+    .ie8 .columns .column2 .post .cal-icon {
+      margin-left: 0; }
+.ie7 .first-subcontent-widget-area, 
+.ie8 .first-subcontent-widget-area {
+  float: left;
+  width: 33%; }
+.ie7 .second-subcontent-widget-area, 
+.ie8 .second-subcontent-widget-area {
+  float: left;
+  width: 33%; }
+.ie7 .third-subcontent-widget-area, 
+.ie8 .third-subcontent-widget-area {
+  float: right;
+  width: 33%; }
+.ie7 .first-footer-widget-area,
+.ie8 .first-footer-widget-area {
+  float: left;
+  width: 67%; }
+.ie7 .second-footer-widget-area,
+.ie8 .second-footer-widget-area {
+  float: right;
+  width: 33%;
+}
+
+.ie7 .fs2 .flexslider .flex-pauseplay {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    overflow: hidden;
+    z-index: 800;
+    background: white;
+    cursor: pointer;
+    color: black; 
+    padding: 0.2em;
+}
+
+@media screen, projection {
+	
+    a {     
+      color: #06C;
+      -webkit-tap-highlight-color: #2d7dc5; 
+    }
+    a:visited {
+        color: #2d7dc5;
+      }
+    a:hover {
+        color: #111;
+      }
+    ins, mark {
+        background-color: #4c2582;
+    }
+    ::selection {
+      background: #2d7dc5;
+      color: white; 
+    }
+
+    ::-moz-selection {
+      background: #2d7dc5;
+      color: white;
+    }
+    input, select, textarea {
+      background: white;
+      background: rgba(255, 255, 255, 0.6); 
+    }
+    input:focus, input:active, 
+    select:focus, select:active, 
+    textarea:focus, textarea:active {
+        background: white; 
+    }
+    
+    button, input[type="submit"], 
+    .post-edit-link {
+      background: #2d7dc5;
+      color: white;
+      border: 1px solid #2d7dc5;
+      text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.1);
+      border-top: 1px solid #4e96d7;
+      border-bottom: 1px solid #1a4872;
+      text-shadow: 0 -1px 0 #112e48;
+      background-color: #2d7dc5;
+      background-image: -moz-linear-gradient(top, #2d7dc5, #24639b);
+      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #2d7dc5), color-stop(1, #24639b));
+      background-image: linear-gradient(top, #2d7dc5, #24639b); }
+
+      button:hover, 
+      input[type="submit"]:hover, 
+      .post-edit-link:hover {
+        background-color: #2d7dc5;
+        background-image: -moz-linear-gradient(top, #2d7dc5, #1a4872);
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #2d7dc5), color-stop(1, #1a4872));
+        background-image: linear-gradient(top, #2d7dc5, #1a4872);
+      }
+      .sticky {
+        border-color: #888;
+        border-color: rgba(0,0,0,.3);
+        -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2) inset;
+        -moz-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2) inset;
+        -ms-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2) inset;
+        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2) inset;
+        color: #444;
+        color: rgba(0,0,0,.8);
+        background: url("https://archiv.piratenpartei.at/wp-content/themes/Piratenkleider-PPOE/images/int/bg-tags-at.png") repeat fixed -20% top #4c2582;
+     }
+     .sticky a {
+         color: black;
+         background: #993399;
+
+     }      
+     .sticky a:hover,
+     .sticky a:focus {    
+        color: #000;
+        background: #d97300;
+     }   
+    
+     .skiplinks li a:focus, 
+     .skiplinks li a:active {
+        background: #2d7dc5;
+        color: white;
+         }
+     .skiplinks li a:hover {
+        background: #4c2582;
+        color: black; 
+    }
+    ul.socialmedia li a img {   
+        border-color: #eee;
+    }
+    ul.socialmedia li a:hover img {
+         border-color: white;      
+    }
+    ul.socialmedia li a:focus img {
+       border-color: #4c2582;    
+    }    
+    
+.sticker ul li {  
+    border-color: transparent;     
+  }
+
+  .sticker ul li a {    
+        color: #666;       
+  }
+  .sticker ul li a:hover,
+  .sticker ul li a:focus {
+    color: #1a4872; 
+   } 
+   
+   .sticker ul li a .cicolor {        
+     color: #4c2582;    
+   }
+  
+   .sticker ul li a:hover .cicolor,
+   .sticker ul li a:focus .cicolor {
+        color: #2d7dc5;  
+   }
+   
+   .sticker ul li a .shadow {        
+         text-shadow: 1px 1px 1px #333; 
+   }
+  
+ 
+    .sticker li a img {
+        border-color: transparent;     
+    }
+
+    .sticker li a:hover img, 
+    .sticker li a:focus img {
+       border-color: #4c2582;
+    }
+
+
+    .header .newsletter .skin {
+      background: #f7f7f7;
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+  .teaser {
+    background: #4c2582 url("https://archiv.piratenpartei.at/wp-content/themes/Piratenkleider-PPOE/images/int/bg-tags-at.png") -20% top fixed; 
+    }
+  .teaser .row {
+    background: #993399;
+    background: rgba(0, 0, 0, 0.2) -20% 0 fixed; 
+  }
+  .teaser .first-teaser-widget-area {
+    background: #111;
+ }
+  .first-teaser-widget-area .slide .textslider  {
+    background: #4c2582;
+    color: #ddd;
+  } 
+  
+    .second-teaser-widget-area li {
+      background: #4c2582;
+    }
+
+
+  .second-teaser-widget-area li a {
+    color: white;  
+    text-shadow: 0 0 0; 
+
+  }
+    .second-teaser-widget-area li a div {
+      color: black;
+      font-family: "FontPiratenkleiderHeadlines", Helvetica, Arial, sans-serif;
+      text-shadow: 0 -1px 1px #552554;
+
+    }
+   
+
+  .second-teaser-widget-area li a:focus,  
+  .second-teaser-widget-area li a:hover {    
+        background: #993399;
+        background: rgba(0, 0, 0, 0.5);  
+        color: white;
+  }
+  
+  .second-teaser-widget-area .textwidget {      
+        background: #4c2582;
+        color: white; 
+        text-shadow: 0 0 0; 
+  }
+   .second-teaser-widget-area li.recentcomments {
+       color: white;
+   }
+
+.teaserlinks ul li {
+    background-color: #5C388F;
+	color: white;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+ 
+  }
+  .teaserlinks .symbol:before {
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.2) !important; 
+  } 
+ .teaserlinks ul li a {
+     color: #EEE;
+     font-family: "FontPiratenkleiderHeadlines", Helvetica, Arial, sans-serif;
+     text-shadow: 0 -1px 1px #552554;
+ }
+  .teaserlinks ul li a:hover,
+  .teaserlinks ul li a:focus{
+      color: white;
+      background: none repeat scroll 0 0 #5C388F;
+  }
+  .teaserlinks ul li a span {
+     text-shadow: 0 0 0; 
+	 color: #EEE;
+  }
+    .teaserlinks ul li a:hover span,
+    .teaserlinks ul li a:focus span { 
+           color: white;
+     }    
+
+    .content {
+     background: #4c2582 url("https://archiv.piratenpartei.at/wp-content/themes/Piratenkleider-PPOE/images/int/bg-tags-at.png") -20% top fixed;  
+    }
+    .content .row {
+        background: #4c2582;
+        background: rgba(76, 37, 130, 0.2); 
+    }
+    .content .symbolbild .caption {
+      background: transparent;
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+
+    }
+    .content .symbolbild .aaarh {
+         background: transparent;
+         color: black;
+         font-family: "FontPiratenkleiderHeadlines", Helvetica, Arial, sans-serif;
+    }
+  .content-primary input[type="text"]:hover, 
+  .content-primary textarea:hover,
+  .content-primary input[type="text"]:focus, 
+  .content-primary textarea:focus {
+    border-color: black; 
+    background-color: beige;
+  }
+   .content-primary .post-nav a {
+      font-family: "FontPiratenkleiderHeadlines", Helvetica, Arial, sans-serif;
+     }
+      .content-primary .sprungmarken ol li a:hover {
+          background: #4c2582;
+          color: black;
+        }
+  .content-aside .newsletter {     
+    background-color: #ffa500;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+ } 
+
+  .post .post-info .commentbubble a {
+      background: #4c2582;
+      color: white;
+ }
+  .post .post-info .cal-icon {
+    background: #eeeeee;
+    -moz-box-shadow: 1px 1px 2px #444444;
+    -webkit-box-shadow: 1px 1px 2px #444444;
+    box-shadow: 1px 1px 2px #444444; 
+  }
+
+    .post .post-info .cal-icon .day {
+        font-family: "FontPiratenkleiderHeadlines", Helvetica, Arial, sans-serif;
+    }
+    .post .post-meta {
+         color: #222;
+    }
+    .post-comments ol li .reply a {
+        background: #2d7dc5;
+        color: white;
+        border-color: #2d7dc5;
+        text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.1);
+        text-shadow: 0 -1px 0 #112e48;
+        background-color: #2d7dc5;
+        background-image: -moz-linear-gradient(top, #2d7dc5, #24639b);
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #2d7dc5), color-stop(1, #24639b));
+        background-image: linear-gradient(top, #2d7dc5, #24639b); 
+    }
+    .post-comments ol li .reply a:hover {
+        background-color: #2d7dc5;
+        background-image: -moz-linear-gradient(top, #2d7dc5, #1a4872);
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #2d7dc5), color-stop(1, #1a4872));
+        background-image: linear-gradient(top, #2d7dc5, #1a4872);
+    }
+
+    .post-comments .respond span.required {
+         color: #4c2582;
+    }
+  .wp-caption  p.wp-caption-text { 
+      background: transparent;
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+    }
+    
+     .gallery img {
+	border-color: #f1f1f1;
+    }
+    .gallery img:hover {
+            border-color: #4c2582;
+    }
+     .gallery-caption {
+            color: #888;
+    }
+
+    .first-startpage-widget-area li a {
+      font-family: "FontPiratenkleiderHeadlines", Helvetica, Arial, sans-serif;
+      }
+     .first-startpage-widget-area a.all-articles {
+        background: #2d7dc5;
+        color: white;
+        border-color: #2d7dc5;
+        text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.1);
+        border-top-color: #4e96d7;
+        border-bottom-color: #1a4872;
+        text-shadow: 0 -1px 0 #112e48;
+        background-color: #2d7dc5;
+        background-image: -moz-linear-gradient(top, #2d7dc5, #24639b);
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #2d7dc5), color-stop(1, #24639b));
+        background-image: linear-gradient(top, #2d7dc5, #24639b);
+     }
+    .first-startpage-widget-area a.all-articles:hover {
+      background-color: #2d7dc5;
+      background-image: -moz-linear-gradient(top, #2d7dc5, #1a4872);
+      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #2d7dc5), color-stop(1, #1a4872));
+      background-image: linear-gradient(top, #2d7dc5, #1a4872);
+ }
+ 
+.content-aside .newsletter {
+	background: none repeat scroll 0 0 rgba(76, 37, 130, 0.5);
+	box-shadow:none;
+}
+
+
+.content-aside .widget li {
+	 background:none;
+ }
+.content-aside .widget li:hover {
+	 background:#5C388F;
+ }
+.content-aside .widget li:hover,
+ .content-aside .widget li:focus,
+#ics-calendar-widget li:hover, 
+#ics-calendar-widget li:focus, 
+ .content-aside .twitterwidget li:hover, 
+ .content-aside .twitterwidget li:focus {
+     background: #5c388f;
+ }
+ .content-aside .twitterwidget li a:hover { color:#FFF; }
+ .content-aside a {
+  color: #EEE;
+  background: rgba(255,255,255, 0.2);
+  padding:0.25em 0.4em;
+}
+  .content-aside a:hover {
+    color: rgba(76, 37, 130, 0.8);
+    background: rgba(255,255,255, 0.8); 
+  }
+  
+  .content-aside table td,
+  .content-aside table th {
+    border-top-color: #4c2582; 
+  }
+.content-aside blockquote {
+  border: 0 solid;
+  background: #993399;
+  background: rgba(255, 255, 255, 0.2); 
+ }
+  
+ 
+ .content-aside ul.menu {
+  background: #993399;
+ background: rgba(255, 255, 255, 0.2); 
+}
+
+.content-aside ul.menu li a {
+
+      background: white;
+      color: #2d7dc5;
+ }
+.content-aside ul.menu li.active a,
+.content-aside ul.menu li a:hover,
+.content-aside ul.menu li a:focus {
+        color: white;
+        background: #2d7dc5; 
+}
+      
+.content-aside ul.menu li.current_page_item > a,
+.content-aside ul.menu li.current-menu-item > a {
+    background: #2d7dc5 url("https://archiv.piratenpartei.at/wp-content/themes/Piratenkleider-PPOE/assets/plus-left.gif") center left no-repeat;
+    color: white;
+}
+
+
+.subcontent {
+  background: black url("https://archiv.piratenpartei.at/wp-content/themes/Piratenkleider-PPOE/images/int/bg-tags_gray.jpg") -20% top fixed;
+}
+  .subcontent .row {
+    background: rgba(0, 0, 0, 0.2);
+    color: #eeeeee;
+  }
+
+  .subcontent a {
+    background: black;
+    color: #2d7dc5;
+ }
+    .subcontent a:hover {
+      background: #2d7dc5;
+      color: white;
+ }
+
+
+    
+    
+    
+.footer {
+  background: black url("https://archiv.piratenpartei.at/wp-content/themes/Piratenkleider-PPOE/images/int/bg-tags_gray.jpg") -20% top fixed;
+  overflow: hidden; 
+}
+.footer .row {
+    background: rgba(0, 0, 0, 0.2);
+    color: #eeeeee;
+}
+
+.footer a {
+  background: black;
+  color: #2d7dc5; 
+}
+
+.footer a:hover {
+  background: #2d7dc5;
+  color: white;
+}
+ .content-aside .widget li a.rsswidget {
+    background: #993399;
+    background: rgba(0, 0, 0, 0.2);
+ }
+ .content-aside .widget li a.rsswidget:hover,
+ .content-aside .widget li a.rsswidget:focus {
+       background: #4c2582;
+ }
+ .content-aside .widget li .rssSummary {
+    color:#333333;  
+ }
+
+#ics-calendar-widget li {
+    color: black;
+    background: #993399;
+    background: rgba(255, 255, 255, 0.2);
+ }
+
+#ics-calendar-widget-next, 
+#ics-calendar-widget-prev {
+  background: #2d7dc5;
+  color: white;
+  border-color: #2d7dc5;
+  text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.1);
+  border-top-color: #4e96d7;
+  border-bottom-color: #1a4872;
+
+  text-shadow: 0 -1px 0 #112e48;
+  background-color: #2d7dc5;
+  background-image: -moz-linear-gradient(top, #2d7dc5, #24639b);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #2d7dc5), color-stop(1, #24639b));
+  background-image: linear-gradient(top, #2d7dc5, #24639b); }
+#ics-calendar-widget-next:hover, 
+#ics-calendar-widget-prev:hover {
+    background-color: #2d7dc5;
+    background-image: -moz-linear-gradient(top, #2d7dc5, #1a4872);
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #2d7dc5), color-stop(1, #1a4872));
+    background-image: linear-gradient(top, #2d7dc5, #1a4872);
+}
+
+
+ .ics-calendar-header a {
     background: #2d7dc5;
-    color: white !important;
-    border: 1px solid #2d7dc5;
+    color: white;
+    border-color: #2d7dc5;
     text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.1);
-    border-top: 1px solid #4e96d7;
-    border-bottom: 1px solid #1a4872;
-    -moz-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
-    -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
-    border-radius: 2px;
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
+    border-top-color: #4e96d7;
+    border-bottom-color: #1a4872;
     text-shadow: 0 -1px 0 #112e48;
     background-color: #2d7dc5;
     background-image: -moz-linear-gradient(top, #2d7dc5, #24639b);
     background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #2d7dc5), color-stop(1, #24639b));
     background-image: linear-gradient(top, #2d7dc5, #24639b); }
-    .nav-top ul.menu li a:hover, .nav-main ul.menu li a:hover {
-      background: #24639b; }
+  .ics-calendar-header a:hover {
+      background-color: #2d7dc5;
+      background-image: -moz-linear-gradient(top, #2d7dc5, #1a4872);
+      background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #2d7dc5), color-stop(1, #1a4872));
+      background-image: linear-gradient(top, #2d7dc5, #1a4872);
+   }
 
-  .nav-main {
-    margin-bottom: 20px; } }
-.entry-date, .meta-prep {
-  font-size: 10px;
-  color: gray; }
+div.ics-calendar-holder tr.ics-calendar-days td {
+  background: #eeeeee;
+  border-bottom-color: gray; }
+
+div.ics-calendar-holder .ics-calendar-table td .date-holder {
+  background: white; 
+}
+div.ics-calendar-holder .ics-calendar-table td .old-date-holder {
+  background: white;
+  color: #999999;
+}
+div.ics-calendar-holder .ics-calendar-table td .ics-calendar-today {
+  background-color: #4c2582;
+  color: black;
+}
+div.ics-calendar-holder .ics-calendar-event {
+  background: #2d7dc5;
+  color: white;
+}
+
+  .nav-top div.menu-header ul.menu li a:hover,
+  .nav-top div.menu-header ul.menu li a:focus {
+        color: #2d7dc5; 
+  }        
+
+  .content-aside {
+      background: #4c2582 url("https://archiv.piratenpartei.at/wp-content/themes/Piratenkleider-PPOE/images/int/bg-tags-at.png") -20% top fixed;
+	  color:#eee;
+   }
+
+  .content-aside .skin {
+           background: #4c2582;
+           background: rgba(76, 37, 130, 0.2);
+    }
+   
+}
+ @media only screen and (max-width: 600px) {
+   .nav-top ul.menu li a {
+        background: #2d7dc5;
+        color: white;        
+        border-color: #993399;
+        text-shadow: 0 -1px 0 #993399;
+        background-color: #4c2582;     
+   }
+    .nav-top ul.menu li a:hover {
+      background: #24639b;
+    }
+    
+    .nav-main ul.menu li a {
+        color: white;
+        border-color: #2d7dc5;
+        border-top-color: #4e96d7;
+        border-bottom-color: #1a4872;
+        background-color: #2d7dc5;
+        background-image: -moz-linear-gradient(top, #2d7dc5, #24639b);
+        background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #2d7dc5), color-stop(1, #24639b));
+        background-image: linear-gradient(top, #2d7dc5, #24639b);
+  }
+
+  .nav-main ul.menu li a:hover {
+      background: #4e96d7;
+    }
+ .nav-main ul.menu li a:focus, 
+ .nav-main ul.menu li a:hover {
+      background: #24639b;
+      color: black; 
+ }        
+           
+  .post-comments {
+     background: url("https://archiv.piratenpartei.at/wp-content/themes/Piratenkleider-PPOE/images/int/bg-tags-at.png") repeat fixed -20% top #4c2582;
+  }
+  .post-comments a {
+      color: black;
+  }
+  .post-comments ol li {
+      border-color: rgba(0, 0, 0, 0.2);
+  }
+   .post-comments ol li .comment-details {
+    color: #222222;
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.2);
+ }
+ .post-comments ol li .comment-body {
+    background: white; 
+ }
+    
+ }
+ 
+/*
+ * END Colors
+*****************************/
 
 
 /*********************************/

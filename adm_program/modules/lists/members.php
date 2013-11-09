@@ -194,12 +194,14 @@ echo '
     <ul class="iconTextLinkList">
         <li>'.$gL10n->get('SYS_SEARCH').': <input type="text" name="mem_search" id="mem_search" /></li>
         <li><input type="checkbox" name="mem_show_all" id="mem_show_all" /><label for="mem_show_all">'.$gL10n->get('MEM_SHOW_ALL_USERS').'</label></li>
+';/*
         <li>
 	        <span class="iconTextLink" id="add_user_link" style="display: none;">
 		        <a rel="lnkNewUser" href="'.$g_root_path.'/adm_program/administration/members/members_new.php"><img src="'. THEME_PATH. '/icons/add.png" alt="'.$gL10n->get('MEM_CREATE_USER').'" /></a>
 		        <a rel="lnkNewUser" href="'.$g_root_path.'/adm_program/administration/members/members_new.php">'.$gL10n->get('MEM_CREATE_USER').'</a>
 	        </span>
-        </li>
+        </li>*/
+echo '
     </ul>
 </form>';
 

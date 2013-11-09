@@ -88,6 +88,10 @@ echo '
     
 echo '</head>
 <body'. $gLayout['onload']. '>';
+if (isset($gLayout['bodyfirst']))
+{
+echo $gLayout['bodyfirst'];
+}
     if($gLayout['includes'])
     {
         require(THEME_SERVER_PATH. '/my_body_top.php');

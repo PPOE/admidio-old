@@ -578,6 +578,10 @@ echo '
                     </dl>
                 </li>
             </ul>
+            <hr />Du bestätigst hiermit auch deine Anmeldung für den <a href="https://mitglieder.piratenpartei.at/newsletter/register.php">Newsletter</a> - eine Abmeldung davon ist jederzeit möglich.
+Die Datenschutzrichtlinien des Newsletters findest du <a href="https://mitglieder.piratenpartei.at/newsletter/register.php?dse=1">hier</a>. 
+Außerdem bestätigst du, dass wir deine Daten bis zum Ende deiner Mitgliedschaft für parteiinterne Zwecke verwenden und verarbeiten dürfen.
+Das heißt insbesondere, dass wir dich benachrichtigen dürfen (beispielsweise zur Ankündigung von Mitgliederversammlungen).
             <hr />';
         }
 

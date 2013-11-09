@@ -310,6 +310,19 @@ if($gCurrentUser->isWebmaster() || $gCurrentUser->assignRoles() || $gCurrentUser
                             </dd>
                         </dl>
                     </li>';
+                echo '
+                <li>
+                    <dl>
+                        <dt>
+                            <a href="'.$g_root_path.'/adm_program/modules/map/map.php"><img
+                            src="'.THEME_PATH.'/icons/weblinks_big.png" alt="'.$gL10n->get('LNK_WEBLINKS').'" title="Piratenkarte" /></a>
+                        </dt>
+                        <dd>
+                            <span class="veryBigFontSize"><a href="'.$g_root_path.'/adm_program/modules/map/map.php">Piratenkarte</a></span><br />
+                            <span class="smallFontSize">Eine Karte auf der alle Piraten eingezeichnet sind.</span>
+                        </dd>
+                    </dl>
+                </li>';
                 }
 
                 if($gCurrentUser->assignRoles())

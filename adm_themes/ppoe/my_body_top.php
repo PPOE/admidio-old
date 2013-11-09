@@ -1,6 +1,8 @@
-<!-- Hier koennen Sie Ihren HTML-Code einbauen, der am Anfang des <body> Bereich
-     einer Admidio-Modul-Seite erscheinen soll.
--->
+<?php /*
+ * Hier koennen Sie Ihren HTML-Code einbauen, der am Anfang des <body> Bereich
+ * einer Admidio-Modul-Seite erscheinen soll.
+ */
+?>
 	<div class="section header">
 		<div class="row">
 			<div class="branding">
@@ -11,26 +13,26 @@
 			<div class="nav-top" role="navigation">
 				<h2 class="skip">Service-Navigation</h2>
 				<ul class="socialmedia">
-					<li class="facebook"><a href="https://www.facebook.com/PiratenparteiAT"><img src="https://piratenpartei.at/wp-content/themes/xwolfde-Piratenkleider-3294b35/images/social-media/facebook-24x24.png" width="24" height="24" alt="Facebook"></a></li>
-					<li class="twitter"><a href="https://twitter.com/BVppoe"><img src="https://piratenpartei.at/wp-content/themes/xwolfde-Piratenkleider-3294b35/images/social-media/twitter-24x24.png" width="24" height="24" alt="Twitter"></a></li>
-					<li class="youtube"><a href="http://www.youtube.com/user/piratenparteiat"><img src="https://piratenpartei.at/wp-content/themes/xwolfde-Piratenkleider-3294b35/images/social-media/youtube-24x24.png" width="24" height="24" alt="YouTube"></a></li>
-				</ul>
+                	<li class="facebook"><a href="https://www.facebook.com/PiratenparteiAT"><img src="https://archiv.piratenpartei.at/wp-content/themes/Piratenkleider-PPOE/images/social-media/facebook-24x24.png" width="24" height="24" alt="Facebook"></a></li>
+                    <li class="twitter"><a href="https://twitter.com/piratenparteiAT"><img src="https://archiv.piratenpartei.at/wp-content/themes/Piratenkleider-PPOE/images/social-media/twitter-24x24.png" width="24" height="24" alt="Twitter"></a></li>
+                    <li class="gplus"><a href="https://plus.google.com/u/0/114600928784220965597"><img src="https://archiv.piratenpartei.at/wp-content/themes/Piratenkleider-PPOE/images/social-media/gplus-24x24.png" width="24" height="24" alt="Google+"></a></li>
+                    <li class="youtube"><a href="http://www.youtube.com/user/piratenparteiat"><img src="https://archiv.piratenpartei.at/wp-content/themes/Piratenkleider-PPOE/images/social-media/youtube-24x24.png" width="24" height="24" alt="YouTube"></a></li>
+                    <li class="delicious"><a href="http://delicious.com/piratenparteiat"><img src="https://archiv.piratenpartei.at/wp-content/themes/Piratenkleider-PPOE/images/social-media/delicious-24x24.png" width="24" height="24" alt="Delicious"></a></li>
+                    <li class="flattr"><a href="http://flattr.com/thing/1205430/Spenden-Piratenpartei-sterreichs"><img src="https://archiv.piratenpartei.at/wp-content/themes/Piratenkleider-PPOE/images/social-media/flattr-24x24.png" width="24" height="24" alt="Flattr"></a></li>
+                    <li class="feed"><a href="http://piratenpartei.at/feed"><img src="https://archiv.piratenpartei.at/wp-content/themes/Piratenkleider-PPOE/images/social-media/feed-24x24.png" width="24" height="24" alt="RSS/Atom-Feed"></a></li>
+                </ul>
 			<div class="menu-header">
 				<ul id="menu-topnav" class="menu">
-					<li id="menu-item-250" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-255"><a target="_blank" href="http://piratenpartei.at/">Piratenpartei Österreichs</a></li>
-					<li id="menu-item-255" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-255"><a target="_blank" href="http://wiki.piratenpartei.at/wiki/Hauptseite">Wiki</a></li>
-					<li id="menu-item-254" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-254"><a href="http://piratenpartei.at/rechtliches/kontakt/">Kontakt</a></li>
-				</ul>
+                    <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://www.piratenpartei.at">Piratenpartei &Ouml;sterreichs</a></li>
+                    <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="https://lqfb.piratenpartei.at">LiquidFeedback</a></li>
+                    <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="http://wiki.piratenpartei.at/wiki/Hauptseite">Wiki</a></li>
+                    <li class="menu-item menu-item-type-custom menu-item-object-custom"><a href="http://forum.piratenpartei.at/">Forum</a></li>
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.piratenpartei.at/mitmachen/chat/">Chat</a></li>
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://www.piratenpartei.at/rechtliches/kontakt/">Kontakt</a></li>
+	            </ul>
 			</div>
 			</div>
 			<div class="nav-main" role="navigation" id="nav">
-			<h2 class="skip">Navigation</h2>
-				<div class="menu-header">
-					<ul id="menu-primary" class="menu">
-						<li id="menu-item-294" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-294"><a href="https://mitglieder.piratenpartei.at/">Startseite</a></li>
-						<li id="menu-item-6711" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6711"><a href="https://mitglieder.piratenpartei.at">Startseite</a></li>
-					</ul>
-				</div>
 			</div>
 		</div>
 	</div>
