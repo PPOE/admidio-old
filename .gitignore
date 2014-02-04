@@ -1,5 +1,8 @@
+.*
 .orig
 adm_install
 config.php
 newsletter
 presse
+Thumbs.db
+adm_my_files
