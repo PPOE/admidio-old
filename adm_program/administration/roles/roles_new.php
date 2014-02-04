@@ -264,7 +264,7 @@ echo '
 						<dl>
 							<dt><label for="rol_description">'.$gL10n->get('SYS_DESCRIPTION').':</label></dt>
 							<dd>
-								<input type="text" id="rol_description" name="rol_description" style="width: 320px;" maxlength="255" value="'. $role->getValue('rol_description'). '" />
+								<textarea id="rol_description" name="rol_description" width="70" height="20">'. $role->getValue('rol_description'). '</textarea>
 							</dd>
 						</dl>
 					</li>

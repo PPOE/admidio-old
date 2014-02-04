@@ -121,7 +121,7 @@ function getFieldCode($fieldNameIntern, $user, $getNewUser)
     
     // Felder sperren, falls dies so eingestellt wurde
     $disabled = '';
-    if($gProfileFields->getProperty($fieldNameIntern, 'usf_disabled') == 1 && $gCurrentUser->editUsers() == false &&  ($gCurrentUser->editProfile($user->getValue('usr_id')) == false || $gCurrentUser->isLGF() == false) && $getNewUser == 0)
+    if($gProfileFields->getProperty($fieldNameIntern, 'usf_cat_id') == 33 || ($gProfileFields->getProperty($fieldNameIntern, 'usf_disabled') == 1 && $gCurrentUser->editUsers() == false &&  ($gCurrentUser->editProfile($user->getValue('usr_id')) == false || $gCurrentUser->isLGF() == false) && $getNewUser == 0))
     {
     $disabled = ' disabled="disabled" style="background=#AAA;" ';
     }

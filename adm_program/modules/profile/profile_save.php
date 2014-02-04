@@ -114,7 +114,10 @@ foreach($gProfileFields->mProfileFields as $field)
 //echo $fieldNameIntern . "?? <br>\n";
 	if($getNewUser == 2 || $gCurrentUser->editUsers() == true || ($gCurrentUser->editProfile($getUserId) && ($field->getValue('usf_disabled') == 0 || $gCurrentUser->isLGF())) || ($field->getValue('usf_disabled') == 1 && $getNewUser > 0))
 	{
-//echo " YES!!<br>\n";
+		if (!isset($_POST[$post_id]) && isset($_GET[$post_id]))
+		{
+			$_POST[$post_id] = $_GET[$post_id];
+		}
 		if(isset($_POST[$post_id])) 
 		{
 			// Pflichtfelder muessen gefuellt sein
@@ -182,7 +185,7 @@ foreach($gProfileFields->mProfileFields as $field)
 				}
 			}
 		}
-		else
+		elseif ($getNewUser != 0)
 		{
 			// Checkboxen uebergeben bei 0 keinen Wert, deshalb diesen hier setzen
 			if($field->getValue('usf_type') == 'CHECKBOX')
@@ -239,13 +242,13 @@ if($gCurrentUser->isWebmaster() || $gCurrentUser->editProfile($user->getValue('u
                     $forum_old_username = $user->getValue('usr_login_name');
                 }
             }
-        }
 
         $login_name_changed = true;
         if(!$user->setValue('usr_login_name', $_POST['usr_login_name']))
 		{
 			$gMessage->show($gL10n->get('SYS_FIELD_INVALID_CHAR', $gL10n->get('SYS_USERNAME')));
 		}
+        }
     }    
 }
 
@@ -420,8 +423,8 @@ elseif($getNewUser == 0 && $user->getValue('usr_valid') == 0)
 else
 {
     // zur Profilseite zurueckkehren    
-    $gMessage->setForwardUrl($_SESSION['navigation']->getUrl(), 2000);
-    $gMessage->show($gL10n->get('SYS_SAVE_DATA'));
+    header("Location: profile.php?user_id=" . $user->getValue('usr_id'));
+    //$gMessage->show($gL10n->get('SYS_SAVE_DATA'));
 }
 ?>
 

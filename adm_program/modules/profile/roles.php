@@ -93,7 +93,6 @@ echo '
                          LEFT JOIN '. TBL_MEMBERS. '
                            ON rol_id      = mem_rol_id
                           AND mem_usr_id  = '.$getUserId.'
-                          AND mem_begin  <= \''.DATE_NOW.'\'
                           AND mem_end     > \''.DATE_NOW.'\'
                         WHERE rol_valid   = 1
                           AND rol_visible = 1
@@ -111,10 +110,8 @@ echo '
                          LEFT JOIN '. TBL_MEMBERS. ' mgl
                            ON rol_id         = mgl.mem_rol_id
                           AND mgl.mem_usr_id = '.$getUserId.'
-                          AND mgl.mem_begin <= \''.DATE_NOW.'\'
                           AND mgl.mem_end    > \''.DATE_NOW.'\'
                         WHERE bm.mem_usr_id  = '. $gCurrentUser->getValue('usr_id'). '
-                          AND bm.mem_begin  <= \''.DATE_NOW.'\'
                           AND bm.mem_end     > \''.DATE_NOW.'\'
                           AND bm.mem_leader  = 1
                           AND rol_id         = bm.mem_rol_id

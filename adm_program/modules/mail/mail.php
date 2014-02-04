@@ -102,7 +102,10 @@ if ($getUserId > 0)
         $gMessage->show($gL10n->get('SYS_USER_NO_EMAIL', $user->getValue('FIRST_NAME').' '.$user->getValue('LAST_NAME')));
     }
 
-    $userEmail = $user->getValue('EMAIL');
+    if ($gCurrentUser->editProfile($user->getValue('usr_id')))
+      $userEmail = $user->getValue('EMAIL');
+    else
+      $userEmail = 'Nutzer '.$user->getValue('usr_id');
 }
 elseif ($getRoleId > 0 || (strlen($getRoleName) > 0 && strlen($getCategory) > 0))
 {
@@ -122,8 +125,7 @@ elseif ($getRoleId > 0 || (strlen($getRoleName) > 0 && strlen($getCategory) > 0)
                    (SELECT COUNT(1)
                       FROM '.TBL_MEMBERS.'
                      WHERE mem_rol_id = rol_id
-                       AND (  mem_begin > \''.DATE_NOW.'\'
-                           OR mem_end   < \''.DATE_NOW.'\')) as former
+                       AND ( mem_end   < \''.DATE_NOW.'\')) as former
               FROM '. TBL_ROLES. ', '. TBL_CATEGORIES. '
              WHERE rol_cat_id    = cat_id
                AND (  cat_org_id = '. $gCurrentOrganization->getValue('org_id').'

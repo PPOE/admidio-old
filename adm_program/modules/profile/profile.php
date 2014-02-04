@@ -444,7 +444,6 @@ echo '
                 $sql = 'SELECT rol_name
                           FROM '. TBL_MEMBERS. ', '. TBL_ROLES. ', '. TBL_CATEGORIES.'
                          WHERE mem_rol_id = rol_id
-                           AND mem_begin <= \''.DATE_NOW.'\'
                            AND mem_end    > \''.DATE_NOW.'\'
                            AND mem_usr_id = '.$user->getValue('usr_id').'
                            AND rol_valid  = 1
@@ -616,7 +615,6 @@ echo '
             $sql = 'SELECT *
                       FROM '. TBL_MEMBERS. ', '. TBL_ROLES. ', '. TBL_CATEGORIES. ', '. TBL_ORGANIZATIONS. '
                      WHERE mem_rol_id = rol_id
-                       AND mem_begin <= \''.DATE_NOW.'\'
                        AND mem_end   >= \''.DATE_NOW.'\'
                        AND mem_usr_id = '.$user->getValue('usr_id').'
                        AND rol_valid  = 1

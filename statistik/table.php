@@ -21,11 +21,11 @@ echo <<<END
 
 <tr>
 <th> Land </th>
-<th> Mitglied </th>
-<th> Stimmrecht </th>
-<th> stimmber. in&#160;% </th>
-<th> Liquid </th>
-<th> Liquid in&#160;% </th>
+<th style="font-size: 50%;"> Mitglied (inkl. ruhende)</th>
+<th> Mitglied</th>
+<th style="font-size: 50%;"> nicht ruhend in&#160;% </th>
+<th> Akkred. </th>
+<th> Akkred. in&#160;% </th>
 <th> Einwohner in 1000 </th>
 <th> Mitgl. / Mio. Einw. </th>
 <th> Fl&auml;che (km&sup2;) </th>
@@ -53,15 +53,18 @@ foreach ($los as $num => $lo) {
     $b2 = "";
     $class = "";
   }
+  $lo_members = 1;
   $query = mysql_query("SELECT COUNT(*) FROM ppoe_api_data.members WHERE $where;");
   if ($query && ($row = mysql_fetch_array($query))) {
     $lo_members = $row[0];
   }
+  $lo_zahlend = 1;
   $query = mysql_query("SELECT COUNT(*) FROM ppoe_api_data.members WHERE $where AND MB = 1;");
   if ($query && ($row = mysql_fetch_array($query))) {
     $lo_zahlend = $row[0];
   }
-  $query = mysql_query("SELECT COUNT(*) FROM ppoe_api_data.members WHERE $where AND (MB = 1 OR MBM14 = 1) AND Akk = 1;");
+  $lo_simmberechtigt = 1;
+  $query = mysql_query("SELECT COUNT(*) FROM ppoe_api_data.members WHERE $where AND (MB = 1 OR MBP14 = 1) AND Akk = 1;");
   if ($query && ($row = mysql_fetch_array($query))) {
     $lo_stimmberechtigt = $row[0];
   }
@@ -71,7 +74,7 @@ foreach ($los as $num => $lo) {
   echo "<td>$b$lo_zahlend$b2</td>\n";
   echo "<td>$b" . sprintf("%.1f", round(100 * $lo_zahlend / $lo_members,1)) . "%$b2</td>\n";
   echo "<td>$b$lo_stimmberechtigt$b2</td>\n";
-  echo "<td>$b" . sprintf("%.1f", round(100 * $lo_stimmberechtigt / $lo_members,1)) . "%$b2</td>\n";
+  echo "<td>$b" . sprintf("%.1f", round(100 * $lo_stimmberechtigt / $lo_zahlend,1)) . "%$b2</td>\n";
   echo "<td>$b" . $people[$num] . "$b2</td>\n";
   echo "<td>$b" . sprintf("%.1f", round(1000 * $lo_members / $people[$num],1)) . "$b2</td>\n";
   echo "<td>$b" . $area[$num] . "$b2</td>\n";

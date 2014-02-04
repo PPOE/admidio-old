@@ -91,7 +91,6 @@ class User extends TableUsers
                           LEFT JOIN '. TBL_MEMBERS. '
                             ON mem_usr_id  = '. $this->getValue('usr_id'). '
                            AND mem_rol_id  = rol_id
-                           AND mem_begin  <= \''.DATE_NOW.'\'
                            AND mem_end     > \''.DATE_NOW.'\'
                          WHERE rol_valid   = 1
                            AND rol_cat_id  = cat_id
@@ -608,7 +607,6 @@ class User extends TableUsers
                 $sql    = 'SELECT rol_id, rol_this_list_view
                              FROM '. TBL_MEMBERS. ', '. TBL_ROLES. ', '. TBL_CATEGORIES. '
                             WHERE mem_usr_id = '.$usr_id. '
-                              AND mem_begin <= \''.DATE_NOW.'\'
                               AND mem_end    > \''.DATE_NOW.'\'
                               AND mem_rol_id = rol_id
                               AND rol_valid  = 1

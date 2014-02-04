@@ -7,6 +7,7 @@ mysql_select_db($g_adm_db,$link);
 $query = mysql_query("select G1.usr_id,
 (select G2.usd_value from `adm_user_data` G2 where G1.usr_id = G2.usd_usr_id AND G2.usd_usf_id = 1) as LN,
 (select G2.usd_value from `adm_user_data` G2 where G1.usr_id = G2.usd_usr_id AND G2.usd_usf_id = 2) as FN,
+(select 1 from `adm_user_data` G2 where G1.usr_id = G2.usd_usr_id AND G2.usd_usf_id = 26 AND G2.usd_value > NOW()) as P,
 (SELECT G3.mem_rol_id FROM ppoe_mitglieder.adm_members G3 WHERE G1.usr_id = G3.mem_usr_id AND G3.mem_end > curdate() AND G3.mem_begin < curdate() AND G3.mem_rol_id >= 37 AND G3.mem_rol_id <= 45 LIMIT 1) AS LO
 from `adm_users` G1 
 where G1.usr_id IN (
@@ -22,7 +23,7 @@ $lines = "";
 $i = 0;
 while ($row = mysql_fetch_assoc($query)) {
   $i++;
-  $lines .= "$i\t".$row['usr_id']."\t".$row['FN'] . ' ' . $row['LN']."\t".$row['LO']."\n";
+  $lines .= "$i\t".$row['usr_id']."\t".$row['FN'] . ' ' . $row['LN']."\t".$row['LO']."\t".$row['P']."\n";
 }
 
 $encrypted2 = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, md5($key4), $lines, MCRYPT_MODE_CBC, md5(md5($key4))));

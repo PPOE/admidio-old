@@ -35,6 +35,13 @@ $query = mysql_query("SELECT COUNT(*) AS c FROM adm_members WHERE mem_rol_id = $
 if ($query && ($row = mysql_fetch_assoc($query))) {
 $members = $row['c'];
 }
+echo "<tr><td>Mitgliedsbeitrag</td><td><table border=1><tr><th>Anzahl</th><th>Durchschnitt</th></tr>";
+$query = mysql_query("SELECT COUNT(*) AS c,ROUND(AVG(A.usd_value),2) AS a FROM adm_members LEFT JOIN adm_user_data A ON mem_usr_id = A.usd_usr_id LEFT JOIN adm_user_data B ON mem_usr_id = B.usd_usr_id WHERE A.usd_usf_id = 27 AND mem_rol_id = 2 AND mem_end > curdate() AND B.usd_usf_id = 26 AND B.usd_value > curdate();");
+while ($query && ($row = mysql_fetch_assoc($query))) {
+echo "<tr><td>{$row['c']}</td><td>{$row['a']} €</td></tr>";
+}
+echo "</tr></table></tr>";
+
 echo "<tr><td>Geschlecht</td><td><table border=1><tr><th>Wert</th><th>Häufigkeit</th></tr>";
 $query = mysql_query("SELECT * FROM (SELECT usd_value AS v,COUNT(*) AS c FROM ppoe_mitglieder.adm_user_data WHERE usd_usf_id = 11 AND usd_usr_id IN (SELECT mem_usr_id FROM adm_members WHERE mem_rol_id = $lo AND mem_begin <= curdate() AND mem_end >= curdate()) GROUP BY usd_value ORDER BY c DESC LIMIT 10) A WHERE c >= 25;");
 $members_c = $members;

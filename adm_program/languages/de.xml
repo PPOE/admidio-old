@@ -1163,7 +1163,7 @@
     <text id="SYS_NO_ENTRY" development="new" translation="todo">Der angeforderte Eintrag existiert nicht in der Datenbank.</text>
     <text id="SYS_NO_ENTRIES" development="new" translation="todo">Es sind keine Einträge vorhanden.</text>
 	<text id="SYS_NO_ENTRIES_FOUND" development="new" translation="todo">Es wurden keine Einträge gefunden.</text>
-    <text id="SYS_NO_RIGHTS" development="new" translation="todo">Du hast kein Recht, diese Aktion auszuführen.</text>
+    <text id="SYS_NO_RIGHTS" development="new" translation="todo">Du hast kein Recht, diese Aktion auszuführen.\n(Bist du eingeloggt?)</text>
     <text id="SYS_NOBODY" development="new" translation="todo">Niemand</text>
     <text id="SYS_NONE" development="new" translation="todo">Keiner</text>
     <text id="SYS_NOTE" development="new" translation="todo">Hinweis</text>

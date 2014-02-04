@@ -168,13 +168,22 @@ class Message
                                     <a href="javascript:window.close()">'.$gL10n->get('SYS_CLOSE').'</a>
                                 </span>';
                             }
-                            else
+                            elseif ($gCurrentUser && intval($gCurrentUser->getValue('usr_id')) > 0)
                             {
                                 echo '
                                 <span class="iconTextLink">
                                     <a href="javascript:history.back()"><img 
                                         src="'. THEME_PATH. '/icons/back.png" alt="'.$gL10n->get('SYS_BACK').'" title="'.$gL10n->get('SYS_BACK').'" /></a>
                                     <a href="javascript:history.back()">'.$gL10n->get('SYS_BACK').'</a>
+                                </span>';
+                            }
+			    else
+			    {
+				echo '
+                                <span class="iconTextLink">
+                                    <a href="/adm_program/system/login.php"><img 
+                                        src="'. THEME_PATH. '/icons/key.png" alt="'.$gL10n->get('SYS_LOGIN').'" title="'.$gL10n->get('SYS_LOGIN').'" /></a>
+                                    <a href="/adm_program/system/login.php">'.$gL10n->get('SYS_LOGIN').'</a>
                                 </span>';
                             }
                         }

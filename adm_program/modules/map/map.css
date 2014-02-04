@@ -1,3 +1,19 @@
 .olPopup
 {
+  position: absolute;
+  border-radius: 10px;
+  opacity: 0.9 !important; 
+  overflow: hidden;
+  left: 40%;
+  top: 40%;
+  width: 300px !important;
+  height: 300px !important;
+  background-color: #FFF;
+  border: 0px none;
+  z-index: 751;
+}
+.olPopupContent
+{
+  width: 300px !important;
+  height: 300px !important;
 }

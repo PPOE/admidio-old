@@ -12,6 +12,7 @@ $sel_mbuntil = "(select G2.usd_value from ppoe_mitglieder.adm_user_data G2 where
 $sel_lo = "(SELECT G3.mem_rol_id FROM ppoe_mitglieder.adm_members G3 WHERE G1.usr_id = G3.mem_usr_id AND G3.mem_end > curdate() AND G3.mem_rol_id >= 37 AND G3.mem_rol_id <= 45 LIMIT 1) AS LO";
 $sel_mb = "CASE WHEN (select G2.usd_value FROM ppoe_mitglieder.adm_user_data G2 WHERE G1.usr_id = G2.usd_usr_id AND G2.usd_usf_id = 26 AND G2.usd_value >= curdate() LIMIT 1) IS NULL THEN 0 ELSE 1 END AS MB";
 $sel_mbm14 = "CASE WHEN (select G2.usd_value FROM ppoe_mitglieder.adm_user_data G2 WHERE G1.usr_id = G2.usd_usr_id AND G2.usd_usf_id = 26 AND G2.usd_value >= curdate() + INTERVAL 14 DAY LIMIT 1) IS NULL THEN 0 ELSE 1 END AS MBM14";
+$sel_mbp14 = "CASE WHEN (select G2.usd_value FROM ppoe_mitglieder.adm_user_data G2 WHERE G1.usr_id = G2.usd_usr_id AND G2.usd_usf_id = 26 AND G2.usd_value >= curdate() - INTERVAL 14 DAY LIMIT 1) IS NULL THEN 0 ELSE 1 END AS MBP14";
 $sel_mbp90 = "CASE WHEN (select G2.usd_value FROM ppoe_mitglieder.adm_user_data G2 WHERE G1.usr_id = G2.usd_usr_id AND G2.usd_usf_id = 26 AND G2.usd_value >= curdate() - INTERVAL 90 DAY LIMIT 1) IS NULL THEN 0 ELSE 1 END AS MBP90";
 $sel_mbp180 = "CASE WHEN (select G2.usd_value FROM ppoe_mitglieder.adm_user_data G2 WHERE G1.usr_id = G2.usd_usr_id AND G2.usd_usf_id = 26 AND G2.usd_value >= curdate() - INTERVAL 180 DAY LIMIT 1) IS NULL THEN 0 ELSE 1 END AS MBP180";
 $sel_akk = "CASE WHEN (select G2.usd_value FROM ppoe_mitglieder.adm_user_data G2 WHERE G1.usr_id = G2.usd_usr_id AND G2.usd_usf_id = 35 AND G2.usd_value <= curdate() LIMIT 1) IS NULL THEN 0 ELSE 1 END AS Akk";
@@ -24,16 +25,16 @@ mysql_select_db($g_adm_db,$link);
 $los    = array(0 => 'Keine', 38 => 'Burgenland', 40 => 'K&auml;rnten', 39 => 'Nieder&ouml;sterreich', 41 => 'Ober&ouml;sterreich', 42 => 'Salzburg', 43 => 'Steiermark', 44 => 'Tirol', 45 => 'Vorarlberg', 37 => 'Wien');
 
 $mails = array(
-0 => array("bv@piratenpartei.at","bgf@piratenpartei.at"),
-37 => array("bv@piratenpartei.at","bgf@piratenpartei.at","lv-wien@piratenpartei.at","sekretariat-wien@piratenpartei.at"),
-38 => array("bv@piratenpartei.at","bgf@piratenpartei.at","lv-burgenland@piratenpartei.at","lgf-burgenland@piratenpartei.at"),
-39 => array("bv@piratenpartei.at","bgf@piratenpartei.at","lgf-noe@piratenpartei.at"),
-40 => array("bv@piratenpartei.at","bgf@piratenpartei.at","lv-kaernten@piratenpartei.at","lgf-kaernten@piratenpartei.at"),
-41 => array("bv@piratenpartei.at","bgf@piratenpartei.at","lv-ooe@piratenpartei.at"),
-42 => array("bv@piratenpartei.at","bgf@piratenpartei.at","lv-sbg@piratenpartei.at","lgf-sbg@piratenpartei.at"),
-43 => array("bv@piratenpartei.at","bgf@piratenpartei.at","lv-steiermark@piratenpartei.at","lgf-steiermark@piratenpartei.at"),
-44 => array("bv@piratenpartei.at","bgf@piratenpartei.at","lv-tirol@piratenpartei.at","lgf-tirol@piratenpartei.at"),
-45 => array("bv@piratenpartei.at","bgf@piratenpartei.at","lv-vorarlberg@piratenpartei.at","lgf-vorarlberg@piratenpartei.at")
+0 => array("bv@piratenpartei.at","bgf@piratenpartei.at","bgf-intern@piratenpartei.at","ag-mentoring@piratenpartei.at"),
+37 => array("bv@piratenpartei.at","bgf@piratenpartei.at","bgf-intern@piratenpartei.at","lv-wien@piratenpartei.at","sekretariat-wien@piratenpartei.at"),
+38 => array("bv@piratenpartei.at","bgf@piratenpartei.at","bgf-intern@piratenpartei.at","lv-burgenland@piratenpartei.at","lgf-burgenland@piratenpartei.at"),
+39 => array("bv@piratenpartei.at","bgf@piratenpartei.at","bgf-intern@piratenpartei.at","lgf-noe@piratenpartei.at"),
+40 => array("bv@piratenpartei.at","bgf@piratenpartei.at","bgf-intern@piratenpartei.at","lv-kaernten@piratenpartei.at","lgf-kaernten@piratenpartei.at"),
+41 => array("bv@piratenpartei.at","bgf@piratenpartei.at","bgf-intern@piratenpartei.at","lv-ooe@piratenpartei.at"),
+42 => array("bv@piratenpartei.at","bgf@piratenpartei.at","bgf-intern@piratenpartei.at","lv-sbg@piratenpartei.at","lgf-sbg@piratenpartei.at"),
+43 => array("bv@piratenpartei.at","bgf@piratenpartei.at","bgf-intern@piratenpartei.at","lv-steiermark@piratenpartei.at","lgf-steiermark@piratenpartei.at"),
+44 => array("bv@piratenpartei.at","bgf@piratenpartei.at","bgf-intern@piratenpartei.at","lv-tirol@piratenpartei.at","lgf-tirol@piratenpartei.at"),
+45 => array("bv@piratenpartei.at","bgf@piratenpartei.at","bgf-intern@piratenpartei.at","lv-vorarlberg@piratenpartei.at","lgf-vorarlberg@piratenpartei.at")
 );
 
 $refill = true;
@@ -47,16 +48,18 @@ if ($query) {
 while ($row = mysql_fetch_array($query)) {
   $refill = true;
   $id = $row["usr_id"];
-  $nick = $row["nick"];i
-  $reason = $row["reason"];
+  $nick = "";
+  if (isset($row["Nick"]))
+    $nick = $row["Nick"];
+  $reason = "";
+  if (isset($row["Reason"]))
+    $reason = $row["Reason"];
   $lo = intval($row["LO"]);
   if ($lo == null || count($lo) == 0)
     $lo = 0;
   echo "Generating Mails for new user $lo $id (not TO user)\n";
   foreach ($mails[$lo] AS $mail)
   {
-    //if ($mail == 'bgf@piratenpartei.at')
-    //  continue;
     $subject = "[Admidio] Neues Mitglied zugeordnet";
     $text = "Es wurde ein neues Mitglied ($nick) der LO {$los[$lo]} zugeordnet:
 
@@ -106,7 +109,9 @@ if ($query) {
 while ($row = mysql_fetch_array($query)) {
   $refill = true;
   $id = $row["usr_id"];
-  $nick = $row["nick"];
+  $nick = "";
+  if (isset($row["Nick"]))
+    $nick = $row["Nick"];
   $lo = intval($row["LO"]);
   foreach ($mails[$lo] AS $mail)
   {
@@ -179,23 +184,26 @@ while ($row = mysql_fetch_array($query)) {
 
 Wir danken dir für die Zahlung deines Mitgliedsbeitrags im vergangenen Jahr und hoffen, dass du auch weiterhin ein aktives, unterstützendes Mitglied der Piratenpartei bleiben wirst.
 
-Deine letzte Zahlung deckt nur noch die nächsten zwei Wochen ab, dann wird dein Mitgliedsstatus ruhend gestellt, bis du für das nächste Geschäftsjahr deinen Beitrag entrichtest. Der Mitgliedsbeitrag soll und kann bis zum Ende des Kalenderjahres vorausgezahlt werden. Über ein Kalenderjahr hinausgehende Mitgliedsbeitragsvorauszahlungen werden als Spenden angesehen.
+Um für 2014 stimmberechtigt zu sein (in Liquid oder auf den Mitgliederversammlungen), bitten wir dich wie jedes Jahr erneut um die Entrichtung des Mitgliedsbeitrages. Dieser wurde in der letzten Abstimmung hierzu auf eine Höhe von € 40,00 festgelegt. Genauere Informationen findest du weiter unten.
 
-Für das nächste Jahr ist ein Jahresbeitrag von €12 fällig, zahlbar auf folgendes Konto:
+Bitte überweise deinen Mitgliedsbeitrag auf folgendes Konto:
 
 Kontoinhaber: Piratenpartei Österreichs
-Bankinstitut: BAWAG/P.S.K.
-Kontonummer: 50110110437
-BLZ: 60000
 IBAN: AT916000050110110437
 BIC: OPSKATWW
 
-Wir hoffen dass du dich bei den Piraten wohl fühlst und danken dir für deine finanzielle Unterstützung. Über eine Spende würden wir uns besonders freuen, in Anlehnung an die Empfehlung der Piratenpartei Deutschland schlagen auch wir eine Spende in Höhe von einem Prozent deines Bruttojahreseinkommens vor.
+oder schicke deinen Mitgliedsbeitrag an spende@piratenpartei.at mit dem Vermerk, dass es ein Mitgliedsbeitrag ist und für WEN dieser Beitrag gilt, damit wir diesen zuordnen können.
 
-Wenn die Beitragszahlung innerhalb von drei Wochen eingeht, wirst du zu keinem Zeitpunkt das Stimmrecht in Liquid verlieren.
+2014 wollen wir gemeinsam den EU-Wahlkampf, sowie Landtagswahlen und Gemeinderatswahlen bestreiten. Außerdem kommen größere Kostenpunkte durch die Rechenschaftspflicht dazu. Mit diesem Hintergrund haben alle an der Abstimmung teilnehmenden Mitglieder beschlossen, den Mitgliedsbeitrag variabel zu gestalten.
+
+Ab einem Beitrag von € 20 erhältst du Stimmrecht. Um alle unsere Kosten zu decken und Handlungsspielraum im neuen Jahr zu haben, bitten wir dich aber, einen Mitgliedsbeitrag von mindestens € 40 zu zahlen, sofern dir das möglich ist. Wenn unsere 500 zahlenden Mitglieder alle einen Beitrag von €50,00 leisten könnten, hätten wir für 2014 erstmals die Möglichkeit, größere Dinge zu planen, mehr Geld für die Wahlkämpfe abzustellen, oder uns gar personelle Unterstützung für die Organe zu leisten, damit unsere Finanzgebahrung auf solidere Beine gestellt werden kann. Dein Jahresbeitrag sowie weitere Beitragszahlungen, bis maximal €1000 im Jahr, werden außerdem als Mitgliedsbeitrag gerechnet, sofern nicht explizit anders gewünscht. Darüber hinausgehende Einzahlungen werden als Spenden angesehen.
+
+In Anlehnung an die Empfehlung der Piratenpartei Deutschland, fänden wir es auch sehr entgegenkommend, wenn du deinen Mitgliedsbeitrag an deiner aktuellen Einkommenssituation ausrichten würdest, und dir die Mitgliedschaft und die finanzielle Handlungsfähigkeit etwa 1% deines Einkommens als Mitgliedsbeitrag wert wäre.
+
+Wir danken dir für deine finanzielle Unterstützung!
 
 Mit piratigen Grüßen,
-  deine Bundesgeschäftsführung
+ deine Bundesgeschäftsführung
 ";
   utf8_mail($mail,$subject,$text);
   echo "INFO TO MEMBER 14 DAYS LEFT!! Mail to $mail $id\n";
@@ -211,7 +219,7 @@ while ($row = mysql_fetch_array($query)) {
   $refill = true;
   $id = $row["usr_id"];
   $mail = $row["Email"];
-  $nick = $row["nick"];
+  $nick = $row["Nick"];
   $name = $row["Name"];
   $mbuntil = $row["MBUntil"];
   $subject = "[Piraten] Erinnerung: Mitgliedsbeitrag";
@@ -219,23 +227,28 @@ while ($row = mysql_fetch_array($query)) {
 
 Wie wir dich in der letzten E-Mail informiert haben, läuft heute dein Mitgliedsbeitrag aus, und deine Mitgliedschaft wird ruhend gestellt. Dein Stimmrecht in Liquid wird noch für 14 Tage erhalten bleiben.
 
-Der Mitgliedsbeitrag soll und kann bis zum Ende des Kalenderjahres vorausgezahlt werden. Über ein Kalenderjahr hinausgehende Mitgliedsbeitragsvorauszahlungen werden als Spenden angesehen.
+Um für 2014 stimmberechtigt zu sein (in Liquid oder auf den Mitgliederversammlungen), bitten wir dich wie jedes Jahr erneut um die Entrichtung des Mitgliedsbeitrages. Dieser wurde in der letzten Abstimmung hierzu auf eine Höhe von € 40,00 festgelegt. Genauere Informationen findest du weiter unten.
 
-Der Jahresbeitrag von €12 ist zahlbar auf folgendes Konto:
+Bitte überweise deinen Mitgliedsbeitrag auf folgendes Konto:
 
 Kontoinhaber: Piratenpartei Österreichs
-Bankinstitut: BAWAG/P.S.K.
-Kontonummer: 50110110437
-BLZ: 60000
 IBAN: AT916000050110110437
 BIC: OPSKATWW
 
-Wir danken dir für deine finanzielle Unterstützung. Über eine Spende würden wir uns besonders freuen, in Anlehnung an die Empfehlung der Piratenpartei Deutschland schlagen auch wir eine Spende in Höhe von einem Prozent deines Bruttojahreseinkommens vor.
+oder schicke deinen Mitgliedsbeitrag an spende@piratenpartei.at mit dem Vermerk, dass es ein Mitgliedsbeitrag ist und für WEN dieser Beitrag gilt, damit wir diesen zuordnen können.
+
+2014 wollen wir gemeinsam den EU-Wahlkampf, sowie Landtagswahlen und Gemeinderatswahlen bestreiten. Außerdem kommen größere Kostenpunkte durch die Rechenschaftspflicht dazu. Mit diesem Hintergrund haben alle an der Abstimmung teilnehmenden Mitglieder beschlossen, den Mitgliedsbeitrag variabel zu gestalten.
+
+Ab einem Beitrag von € 20 erhältst du Stimmrecht. Um alle unsere Kosten zu decken und Handlungsspielraum im neuen Jahr zu haben, bitten wir dich aber, einen Mitgliedsbeitrag von mindestens € 40 zu zahlen, sofern dir das möglich ist. Wenn unsere 500 zahlenden Mitglieder alle einen Beitrag von €50,00 leisten könnten, hätten wir für 2014 erstmals die Möglichkeit, größere Dinge zu planen, mehr Geld für die Wahlkämpfe abzustellen, oder uns gar personelle Unterstützung für die Organe zu leisten, damit unsere Finanzgebahrung auf solidere Beine gestellt werden kann. Dein Jahresbeitrag sowie weitere Beitragszahlungen, bis maximal €1000 im Jahr, werden außerdem als Mitgliedsbeitrag gerechnet, sofern nicht explizit anders gewünscht. Darüber hinausgehende Einzahlungen werden als Spenden angesehen.
+
+In Anlehnung an die Empfehlung der Piratenpartei Deutschland, fänden wir es auch sehr entgegenkommend, wenn du deinen Mitgliedsbeitrag an deiner aktuellen Einkommenssituation ausrichten würdest, und dir die Mitgliedschaft und die finanzielle Handlungsfähigkeit etwa 1% deines Einkommens als Mitgliedsbeitrag wert wäre.
+
+Wir danken dir für deine finanzielle Unterstützung!
 
 Wenn die Beitragszahlung innerhalb der nächsten Woche eingeht, wirst du zu keinem Zeitpunkt das Stimmrecht in Liquid verlieren.
 
 Mit piratigen Grüßen,
-   deine Bundesgeschäftsführung
+ deine Bundesgeschäftsführung
 ";
   utf8_mail($mail,$subject,$text);
   echo "INFO TO MEMBER PAY NOW!! Mail to $mail $id\n";
@@ -265,28 +278,19 @@ while ($row = mysql_fetch_array($query)) {
   $refill = true;
   $id = $row["usr_id"];
   $mail = $row["Email"];
-  $nick = $row["nick"];
+  $nick = $row["Nick"];
   $name = $row["Name"];
   $mbuntil = $row["MBUntil"];
   $subject = "[Piraten] Du bist stimmberechtigt!";
   $text = "Hallo $name!
 
-Die Bundesgeschäftsführung hat beschlossen den Mitgliedsbeitrag für die verbleibenden Monate im Jahr 2013 auszusetzen.
+Danke, dass du deinen Mitgliedsbeitrag eingezahlt hast! Damit leistest du einen wichtigen Beitrag für eine bessere Politik.
 
-Dein Mitgliedsstatus ist also bis einschließlich $mbuntil gültig. Du kannst diesen sowie deine hinterlegten Daten in deinem Profil in der Mitgliedsverwaltung überprüfen: https://mitglieder.piratenpartei.at/
+Dein Mitgliedsstatus ist damit bis einschließlich $mbuntil gültig. Du kannst diesen sowie deine hinterlegten Daten in deinem Profil in der Mitgliedsverwaltung überprüfen: https://mitglieder.piratenpartei.at/
 Solltest du Unterstützung bei der Anmeldung dort brauchen, dann schreibe uns bitte einfach an bgf@piratenpartei.at .
 
-Natürlich sind wir dankbar wenn du uns etwas spendest. Unsere Kontodaten lauten:
-
-Kontoinhaber: Piratenpartei Österreichs
-Bankinstitut: BAWAG/P.S.K.
-Kontonummer: 50110110437
-BLZ: 60000
-IBAN: AT916000050110110437
-BIC: OPSKATWW
-
 Mit piratigen Grüßen,
-   deine Bundesgeschäftsführung
+ deine Bundesgeschäftsführung
 ";
   utf8_mail($mail,$subject,$text);
 
@@ -300,7 +304,7 @@ Mit piratigen Grüßen,
 https://mitglieder.piratenpartei.at/adm_program/modules/profile/profile.php?user_id=$id
 
 Du musst eingeloggt sein, um den obigen Link zu öffnen.";
-    //utf8_mail($mail,$subject,$text);
+    utf8_mail($mail,$subject,$text);
   }
 
 }
@@ -315,7 +319,7 @@ while ($row = mysql_fetch_array($query)) {
   $refill = true;
   $id = $row["usr_id"];
   $mail = $row["Email"];
-  $nick = $row["nick"];
+  $nick = $row["Nick"];
   $name = $row["Name"];
   $mbuntil = $row["MBUntil"];
   $subject = "[Piraten] Erinnerung: Mitgliedsbeitrag";
@@ -323,23 +327,24 @@ while ($row = mysql_fetch_array($query)) {
 
 Wir schreiben dich nun an, weil du seit drei Monaten keinen Mitgliedsbeitrag gezahlt hast.
 
-Der Mitgliedsbeitrag soll und kann bis zum Ende des Kalenderjahres vorausgezahlt werden. Über ein Kalenderjahr hinausgehende Mitgliedsbeitragsvorauszahlungen werden als Spenden angesehen.
+Um für 2014 stimmberechtigt zu sein (in Liquid oder auf den Mitgliederversammlungen), bitten wir dich wie jedes Jahr erneut um die Entrichtung des Mitgliedsbeitrages. Dieser wurde in der letzten Abstimmung hierzu auf eine Höhe von € 40,00 festgelegt. Genauere Informationen findest du weiter unten.
 
-Der Jahresbeitrag von €12 ist zahlbar auf folgendes Konto:
+Bitte überweise deinen Mitgliedsbeitrag auf folgendes Konto:
 
 Kontoinhaber: Piratenpartei Österreichs
-Bankinstitut: BAWAG/P.S.K.
-Kontonummer: 50110110437
-BLZ: 60000
 IBAN: AT916000050110110437
 BIC: OPSKATWW
 
-Wir danken dir für deine finanzielle Unterstützung. Über eine Spende würden wir uns besonders freuen, in Anlehnung an die Empfehlung der Piratenpartei Deutschland schlagen auch wir eine Spende in Höhe von einem Prozent deines Bruttojahreseinkommens vor.
+oder schicke deinen Mitgliedsbeitrag an spende@piratenpartei.at mit dem Vermerk, dass es ein Mitgliedsbeitrag ist und für WEN dieser Beitrag gilt, damit wir diesen zuordnen können.
+
+Ab einem Beitrag von € 20 erhältst du Stimmrecht. Um alle unsere Kosten zu decken und Handlungsspielraum im neuen Jahr zu haben, bitten wir dich aber, einen Mitgliedsbeitrag von mindestens € 40 zu zahlen, sofern dir das möglich ist. Wenn unsere 500 zahlenden Mitglieder alle einen Beitrag von €50,00 leisten könnten, hätten wir für 2014 erstmals die Möglichkeit, größere Dinge zu planen, mehr Geld für die Wahlkämpfe abzustellen, oder uns gar personelle Unterstützung für die Organe zu leisten, damit unsere Finanzgebahrung auf solidere Beine gestellt werden kann. Dein Jahresbeitrag sowie weitere Beitragszahlungen, bis maximal €1000 im Jahr, werden außerdem als Mitgliedsbeitrag gerechnet, sofern nicht explizit anders gewünscht. Darüber hinausgehende Einzahlungen werden als Spenden angesehen.
+
+In Anlehnung an die Empfehlung der Piratenpartei Deutschland, fänden wir es auch sehr entgegenkommend, wenn du deinen Mitgliedsbeitrag an deiner aktuellen Einkommenssituation ausrichten würdest, und dir die Mitgliedschaft und die finanzielle Handlungsfähigkeit etwa 1% deines Einkommens als Mitgliedsbeitrag wert wäre.
 
 Außerdem möchten wir dich darauf hinweisen, dass in etwa drei Monaten gemäß Satzung §4 (7) eine Streichung deiner Mitgliedschaft erfolgt, falls der Mitgliedsbeitrag bis dahin nicht eingegangen ist. Wir würden dies sehr bedauern und hoffen daher auf deine Beitragszahlung und/oder eine Rückmeldung!
 
 Mit piratigen Grüßen,
-   deine Bundesgeschäftsführung
+ deine Bundesgeschäftsführung
 ";
   utf8_mail($mail,$subject,$text);
 
@@ -370,30 +375,31 @@ while ($row = mysql_fetch_array($query)) {
   $id = $row["usr_id"];
   $mail = $row["Email"];
   $name = $row["Name"];
-  $nick = $row["nick"];
+  $nick = $row["Nick"];
   $mbuntil = $row["MBUntil"];
   $subject = "[Piraten] Erinnerung: Mitgliedsbeitrag";
   $text = "Hallo $name!
 
 Wir schreiben dich nun an, weil du seit sechs Monaten keinen Mitgliedsbeitrag gezahlt hast.
 
-Der Mitgliedsbeitrag soll und kann bis zum Ende des Kalenderjahres vorausgezahlt werden. Über ein Kalenderjahr hinausgehende Mitgliedsbeitragsvorauszahlungen werden als Spenden angesehen.
+Um für 2014 stimmberechtigt zu sein (in Liquid oder auf den Mitgliederversammlungen), bitten wir dich wie jedes Jahr erneut um die Entrichtung des Mitgliedsbeitrages. Dieser wurde in der letzten Abstimmung hierzu auf eine Höhe von € 40,00 festgelegt. Genauere Informationen findest du weiter unten.
 
-Der Jahresbeitrag von €12 ist zahlbar auf folgendes Konto:
+Bitte überweise deinen Mitgliedsbeitrag auf folgendes Konto:
 
 Kontoinhaber: Piratenpartei Österreichs
-Bankinstitut: BAWAG/P.S.K.
-Kontonummer: 50110110437
-BLZ: 60000
 IBAN: AT916000050110110437
 BIC: OPSKATWW
 
-Wir danken dir für deine finanzielle Unterstützung. Über eine Spende würden wir uns besonders freuen, in Anlehnung an die Empfehlung der Piratenpartei Deutschland schlagen auch wir eine Spende in Höhe von einem Prozent deines Bruttojahreseinkommens vor.
+oder schicke deinen Mitgliedsbeitrag an spende@piratenpartei.at mit dem Vermerk, dass es ein Mitgliedsbeitrag ist und für WEN dieser Beitrag gilt, damit wir diesen zuordnen können.
+
+Ab einem Beitrag von € 20 erhältst du Stimmrecht. Um alle unsere Kosten zu decken und Handlungsspielraum im neuen Jahr zu haben, bitten wir dich aber, einen Mitgliedsbeitrag von mindestens € 40 zu zahlen, sofern dir das möglich ist. Wenn unsere 500 zahlenden Mitglieder alle einen Beitrag von €50,00 leisten könnten, hätten wir für 2014 erstmals die Möglichkeit, größere Dinge zu planen, mehr Geld für die Wahlkämpfe abzustellen, oder uns gar personelle Unterstützung für die Organe zu leisten, damit unsere Finanzgebahrung auf solidere Beine gestellt werden kann. Dein Jahresbeitrag sowie weitere Beitragszahlungen, bis maximal €1000 im Jahr, werden außerdem als Mitgliedsbeitrag gerechnet, sofern nicht explizit anders gewünscht. Darüber hinausgehende Einzahlungen werden als Spenden angesehen.
+
+In Anlehnung an die Empfehlung der Piratenpartei Deutschland, fänden wir es auch sehr entgegenkommend, wenn du deinen Mitgliedsbeitrag an deiner aktuellen Einkommenssituation ausrichten würdest, und dir die Mitgliedschaft und die finanzielle Handlungsfähigkeit etwa 1% deines Einkommens als Mitgliedsbeitrag wert wäre.
 
 Außerdem möchten wir dich darauf hinweisen, dass in den nächsten Tagen gemäß Satzung §4 (7) eine Streichung deiner Mitgliedschaft erfolgt, falls wir von dir keine Rückmeldung oder eine Beitragszahlung erhalten. Wir würden dies sehr bedauern und hoffen daher auf deine Beitragszahlung und/oder eine Rückmeldung!
 
 Mit piratigen Grüßen,
-   deine Bundesgeschäftsführung
+ deine Bundesgeschäftsführung
 ";
   utf8_mail($mail,$subject,$text);
 
@@ -420,7 +426,7 @@ if ($refill == true)
 {
 $query = mysql_query("TRUNCATE ppoe_api_data.members;");
 
-$query = mysql_query("INSERT INTO ppoe_api_data.members (usr_id, Email, LO, MB, MBM14, MBP90, MBP180, Akk) SELECT * FROM (select G1.usr_id, $sel_mail, $sel_lo, $sel_mb, $sel_mbm14, $sel_mbp90, $sel_mbp180, $sel_akk from ppoe_mitglieder.adm_users G1 $where_member) A;");
+$query = mysql_query("INSERT INTO ppoe_api_data.members (usr_id, Email, LO, MB, MBM14, MBP14, MBP90, MBP180, Akk) SELECT * FROM (select G1.usr_id, $sel_mail, $sel_lo, $sel_mb, $sel_mbm14, $sel_mbp14, $sel_mbp90, $sel_mbp180, $sel_akk from ppoe_mitglieder.adm_users G1 $where_member) A;");
 }
 
 $query = mysql_query("SELECT * FROM ppoe_mv_info.mv_statistik WHERE LO = 0 AND timestamp >= '" . date_format($date, 'Y-m-d 00:00:00') . "' AND timestamp <= '" . date_format($date, 'Y-m-d 23:59:59') . "';");
@@ -446,7 +452,7 @@ foreach ($los as $num => $lo) {
     $lo_zahlend = $row[0];
   }
   $lo_stimmberechtigt = 0;
-  $query = mysql_query("SELECT COUNT(*) FROM ppoe_api_data.members WHERE $where AND (MB = 1 OR MBM14 = 1) AND Akk = 1;");
+  $query = mysql_query("SELECT COUNT(*) FROM ppoe_api_data.members WHERE $where AND (MB = 1 OR MBP14 = 1) AND Akk = 1;");
   if ($query && ($row = mysql_fetch_array($query))) {
     $lo_stimmberechtigt = $row[0];
   }

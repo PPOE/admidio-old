@@ -24,7 +24,6 @@ function getRolesFromDatabase($gDb,$user_id,$gCurrentOrganization)
     $sql = 'SELECT *
               FROM '. TBL_MEMBERS. ', '. TBL_ROLES. ', '. TBL_CATEGORIES. '
              WHERE mem_rol_id  = rol_id
-               AND mem_begin  <= \''.DATE_NOW.'\'
                AND mem_end    >= \''.DATE_NOW.'\'
                AND mem_usr_id  = '.$user_id.'
                AND rol_valid   = 1

@@ -17,38 +17,13 @@ require_once('../../system/common.php');
 require_once('../../system/classes/list_configuration.php');
 require_once('../../system/classes/table_roles.php');
 
-// prueft, ob der User die notwendigen Rechte hat, neue User anzulegen
-if($gCurrentUser->editUsers() == false)
-{
-$roles = array(2,37,38,39,40,41,42,43,44,45);
-$access = array();
-foreach ($roles as $getRoleId)
-{
-// Rollenobjekt erzeugen
-$role = new TableRoles($gDb, $getRoleId);
-
-//Testen ob Recht zur Listeneinsicht besteht
-if($role->viewRole() == false)
-{
-}
-else
-{
-  $access[] = $getRoleId;
-  if ($getRoleId == 2)
-  {
-    $access = array(2);
-    break;
-  }
-}
-}
-if (count($access) == 0)
+if(!$gCurrentUser || !$gValidLogin)
 {
     $gMessage->show($gL10n->get('SYS_NO_RIGHTS'));
 }
-}
-else
+elseif (!$gCurrentUser->getValue('PIRATENKARTE'))
 {
-  $access = array(2);
+    $gMessage->show('Du musst zuerst deine Präferenz für die Piratenkarte in deinem <a href="/adm_program/modules/profile/profile_new.php?user_id='.$gCurrentUser->getValue('usr_id').'">Profil</a> auswählen.');
 }
 
 //Verwaltung der Session
@@ -79,16 +54,77 @@ echo<<<END
 <link href="bootstrap/dist/css/bootstrap.css" rel="stylesheet">
 </head><body>
   <div id="mapdiv"></div>
+  <table id="newMarkerPopup" class="olPopup" style="display: none;">
+  <tr>
+  <td>
+  <h4>Infostand oder Aktion eintragen</h4>
+  <form>
+  <p>
+  <textarea></textarea>
+  <input value="Speichern" type="button" onclick="saveCurrentMarker();"/>
+  <input value="Abbrechen" type="button" onclick="undoCurrentMarker();"/>
+  </p>
+  </form>
+  </td>
+  </tr>
+  </table>
   <script src="openlayers/lib/OpenLayers.js"></script>
   <script>
-    map = new OpenLayers.Map("mapdiv", { controls: [] });
+    var currentMarker = null;
+    function undoCurrentMarker()
+    {
+      if (currentMarker == null)
+        return;
+      document.getElementById('newMarkerPopup').style.display = 'none';
+      map.getLayer('Markers').removeMarker(currentMarker);
+      currentMarker = null;
+    }
+    var map = new OpenLayers.Map("mapdiv", { controls: [] });
     map.addLayer(new OpenLayers.Layer.OSM());
+map.addControl(new OpenLayers.Control.LayerSwitcher({'ascending':true}));
 map.addControl(new OpenLayers.Control.PanZoomBar());
 map.addControl(new OpenLayers.Control.Permalink());
 map.addControl(new OpenLayers.Control.Permalink('permalink'));
 map.addControl(new OpenLayers.Control.Attribution());
 map.addControl(new OpenLayers.Control.KeyboardDefaults()); 
 map.addControl(new OpenLayers.Control.Navigation());
+
+map.baseLayer.displayInLayerSwitcher = false;
+
+    var actions = new OpenLayers.Layer.Text( "Infost&auml;nde und Aktionen",
+                    { location:"./actions.php",
+                      projection: map.displayProjection
+                    });
+
+map.addLayer(actions);
+
+var markers = new OpenLayers.Layer.Markers( "Neuen Infostand oder Aktion", {'displayInLayerSwitcher':false} );
+
+markers.id = "Markers";
+map.addLayer(markers);
+
+map.events.register("click", map, function(e) {
+      //var position = this.events.getMousePosition(e);
+      var position = map.getLonLatFromPixel(e.xy);
+      var size = new OpenLayers.Size(16,16);
+   var offset = new OpenLayers.Pixel(-(size.w/2), -(size.h/2));
+   var icon = new OpenLayers.Icon('/adm_themes/ppoe/icons/exclamation.png', size, offset);   
+   var markerslayer = map.getLayer('Markers');
+   if (currentMarker)
+     undoCurrentMarker();
+   currentMarker = new OpenLayers.Marker(position,icon);
+   markerslayer.addMarker(currentMarker);
+   
+   document.getElementById("newMarkerPopup").style.display = "";
+
+   });
+
+    var voters = new OpenLayers.Layer.Text( "Haushalte",
+                    { location:"./voters.php",
+                      projection: map.displayProjection
+                    });
+    map.addLayer(voters);
+
     var pois = new OpenLayers.Layer.Text( "Piraten",
                     { location:"./csv.php",
                       projection: map.displayProjection

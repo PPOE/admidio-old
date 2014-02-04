@@ -21,13 +21,13 @@ echo <<<END
 
 <tr>
 <th> Region </th>
-<th> Mitglied </th>
-<th> zahlend </th>
-<th> zahlend in&#160;% </th>
-<th> Stimmrecht </th>
-<th> stimmber. in&#160;% </th>
+<th style="font-size: 50%;"> Mitglied (inkl. ruhende)</th>
+<th> Mitglied</th>
+<th style="font-size: 50%;"> nicht ruhend in&#160;% </th>
+<th> Akkred. </th>
+<th> Akkred. in&#160;% </th>
 <th> Einwohner in 1000 </th>
-<th> Mitgl. / 1000 Einw. </th>
+<th> Mitgl. / Mio. Einw. </th>
 <th> Fl&auml;che (km&sup2;) </th>
 <th> Mitgl. / 1000 km&sup2;
 </th></tr>
@@ -104,19 +104,11 @@ if ($query && $row = mysql_fetch_array($query)) {
 }
 
 $query = mysql_query("select COUNT(*)
-from `adm_users` G1
-where G1.usr_id IN (
-select T1.usr_id
-from `adm_users` T1 INNER JOIN `adm_user_data` T2
-WHERE T1.usr_id = T2.usd_usr_id
-AND   T2.usd_usf_id = 26
+from `adm_users` T1 LEFT JOIN `adm_user_data` T2 ON T1.usr_id = T2.usd_usr_id
+LEFT JOIN `adm_members` T4 ON T1.usr_id = T4.mem_usr_id
+WHERE T2.usd_usf_id = 26
 AND   T2.usd_value >= curdate()
-)
-and G1.usr_id IN (
-select T3.usr_id
-from `adm_users` T3 INNER JOIN `adm_members` T4
-WHERE T3.usr_id = T4.mem_usr_id
-AND   T3.usr_valid = 1
+AND   T1.usr_valid = 1
 AND   T4.mem_rol_id = 2
 AND   T4.mem_end >= curdate()
 )");
@@ -128,15 +120,11 @@ if ($query && $row = mysql_fetch_array($query)) {
 }
 
 $query = mysql_query("select COUNT(*)
-from `adm_users` G1
-where G1.usr_id IN (
-select T3.usr_id
-from `adm_users` T3 INNER JOIN `adm_members` T4
-WHERE T3.usr_id = T4.mem_usr_id
-AND   T3.usr_valid = 1
+from `adm_users` T3 LEFT JOIN `adm_members` T4 ON T3.usr_id = T4.mem_usr_id
+WHERE T3.usr_valid = 1
 AND   T4.mem_rol_id = 2
 AND   T4.mem_end >= curdate()
-)");
+");
 
 $gesamt = 0;
 

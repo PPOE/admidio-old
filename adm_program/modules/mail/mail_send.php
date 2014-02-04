@@ -46,7 +46,7 @@ $_SESSION['mail_request'] = $_REQUEST;
 // Pruefungen, ob die Seite regulaer aufgerufen wurde
 
 $members_in_region = false;
-
+$user = null;
 if ($getUserId > 0)
 {
     // Falls eine Usr_id uebergeben wurde, muss geprueft werden ob der User ueberhaupt
@@ -256,14 +256,11 @@ else
     }
     elseif(isset($_POST['show_members']) && $_POST['show_members'] == 2)
     {
-        // former members and active members
-        $sqlConditions = ' AND mem_begin < \''.DATE_NOW.'\' ';
     }
     else
     {
         // only active members
-        $sqlConditions = ' AND mem_begin  <= \''.DATE_NOW.'\'
-                           AND mem_end     > \''.DATE_NOW.'\' ';
+        $sqlConditions = ' AND mem_end     > \''.DATE_NOW.'\' ';
     }
 
     if ($postMemberAkk)
@@ -373,7 +370,7 @@ if (isset($_POST['carbon_copy']) && $_POST['carbon_copy'] == true)
     $email->setCopyToSenderFlag();
 
     //Falls der User eingeloggt ist, werden die Empfaenger der Mail in der Kopie aufgelistet
-    if ($gValidLogin && $gCurrentUser->editUsers())
+    if ($gValidLogin && $gCurrentUser->editUsers() && (!$user || $gCurrentUser->editProfile($user->getValue('usr_id'))))
     {
         $email->setListRecipientsFlag();
     }
@@ -414,9 +411,13 @@ if ($email->sendEmail())
     {
         $gMessage->show($gL10n->get('SYS_EMAIL_SEND', $gL10n->get('MAI_TO_ROLE', $role->getValue('rol_name') . " (" . $sentmails . " Mails)")));
     }
-    else
+    else if ($gCurrentUser->editProfile($user->getValue('usr_id')))
     {
         $gMessage->show($gL10n->get('SYS_EMAIL_SEND', $_POST['mailto']));
+    }
+    else
+    {
+        $gMessage->show($gL10n->get('SYS_EMAIL_SEND', "Nutzer ".$user->getValue('usr_id')));
     }
 }
 else
@@ -425,9 +426,13 @@ else
     {
         $gMessage->show($gL10n->get('SYS_EMAIL_NOT_SEND', $gL10n->get('MAI_TO_ROLE', $role->getValue('rol_name'))));
     }
-    else
+    else if ($gCurrentUser->editProfile($user->getValue('usr_id')))
     {
         $gMessage->show($gL10n->get('SYS_EMAIL_NOT_SEND', $_POST['mailto']));
+    }
+    else
+    {
+        $gMessage->show($gL10n->get('SYS_EMAIL_NOT_SEND', "Nutzer ".$user->getValue('usr_id')));
     }
 }
 
