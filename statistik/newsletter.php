@@ -47,7 +47,23 @@ END;
   }
 
 echo "<tr>";// class=\"sortbottom even\">\n";
-echo "<td> <b>Bund</b> </td>\n";
+echo "<td> <b>Newsletter</b> </td>\n";
+echo "<td> <b>$users</b> </td>\n";
+echo "<td> <b>$users_nc</b> </td>\n";
+  
+  $users = 0;
+  $query = mysql_query("SELECT COUNT(*) FROM ppoe_api_data.presse_users;");
+  if ($query && ($row = mysql_fetch_array($query))) {
+    $users = $row[0];
+  }
+  $users_nc = 0;
+  $query = mysql_query("SELECT COUNT(*) FROM ppoe_api_data.presse_users WHERE confirmed = 0;");
+  if ($query && ($row = mysql_fetch_array($query))) {
+    $users_nc = $row[0];
+  }
+
+echo "<tr>";// class=\"sortbottom even\">\n";
+echo "<td> <b>Presseverteiler</b> </td>\n";
 echo "<td> <b>$users</b> </td>\n";
 echo "<td> <b>$users_nc</b> </td>\n";
 echo "</tr></html>\n";

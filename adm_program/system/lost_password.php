@@ -196,13 +196,13 @@ else
 function generatePassword()
 {
     // neues Passwort generieren
-    $password = substr(md5(time()), 0, 8);
+    $password = substr(md5(time()), 0, 16);
     return $password;
 }
 
 function generateActivationId($text)
 {
-    $aid = substr(md5(uniqid($text.time())),0,10);
+    $aid = substr(md5(uniqid($text.time())),0,16);
     return $aid;
 }
 ?>

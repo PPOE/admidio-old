@@ -52,6 +52,17 @@ else
     }
     else
     {
+	if (isset($_GET['target']) && preg_match('/^[a-f0-9]+$/i', $_GET['target']) == 1)
+	{
+		function hex2str($hex) {
+		    $str = '';
+		    for($i=0;$i < strlen($hex);$i+=2) {
+		      $str.=chr(hexdec(substr($hex,$i,2)));
+		    }
+		    return $str;
+		}
+		header("Location: " . hex2str($_GET['target']));
+	}
         $gMessage->show($gL10n->get($getMessageCode));
     }
 }

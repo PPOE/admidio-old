@@ -477,9 +477,9 @@ echo '
                         {
                             echo '<li>
                                 <dl>
-                                    <dt><label for="usr_password">'.$gL10n->get('SYS_PASSWORD').' (min. 6 Zeichen):</label></dt>
+                                    <dt><label for="usr_password">'.$gL10n->get('SYS_PASSWORD').' (min. 6 Zeichen, max. 75 Zeichen):</label></dt>
                                     <dd>
-                                        <input type="password" id="usr_password" name="usr_password" style="width: 130px;" maxlength="20" />
+                                        <input type="password" id="usr_password" name="usr_password" style="width: 130px;" maxlength="75" />
                                         <span class="mandatoryFieldMarker" title="'.$gL10n->get('SYS_MANDATORY_FIELD').'">*</span>
                                         <a rel="colorboxHelp" href="'. $g_root_path. '/adm_program/system/msg_window.php?message_id=PRO_PASSWORD_DESCRIPTION&amp;inline=true"><img 
                                             onmouseover="ajax_showTooltip(event,\''.$g_root_path.'/adm_program/system/msg_window.php?message_id=PRO_PASSWORD_DESCRIPTION\',this)" onmouseout="ajax_hideTooltip()"

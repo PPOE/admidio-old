@@ -49,6 +49,7 @@ if ($query && ($row = mysql_fetch_assoc($query))) {
 }
 echo<<<END
   <html><head>
+<meta charset="UTF-8" />
 <title>Piratenkarte</title>
 <link rel="stylesheet" type="text/css" href="map.css">
 <link href="bootstrap/dist/css/bootstrap.css" rel="stylesheet">
@@ -56,13 +57,14 @@ echo<<<END
   <div id="mapdiv"></div>
   <table id="newMarkerPopup" class="olPopup" style="display: none;">
   <tr>
-  <td>
-  <h4>Infostand oder Aktion eintragen</h4>
+  <td style="padding-left: 15px">
+  <h4>Aktion eintragen</h4>
   <form>
   <p>
-  <textarea></textarea>
+  <textarea id="content" style="height: 250px; width: 270px;"></textarea>
   <input value="Speichern" type="button" onclick="saveCurrentMarker();"/>
   <input value="Abbrechen" type="button" onclick="undoCurrentMarker();"/>
+  <iframe id="updateframe" style="display: none;" src="addaction.php"></iframe>
   </p>
   </form>
   </td>
@@ -71,6 +73,32 @@ echo<<<END
   <script src="openlayers/lib/OpenLayers.js"></script>
   <script>
     var currentMarker = null;
+    function deleteAction(id)
+    {
+      document.getElementById('delA' + id).parentNode.parentNode.parentNode.parentNode.style.display = 'none';
+      document.getElementById('updateframe').src = 'addaction.php?action=del&id=' + id;
+      document.getElementById('content').value = '';
+      document.getElementById('newMarkerPopup').style.display = 'none';
+      map.getLayer('Markers').removeMarker(currentMarker);
+      currentMarker = null;
+      // TODO remove marker from screen immediately
+    }
+    function saveCurrentMarker()
+    {
+      if (currentMarker == null)
+        return;
+      var content = encodeURIComponent(document.getElementById('content').value);
+      var lonlat = currentMarker.lonlat.transform(new OpenLayers.Projection("EPSG:900913"), new OpenLayers.Projection("EPSG:4326"));
+      var lat = lonlat.lat;
+      var lon = lonlat.lon;
+      // TODO use jquery
+      document.getElementById('updateframe').src = 'addaction.php?action=add&lat=' + lat + '&lon=' + lon + '&content=' + content;
+      document.getElementById('content').value = '';
+      document.getElementById('newMarkerPopup').style.display = 'none';
+      map.getLayer('Markers').removeMarker(currentMarker);
+      currentMarker = null;
+      // TODO put the new marker on screen immediately
+    }
     function undoCurrentMarker()
     {
       if (currentMarker == null)
@@ -91,14 +119,22 @@ map.addControl(new OpenLayers.Control.Navigation());
 
 map.baseLayer.displayInLayerSwitcher = false;
 
-    var actions = new OpenLayers.Layer.Text( "Infost&auml;nde und Aktionen",
+    var pois = new OpenLayers.Layer.Text( "Piraten",
+                    { location:"./csv.php",
+                      projection: map.displayProjection
+                    });
+    map.addLayer(pois);
+ 
+
+    var actions = new OpenLayers.Layer.Text( "Aktionen",
                     { location:"./actions.php",
                       projection: map.displayProjection
                     });
+    actions.id = "Aktionen";
 
 map.addLayer(actions);
 
-var markers = new OpenLayers.Layer.Markers( "Neuen Infostand oder Aktion", {'displayInLayerSwitcher':false} );
+var markers = new OpenLayers.Layer.Markers( "Neue Aktion", {'displayInLayerSwitcher':false} );
 
 markers.id = "Markers";
 map.addLayer(markers);
@@ -119,18 +155,11 @@ map.events.register("click", map, function(e) {
 
    });
 
-    var voters = new OpenLayers.Layer.Text( "Haushalte",
+/*    var voters = new OpenLayers.Layer.Text( "Haushalte",
                     { location:"./voters.php",
                       projection: map.displayProjection
                     });
-    map.addLayer(voters);
-
-    var pois = new OpenLayers.Layer.Text( "Piraten",
-                    { location:"./csv.php",
-                      projection: map.displayProjection
-                    });
-    map.addLayer(pois);
- 
+    map.addLayer(voters);*/
     //Set start centrepoint and zoom    
     var lonLat = new OpenLayers.LonLat( $lon, $lat)
           .transform(

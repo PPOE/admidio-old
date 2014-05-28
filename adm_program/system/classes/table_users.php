@@ -159,7 +159,7 @@ class TableUsers extends TableAccess
     public function setValue($field_name, $field_value, $check_value = true)
     {
         // encode Passwort with phpAss
-        if(($field_name == 'usr_password' || $field_name == 'usr_new_password') && strlen($field_value) < 30)
+        if($field_name == 'usr_password' && strlen($field_value) < 76)
         {
             $check_value    = false;
             $passwordHasher = new PasswordHash(9, true);

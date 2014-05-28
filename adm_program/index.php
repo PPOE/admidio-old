@@ -229,6 +229,21 @@ echo '</ul>
                 </dl>
             </li>';
 
+                echo '
+                <li>
+                    <dl>
+                        <dt>
+                            <a href="/blog"><img
+                            src="'.THEME_PATH.'/icons/forum_big.png" alt="Liquid Wählerverzeichnis" title="Liquid Wählerverzeichnis" /></a>
+                        </dt>
+                        <dd>
+                            <span class="veryBigFontSize"><a href="'.$g_root_path.'/adm_program/modules/liquid/liquid.php">Liquid Wählerverzeichnis</a></span><br />
+                            <span class="smallFontSize">Das Liquid Wählerverzeichnis enthält alle Identifier die in Liquid stimmberechtigt sind.</span>
+                        </dd>
+                    </dl>
+                </li>';
+
+
 
             if( $gPreferences['enable_dates_module'] == 1
             || ($gPreferences['enable_dates_module'] == 2 && $gValidLogin))

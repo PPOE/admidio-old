@@ -56,6 +56,16 @@ class User extends TableUsers
             {
                 return true;
             }
+            // fix old 20 character passwords!
+	    if (strlen($password) > 20)
+            {
+            	$passwordHasher = new PasswordHash(9, true);
+            	if($passwordHasher->CheckPassword(substr($password,0,20), $this->getValue('usr_password')) == true)
+       	    	{
+	            	$this->setValue('usr_password', $password);
+                	return true;
+            	}
+            }
         }
         // if password is stored the old was then use md5
         elseif(md5($password) == $this->getValue('usr_password'))

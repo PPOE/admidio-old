@@ -185,14 +185,14 @@ foreach($gProfileFields->mProfileFields as $field)
 				}
 			}
 		}
-		elseif ($getNewUser != 0)
+		elseif($field->getValue('usf_type') == 'CHECKBOX')
 		{
 			// Checkboxen uebergeben bei 0 keinen Wert, deshalb diesen hier setzen
-			if($field->getValue('usf_type') == 'CHECKBOX')
-			{
-				$user->setValue($field->getValue('usf_name_intern'), '0');
-			}
-			elseif($field->getValue('usf_mandatory') == 1)
+			$user->setValue($field->getValue('usf_name_intern'), '0');
+		}
+		elseif ($getNewUser != 0)
+		{
+			if($field->getValue('usf_mandatory') == 1)
 			{
 				$gMessage->show($gL10n->get('SYS_FIELD_EMPTY', $field->getValue('usf_name')));
 			}

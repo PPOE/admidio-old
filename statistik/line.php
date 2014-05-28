@@ -43,6 +43,19 @@ $q = "";
   $q = "SELECT * FROM ppoe_mv_info.mv_statistik GROUP BY timestamp ORDER BY timestamp ASC;";
 }
 else*/
+if (isset($_GET['timespan']))
+{
+  $timespan = '1 YEAR';
+  switch ($_GET['timespan'])
+  {
+    case '6months': $timespan = '6 MONTH'; break;
+    case '3months': $timespan = '3 MONTH'; break;
+    case '1month': $timespan = '1 MONTH'; break;
+    default:
+  }
+  $q = "SELECT * FROM ppoe_mv_info.mv_statistik WHERE LO = $lo AND timestamp > NOW() - INTERVAL $timespan ORDER BY timestamp ASC;";
+}
+else
 {
   $q = "SELECT * FROM ppoe_mv_info.mv_statistik WHERE LO = $lo ORDER BY timestamp ASC;";
 }
@@ -51,6 +64,7 @@ while ($query && ($row = mysql_fetch_array($query))) {
 	$stat[$c++] = array(
 			"members" => $row["members"],
                         "akk" => $row["akk"],
+                        "exit" => $row["exits"],
 			"users" => $row["users"],
 			"datum" => $row["timestamp"]
 			);
@@ -60,34 +74,64 @@ mysql_close($link);
 $c = count($stat);
 $datastr1 = "";
 $c1=1;
+$last = -123;
 foreach($stat as $id=>$data){
 	$mtime = strtotime($data["datum"])*1000;
+        if ($c1 === $c || $data["members"] != $last)
+        {
 	$datastr1.= "[".$mtime.",".$data["members"]."]";
 	if($c1!==$c){
 		$datastr1 .= ",";
 	}
+        $last = $data["members"];
+        }
 	$c1++;
 }
 $datastr2 = "";
 $c1=1;
 $memmax = 20;
+$last = -123;
 foreach($stat as $id=>$data){
         $memmax = max($memmax,intval($data["users"] * 1.2));
 	$mtime = strtotime($data["datum"])*1000;
+        if ($c1 === $c || $data["users"] != $last)
+        {
 	$datastr2.= "[".$mtime.",".$data["users"]."]";
 	if($c1!==$c){
 		$datastr2 .= ",";
 	}
+        $last = $data["users"];
+        }
 	$c1++;
 }
 $datastr3 = "";
 $c1=1;
+$last = -123;
 foreach($stat as $id=>$data){
 	$mtime = strtotime($data["datum"])*1000;
+        if ($c1 === $c || $data["akk"] != $last)
+        {
 	$datastr3.= "[".$mtime.",".$data["akk"]."]";
 	if($c1!==$c){
 		$datastr3 .= ",";
 	}
+        $last = $data["akk"];
+        }
+	$c1++;
+}
+$datastr4 = "";
+$c1=1;
+$last = -123;
+foreach($stat as $id=>$data){
+	$mtime = strtotime($data["datum"])*1000;
+        if (intval($data["exit"]) > 0)
+        {
+	$datastr4.= "[".$mtime.",".$data["exit"]."],";
+	if($c1!==$c){
+		$datastr4 .= ",";
+	}
+        $last = $data["exit"];
+        }
 	$c1++;
 }
 
@@ -107,23 +151,29 @@ $(function () {
 	var members = [<?php echo $datastr1; ?>];
 	var users = [<?php echo $datastr2; ?>];
 	var akk = [<?php echo $datastr3; ?>];
+	var exit = [<?php echo $datastr4; ?>];
 	var memdata = {	label: "Stimmberechtigt", data: members };
 	var userdata = { label: "Mitglieder", data: users };
 	var akkdata = { label: "Liquid", data: akk };
-	var data = 	[ memdata , userdata, akkdata ];
+	var exitdata = { label: "Austritte", data: exit };
+	var data = 	[ memdata , userdata, akkdata, exitdata ];
 
 	var datasets = {
-		"Liquid": {
-			label: "Liquid Accounts",
-			data: akk
+		"Registriert": {
+			label: "Mitglieder",
+			data: users
 		},
 		"Mitglieder": {
 			label: "Stimmberechtigt",
 			data: members
 		},
-		"Registriert": {
-			label: "Mitglieder",
-			data: users
+		"Austritte": {
+			label: "Austritte",
+			data: exit
+		},
+		"Liquid": {
+			label: "Liquid Accounts",
+			data: akk
 		}
 	};
     
@@ -241,7 +291,11 @@ $(function () {
 
 <body style="font-family:'Helvetica Neue', Helvetica, Arial, sans-serif; margin:0; padding:0; color:#444; width:<?php echo $page_width; ?>px">
 <div id="grafik" style="width:<?php echo $page_width; ?>px; height:<?php echo $container_height; ?>px; margin: 0; padding:0;"></div>
-<div id="choices" style="height:<?php echo $copy_height; ?>"></div>
+<div id="choices" style="display:none;"></div>
+<div><a target="_parent" href="?width=<?php echo $page_width+50; ?>&height=<?php echo $page_height; ?>&timespan=1year">1 Jahr</a> &middot;
+<a target="_parent" href="?width=<?php echo $page_width+50; ?>&height=<?php echo $page_height; ?>&timespan=6months">6 Monate</a> &middot;
+<a target="_parent" href="?width=<?php echo $page_width+50; ?>&height=<?php echo $page_height; ?>&timespan=3months">3 Monate</a> &middot;
+<a target="_parent" href="?width=<?php echo $page_width+50; ?>&height=<?php echo $page_height; ?>&timespan=1month">1 Monat</a></div>
 
 </body>
 </html>

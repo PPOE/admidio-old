@@ -66,6 +66,14 @@ $gLayout['title']  = 'Piratenkarte';
 
 // CONTENT AB HIER
 
+$lat = null;
+$lon = null;
+$title = "";
+$details = "";
+$icon = "../../../adm_themes/ppoe/icons/profile.png";
+$iconSize = "";
+$iconOffset = "";
+
 $rows = array();
 $query = mysql_query("SELECT adm_users.usr_id,A.usd_value AS postal,B.usd_value AS city,C.usd_value AS street,gps,mem_rol_id IN (".implode(',',$access).") AS details FROM adm_users LEFT JOIN adm_members ON usr_id = mem_usr_id AND mem_rol_id IN (".implode(',',$access).") AND mem_end > NOW() AND mem_begin < NOW() LEFT JOIN adm_user_data A ON A.usd_usr_id = usr_id AND A.usd_usf_id = 4 LEFT JOIN adm_user_data B ON B.usd_usr_id = usr_id AND B.usd_usf_id = 5 LEFT JOIN adm_user_data C ON C.usd_usr_id = usr_id AND C.usd_usf_id = 3 LEFT JOIN usergps ON adm_users.usr_id = usergps.usr_id LEFT JOIN adm_user_data D ON D.usd_usr_id = adm_users.usr_id AND D.usd_usf_id = 41 WHERE (mem_rol_id IN (".implode(',',$access).") OR D.usd_value = 3) AND gps IS NOT NULL AND usr_valid ORDER BY gps;");
 while ($query && ($row = mysql_fetch_assoc($query))) {
@@ -98,7 +106,7 @@ $lon = $row['lon'];
 $title = "PLZ " . $row['postal'];
 $details = $row['details'];
 if ($details)
-$description .= "<a href=\"https://mitglieder.piratenpartei.at/adm_program/modules/profile/profile.php?user_id=".$row['usr_id']."\" target=\"_blank\">".$row['usr_id']."</a><br />";
+$description .= "<a href=\"https://mitglieder.piratenpartei.at/adm_program/modules/mail/mail.php?usr_id=".$row['usr_id']."\" target=\"_blank\">Mitglied ".$row['usr_id']." eine Nachricht senden</a><br />";
 else
 $description .= "<a href=\"https://mitglieder.piratenpartei.at/adm_program/modules/mail/mail.php?usr_id=".$row['usr_id']."\" target=\"_blank\">Mitglied ".$row['usr_id']." eine Nachricht senden</a><br />";
 $icon = "../../../adm_themes/ppoe/icons/profile.png";

@@ -17,7 +17,12 @@ $bAutoLogin = false;
 $loginname  = '';
 $password   = '';
 $organizationId = $gCurrentOrganization->getValue('org_id');
+$target = "";
 
+if (isset($_POST['target']) && preg_match('/^[a-f0-9]+$/i', $_POST['target']) == 1)
+{
+  $target = $_POST['target'];
+}
 // Filter parameters
 // parameters could be from login dialog or login plugin !!!
 if(isset($_POST['usr_login_name']) && strlen($_POST['usr_login_name']) > 0)
@@ -71,7 +76,7 @@ if(strlen($password) == 0)
 
 $sql    = 'SELECT usr_id
              FROM '. TBL_USERS. ', '. TBL_MEMBERS. ', '. TBL_ROLES. ', '. TBL_CATEGORIES. '
-            WHERE UPPER(usr_login_name) LIKE UPPER(\''.$loginname.'\')
+            WHERE UPPER(usr_login_name) LIKE UPPER(\''.mysql_escape_string($loginname).'\')
               AND usr_valid      = 1
               AND mem_usr_id     = usr_id
               AND mem_rol_id     = rol_id
@@ -184,7 +189,7 @@ if ($userFound >= 1)
 
         // bevor zur entsprechenden Seite weitergeleitet wird, muss noch geprueft werden,
         // ob der Browser Cookies setzen darf -> sonst kein Login moeglich
-        $location = 'Location: '.$g_root_path.'/adm_program/system/cookie_check.php?message_code='.$login_message;
+        $location = 'Location: '.$g_root_path.'/adm_program/system/cookie_check.php?message_code='.$login_message.'&target='.$target;
         header($location);
         exit();
     }

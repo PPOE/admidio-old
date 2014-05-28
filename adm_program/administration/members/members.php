@@ -54,7 +54,7 @@ unset($_SESSION['QuerySuggestions']);
 $_SESSION['navigation']->clear();
 $_SESSION['navigation']->addUrl(CURRENT_URL);
 
-
+$search_string = '';
 // Bedingungen fuer das SQL-Statement je nach Modus setzen
 if(strlen($getSearch) > 0)
 {

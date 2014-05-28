@@ -11,12 +11,22 @@ if(!$gCurrentUser || !$gValidLogin || strtotime($gCurrentUser->getValue('BEZAHLT
   $_SESSION['navigation']->clear();
   $_SESSION['navigation']->addUrl("https://mitglieder.piratenpartei.at/adm_program/system/login.php");
   $_SESSION['navigation']->addUrl("https://mitglieder.piratenpartei.at/adm_program/system/login.php");
-  $gMessage->show($gL10n->get('SYS_NO_RIGHTS'));
+  //$gMessage->show($gL10n->get('SYS_NO_RIGHTS'));
+  function str2hex($string) {
+    $hex = "";
+    for ($i = 0; $i < strlen($string); $i++) {
+      $hex .= (strlen(dechex(ord($string[$i]))) < 2) ? "0" . dechex(ord($string[$i])) : dechex(ord($string[$i]));
+    }
+    return $hex;
+  }
+  $thisurl = "https://mitglieder.piratenpartei.at/blog";
+  header("Location: https://mitglieder.piratenpartei.at/adm_program/system/login.php?target=" . str2hex($thisurl));
+  return;
 }
 
 $secret = $blogSecret;
 
-$url = "http://wahlallianz.at/blog/wp-content/plugins/piratelogin/";
+$url = "http://blog.europaanders.at/wp-content/plugins/piratelogin/";
 
 // fetch encrypted token
 $response = file($url);

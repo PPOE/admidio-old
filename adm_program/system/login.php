@@ -31,8 +31,10 @@ require(SERVER_PATH. '/adm_program/system/overall_header.php');
 
 // Html des Modules ausgeben
 echo '
-<form action="'.$g_root_path.'/adm_program/system/login_check.php" method="post">
-<div class="formLayout" id="login_form" style="width: 300px; margin-top: 60px;">
+<form action="'.$g_root_path.'/adm_program/system/login_check.php" method="post">';
+if (isset($_GET['target']) && preg_match('/^[a-f0-9]+$/i', $_GET['target']) == 1)
+  echo '<input type="hidden" name="target" value="'.$_GET['target'].'" />';
+echo '<div class="formLayout" id="login_form" style="width: 300px; margin-top: 60px;">
     <div class="formHead">'.$gL10n->get('SYS_LOGIN').'</div>
     <div class="formBody">
         <ul class="formFieldList">
@@ -45,7 +47,7 @@ echo '
             <li>
                 <dl>
                     <dt><label for="usr_password">'.$gL10n->get('SYS_PASSWORD').':</label></dt>
-                    <dd><input type="password" id="usr_password" name="usr_password" style="width: 120px;" maxlength="20" /></dd>
+                    <dd><input type="password" id="usr_password" name="usr_password" style="width: 120px;" maxlength="75" /></dd>
                 </dl>
             </li>';
 

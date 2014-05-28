@@ -27,14 +27,14 @@ $los    = array(0 => 'Keine', 38 => 'Burgenland', 40 => 'K&auml;rnten', 39 => 'N
 $mails = array(
 0 => array("bv@piratenpartei.at","bgf-intern@piratenpartei.at","ag-mentoring@piratenpartei.at"),
 37 => array("bv@piratenpartei.at","bgf-intern@piratenpartei.at","lv-wien@piratenpartei.at","sekretariat-wien@piratenpartei.at"),
-38 => array("bv@piratenpartei.at","bgf-intern@piratenpartei.at","lv-burgenland@piratenpartei.at","lgf-burgenland@piratenpartei.at"),
-39 => array("bv@piratenpartei.at","bgf-intern@piratenpartei.at","lgf-noe@piratenpartei.at"),
-40 => array("bv@piratenpartei.at","bgf-intern@piratenpartei.at","lv-kaernten@piratenpartei.at","lgf-kaernten@piratenpartei.at"),
+38 => array("bv@piratenpartei.at","bgf-intern@piratenpartei.at","lv-burgenland@piratenpartei.at"),
+39 => array("bv@piratenpartei.at","bgf-intern@piratenpartei.at","lv-noe@piratenpartei.at"),
+40 => array("bv@piratenpartei.at","bgf-intern@piratenpartei.at","lv-kaernten@piratenpartei.at"),
 41 => array("bv@piratenpartei.at","bgf-intern@piratenpartei.at","lv-ooe@piratenpartei.at"),
-42 => array("bv@piratenpartei.at","bgf-intern@piratenpartei.at","lv-sbg@piratenpartei.at","lgf-sbg@piratenpartei.at"),
-43 => array("bv@piratenpartei.at","bgf-intern@piratenpartei.at","lv-steiermark@piratenpartei.at","lgf-steiermark@piratenpartei.at"),
-44 => array("bv@piratenpartei.at","bgf-intern@piratenpartei.at","lv-tirol@piratenpartei.at","lgf-tirol@piratenpartei.at"),
-45 => array("bv@piratenpartei.at","bgf-intern@piratenpartei.at","lv-vorarlberg@piratenpartei.at","lgf-vorarlberg@piratenpartei.at")
+42 => array("bv@piratenpartei.at","bgf-intern@piratenpartei.at","lv-sbg@piratenpartei.at"),
+43 => array("bv@piratenpartei.at","bgf-intern@piratenpartei.at","lv-steiermark@piratenpartei.at"),
+44 => array("bv@piratenpartei.at","bgf-intern@piratenpartei.at","lv-tirol@piratenpartei.at"),
+45 => array("bv@piratenpartei.at","bgf-intern@piratenpartei.at","lv-vorarlberg@piratenpartei.at")
 );
 
 $refill = true;
@@ -182,11 +182,15 @@ while ($row = mysql_fetch_array($query)) {
   $name = $row["Name"];
   $mbuntil = $row["MBUntil"];
   $subject = "[Piraten] Erinnerung: Mitgliedsbeitrag";
-  $text = "Hallo $name!
+  $text = 'Hallo $name!
 
 Wir danken dir für die Zahlung deines Mitgliedsbeitrags im vergangenen Jahr und hoffen, dass du auch weiterhin ein aktives, unterstützendes Mitglied der Piratenpartei bleiben wirst.
 
-Um für 2014 stimmberechtigt zu sein (in Liquid oder auf den Mitgliederversammlungen), bitten wir dich wie jedes Jahr erneut um die Entrichtung des Mitgliedsbeitrages. Dieser wurde in der letzten Abstimmung hierzu auf eine Höhe von € 40,00 festgelegt. Genauere Informationen findest du weiter unten.
+Ebenfalls möchten wir uns dafür bedanken, dass wir 2014 einen durchschnittlichen Mitgliedsbeitrag von über 45€ erhalten haben! Um für 2015 stimmberechtigt zu sein (in Liquid und auf den Mitgliederversammlungen), bitten wir dich wie jedes Jahr erneut um die Entrichtung des Mitgliedsbeitrages.
+
+Um für 2015 stimmberechtigt zu sein (in Liquid und auf den Mitgliederversammlungen), bitten wir dich wie jedes Jahr erneut um die Entrichtung des Mitgliedsbeitrages. Ab einem Beitrag von € 20 erhältst du Stimmrecht. Um alle unsere Kosten zu decken und Handlungsspielraum im neuen Jahr zu haben, bitten wir dich aber, einen Mitgliedsbeitrag von mindestens € 40 zu zahlen, sofern dir das möglich ist.
+
+Solltest du deinen Mitgliedsbeitrag für 2015 bereits überwiesen haben (ab 1. Oktober 2014) wird dieser selbstverständlich berücksichtigt. Dein Jahresbeitrag sowie weitere Beitragszahlungen, bis maximal €1000 im Jahr, werden außerdem als Mitgliedsbeitrag gerechnet, sofern nicht explizit anders gewünscht. Darüber hinausgehende Einzahlungen werden als Spenden angesehen. In Anlehnung an die Empfehlung der Piratenpartei Deutschland, fänden wir es auch sehr entgegenkommend, wenn du deinen Mitgliedsbeitrag an deiner aktuellen Einkommenssituation ausrichten würdest, und dir die Mitgliedschaft und die finanzielle Handlungsfähigkeit etwa 1% deines Einkommens als Mitgliedsbeitrag wert wäre.
 
 Bitte überweise deinen Mitgliedsbeitrag auf folgendes Konto:
 
@@ -194,19 +198,15 @@ Kontoinhaber: Piratenpartei Österreichs
 IBAN: AT916000050110110437
 BIC: OPSKATWW
 
-oder schicke deinen Mitgliedsbeitrag an spende@piratenpartei.at mit dem Vermerk, dass es ein Mitgliedsbeitrag ist und für WEN dieser Beitrag gilt, damit wir diesen zuordnen können.
+oder schicke deinen Mitgliedsbeitrag an spende@piratenpartei.at
 
-2014 wollen wir gemeinsam den EU-Wahlkampf, sowie Landtagswahlen und Gemeinderatswahlen bestreiten. Außerdem kommen größere Kostenpunkte durch die Rechenschaftspflicht dazu. Mit diesem Hintergrund haben alle an der Abstimmung teilnehmenden Mitglieder beschlossen, den Mitgliedsbeitrag variabel zu gestalten.
-
-Ab einem Beitrag von € 20 erhältst du Stimmrecht. Um alle unsere Kosten zu decken und Handlungsspielraum im neuen Jahr zu haben, bitten wir dich aber, einen Mitgliedsbeitrag von mindestens € 40 zu zahlen, sofern dir das möglich ist. Wenn unsere 500 zahlenden Mitglieder alle einen Beitrag von €50,00 leisten könnten, hätten wir für 2014 erstmals die Möglichkeit, größere Dinge zu planen, mehr Geld für die Wahlkämpfe abzustellen, oder uns gar personelle Unterstützung für die Organe zu leisten, damit unsere Finanzgebahrung auf solidere Beine gestellt werden kann. Dein Jahresbeitrag sowie weitere Beitragszahlungen, bis maximal €1000 im Jahr, werden außerdem als Mitgliedsbeitrag gerechnet, sofern nicht explizit anders gewünscht. Darüber hinausgehende Einzahlungen werden als Spenden angesehen.
-
-In Anlehnung an die Empfehlung der Piratenpartei Deutschland, fänden wir es auch sehr entgegenkommend, wenn du deinen Mitgliedsbeitrag an deiner aktuellen Einkommenssituation ausrichten würdest, und dir die Mitgliedschaft und die finanzielle Handlungsfähigkeit etwa 1% deines Einkommens als Mitgliedsbeitrag wert wäre.
+Wir bitten dich im Buchungstext/Verwendungszweck deinen Nicknamen anzugeben, sowie "MB2015" oder "Mitgliedsbeitrag".
 
 Wir danken dir für deine finanzielle Unterstützung!
 
 Mit piratigen Grüßen,
  deine Bundesgeschäftsführung
-";
+';
   utf8_mail($mail,$subject,$text);
   echo "INFO TO MEMBER 14 DAYS LEFT!! Mail to $mail $id\n";
 }
@@ -229,7 +229,7 @@ while ($row = mysql_fetch_array($query)) {
 
 Wie wir dich in der letzten E-Mail informiert haben, läuft heute dein Mitgliedsbeitrag aus, und deine Mitgliedschaft wird ruhend gestellt. Dein Stimmrecht in Liquid wird noch für 14 Tage erhalten bleiben.
 
-Um für 2014 stimmberechtigt zu sein (in Liquid oder auf den Mitgliederversammlungen), bitten wir dich wie jedes Jahr erneut um die Entrichtung des Mitgliedsbeitrages. Dieser wurde in der letzten Abstimmung hierzu auf eine Höhe von € 40,00 festgelegt. Genauere Informationen findest du weiter unten.
+Um für 2015 stimmberechtigt zu sein (in Liquid oder auf den Mitgliederversammlungen), bitten wir dich wie jedes Jahr erneut um die Entrichtung des Mitgliedsbeitrages. Dieser wurde in der letzten Abstimmung hierzu auf eine Höhe von € 40,00 festgelegt. Genauere Informationen findest du weiter unten.
 
 Bitte überweise deinen Mitgliedsbeitrag auf folgendes Konto:
 
@@ -238,12 +238,6 @@ IBAN: AT916000050110110437
 BIC: OPSKATWW
 
 oder schicke deinen Mitgliedsbeitrag an spende@piratenpartei.at mit dem Vermerk, dass es ein Mitgliedsbeitrag ist und für WEN dieser Beitrag gilt, damit wir diesen zuordnen können.
-
-2014 wollen wir gemeinsam den EU-Wahlkampf, sowie Landtagswahlen und Gemeinderatswahlen bestreiten. Außerdem kommen größere Kostenpunkte durch die Rechenschaftspflicht dazu. Mit diesem Hintergrund haben alle an der Abstimmung teilnehmenden Mitglieder beschlossen, den Mitgliedsbeitrag variabel zu gestalten.
-
-Ab einem Beitrag von € 20 erhältst du Stimmrecht. Um alle unsere Kosten zu decken und Handlungsspielraum im neuen Jahr zu haben, bitten wir dich aber, einen Mitgliedsbeitrag von mindestens € 40 zu zahlen, sofern dir das möglich ist. Wenn unsere 500 zahlenden Mitglieder alle einen Beitrag von €50,00 leisten könnten, hätten wir für 2014 erstmals die Möglichkeit, größere Dinge zu planen, mehr Geld für die Wahlkämpfe abzustellen, oder uns gar personelle Unterstützung für die Organe zu leisten, damit unsere Finanzgebahrung auf solidere Beine gestellt werden kann. Dein Jahresbeitrag sowie weitere Beitragszahlungen, bis maximal €1000 im Jahr, werden außerdem als Mitgliedsbeitrag gerechnet, sofern nicht explizit anders gewünscht. Darüber hinausgehende Einzahlungen werden als Spenden angesehen.
-
-In Anlehnung an die Empfehlung der Piratenpartei Deutschland, fänden wir es auch sehr entgegenkommend, wenn du deinen Mitgliedsbeitrag an deiner aktuellen Einkommenssituation ausrichten würdest, und dir die Mitgliedschaft und die finanzielle Handlungsfähigkeit etwa 1% deines Einkommens als Mitgliedsbeitrag wert wäre.
 
 Wir danken dir für deine finanzielle Unterstützung!
 
@@ -333,7 +327,7 @@ while ($row = mysql_fetch_array($query)) {
 
 Wir schreiben dich nun an, weil du seit drei Monaten keinen Mitgliedsbeitrag gezahlt hast.
 
-Um für 2014 stimmberechtigt zu sein (in Liquid oder auf den Mitgliederversammlungen), bitten wir dich wie jedes Jahr erneut um die Entrichtung des Mitgliedsbeitrages. Dieser wurde in der letzten Abstimmung hierzu auf eine Höhe von € 40,00 festgelegt. Genauere Informationen findest du weiter unten.
+Um für 2015 stimmberechtigt zu sein (in Liquid oder auf den Mitgliederversammlungen), bitten wir dich wie jedes Jahr erneut um die Entrichtung des Mitgliedsbeitrages. Dieser wurde in der letzten Abstimmung hierzu auf eine Höhe von € 40,00 festgelegt. Genauere Informationen findest du weiter unten.
 
 Bitte überweise deinen Mitgliedsbeitrag auf folgendes Konto:
 
@@ -343,7 +337,7 @@ BIC: OPSKATWW
 
 oder schicke deinen Mitgliedsbeitrag an spende@piratenpartei.at mit dem Vermerk, dass es ein Mitgliedsbeitrag ist und für WEN dieser Beitrag gilt, damit wir diesen zuordnen können.
 
-Ab einem Beitrag von € 20 erhältst du Stimmrecht. Um alle unsere Kosten zu decken und Handlungsspielraum im neuen Jahr zu haben, bitten wir dich aber, einen Mitgliedsbeitrag von mindestens € 40 zu zahlen, sofern dir das möglich ist. Wenn unsere 500 zahlenden Mitglieder alle einen Beitrag von €50,00 leisten könnten, hätten wir für 2014 erstmals die Möglichkeit, größere Dinge zu planen, mehr Geld für die Wahlkämpfe abzustellen, oder uns gar personelle Unterstützung für die Organe zu leisten, damit unsere Finanzgebahrung auf solidere Beine gestellt werden kann. Dein Jahresbeitrag sowie weitere Beitragszahlungen, bis maximal €1000 im Jahr, werden außerdem als Mitgliedsbeitrag gerechnet, sofern nicht explizit anders gewünscht. Darüber hinausgehende Einzahlungen werden als Spenden angesehen.
+Ab einem Beitrag von € 20 erhältst du Stimmrecht. Um alle unsere Kosten zu decken und Handlungsspielraum im neuen Jahr zu haben, bitten wir dich aber, einen Mitgliedsbeitrag von mindestens € 40 zu zahlen, sofern dir das möglich ist. Dein Jahresbeitrag sowie weitere Beitragszahlungen, bis maximal €1000 im Jahr, werden außerdem als Mitgliedsbeitrag gerechnet, sofern nicht explizit anders gewünscht. Darüber hinausgehende Einzahlungen werden als Spenden angesehen.
 
 In Anlehnung an die Empfehlung der Piratenpartei Deutschland, fänden wir es auch sehr entgegenkommend, wenn du deinen Mitgliedsbeitrag an deiner aktuellen Einkommenssituation ausrichten würdest, und dir die Mitgliedschaft und die finanzielle Handlungsfähigkeit etwa 1% deines Einkommens als Mitgliedsbeitrag wert wäre.
 
@@ -390,7 +384,7 @@ while ($row = mysql_fetch_array($query)) {
 
 Wir schreiben dich nun an, weil du seit sechs Monaten keinen Mitgliedsbeitrag gezahlt hast.
 
-Um für 2014 stimmberechtigt zu sein (in Liquid oder auf den Mitgliederversammlungen), bitten wir dich wie jedes Jahr erneut um die Entrichtung des Mitgliedsbeitrages. Dieser wurde in der letzten Abstimmung hierzu auf eine Höhe von € 40,00 festgelegt. Genauere Informationen findest du weiter unten.
+Um für 2015 stimmberechtigt zu sein (in Liquid oder auf den Mitgliederversammlungen), bitten wir dich wie jedes Jahr erneut um die Entrichtung des Mitgliedsbeitrages. Dieser wurde in der letzten Abstimmung hierzu auf eine Höhe von € 40,00 festgelegt. Genauere Informationen findest du weiter unten.
 
 Bitte überweise deinen Mitgliedsbeitrag auf folgendes Konto:
 
@@ -400,7 +394,7 @@ BIC: OPSKATWW
 
 oder schicke deinen Mitgliedsbeitrag an spende@piratenpartei.at mit dem Vermerk, dass es ein Mitgliedsbeitrag ist und für WEN dieser Beitrag gilt, damit wir diesen zuordnen können.
 
-Ab einem Beitrag von € 20 erhältst du Stimmrecht. Um alle unsere Kosten zu decken und Handlungsspielraum im neuen Jahr zu haben, bitten wir dich aber, einen Mitgliedsbeitrag von mindestens € 40 zu zahlen, sofern dir das möglich ist. Wenn unsere 500 zahlenden Mitglieder alle einen Beitrag von €50,00 leisten könnten, hätten wir für 2014 erstmals die Möglichkeit, größere Dinge zu planen, mehr Geld für die Wahlkämpfe abzustellen, oder uns gar personelle Unterstützung für die Organe zu leisten, damit unsere Finanzgebahrung auf solidere Beine gestellt werden kann. Dein Jahresbeitrag sowie weitere Beitragszahlungen, bis maximal €1000 im Jahr, werden außerdem als Mitgliedsbeitrag gerechnet, sofern nicht explizit anders gewünscht. Darüber hinausgehende Einzahlungen werden als Spenden angesehen.
+Ab einem Beitrag von € 20 erhältst du Stimmrecht. Um alle unsere Kosten zu decken und Handlungsspielraum im neuen Jahr zu haben, bitten wir dich aber, einen Mitgliedsbeitrag von mindestens € 40 zu zahlen, sofern dir das möglich ist. Dein Jahresbeitrag sowie weitere Beitragszahlungen, bis maximal €1000 im Jahr, werden außerdem als Mitgliedsbeitrag gerechnet, sofern nicht explizit anders gewünscht. Darüber hinausgehende Einzahlungen werden als Spenden angesehen.
 
 In Anlehnung an die Empfehlung der Piratenpartei Deutschland, fänden wir es auch sehr entgegenkommend, wenn du deinen Mitgliedsbeitrag an deiner aktuellen Einkommenssituation ausrichten würdest, und dir die Mitgliedschaft und die finanzielle Handlungsfähigkeit etwa 1% deines Einkommens als Mitgliedsbeitrag wert wäre.
 
