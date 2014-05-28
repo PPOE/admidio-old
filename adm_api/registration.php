@@ -5,6 +5,7 @@ global $_SERVER;
 $_SERVER['HTTP_HOST'] = "";
 $_SERVER['REQUEST_URI'] = "";
 $_SERVER['REMOTE_ADDR'] = "";
+$_SERVER['QUERY_STRING'] = "";
 require_once('/var/www/adm_program/system/common.php');
 require_once('/var/www/adm_program/system/classes/system_mail.php');
 require_once('/var/www/adm_program/system/classes/table_members.php');

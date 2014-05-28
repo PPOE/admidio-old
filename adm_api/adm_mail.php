@@ -5,7 +5,7 @@ header("Content-Type: text/plain");
 $link = mysql_connect($g_adm_srv,$g_adm_usr,$g_adm_pw);
 mysql_select_db($g_adm_db,$link);
 
-$query = mysql_query("SELECT rol_description,mem_usr_id,usd_value FROM adm_roles LEFT JOIN adm_members ON mem_rol_id = rol_id AND mem_end > NOW() AND mem_begin < NOW() LEFT JOIN adm_user_data ON mem_usr_id = usd_usr_id AND usd_usf_id = 12 WHERE rol_description LIKE '%{%}%';"); 
+$query = mysql_query("SELECT rol_description,mem_usr_id,usd_value FROM adm_roles LEFT JOIN adm_members ON mem_rol_id = rol_id AND mem_end > NOW() LEFT JOIN adm_user_data ON mem_usr_id = usd_usr_id AND usd_usf_id = 12 WHERE rol_description LIKE '%{%}%';"); 
 
 $groups = array();
 
@@ -54,9 +54,9 @@ foreach ($groups as $list => $recpt)
   {
     $rcpt['dummy-organ@piratenpartei.at'] = 1;
   }
-  $data .= "$list: " . implode(",",array_keys($recpt)) . "\n";
+  if ($list != "bgf@piratenpartei.at")
+    $data .= "$list: " . implode(",",array_keys($recpt)) . "\n";
 }
-  //echo $data;
   echo aes256_encrypt($data,$mail_key,$mail_iv);
 mysql_close($link);
 ?>

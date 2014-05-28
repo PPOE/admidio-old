@@ -9,14 +9,15 @@
  *****************************************************************************/
 
 require_once('../adm_program/system/common.php');
-//require_once('../adm_program/system/classes/table_auto_login.php');
-//global $gDb;
+require_once('config.php');
+
 // Initialize parameters
 $userFound  = 0;
 $loginname  = '';
 $password   = '';
 
 function hex2str($hex) {
+  $str = "";
   for($i=0;$i<strlen($hex);$i+=2)
   $str .= chr(hexdec(substr($hex,$i,2)));
   return $str;
@@ -29,19 +30,31 @@ if(isset($_POST['usr_login_name']) && strlen($_POST['usr_login_name']) > 0)
     $loginname = hex2str($_POST['usr_login_name']);
     $password  = hex2str($_POST['usr_password']);
 }
-
+/*else if(isset($_GET['usr_login_name']) && strlen($_GET['usr_login_name']) > 0)
+{
+    $loginname = hex2str($_GET['usr_login_name']);
+    $password  = hex2str($_GET['usr_password']);
+}*/
 if(strlen($loginname) == 0 || strlen($password) == 0)
 {
   echo "ERROR\n";
   exit();
 }
 
+foreach ($botLogins as $botLogin)
+{
+  if ($loginname == $botLogin[0] && $password == $botLogin[1])
+  {
+    echo "OK\n";
+    exit();
+  }
+}
 // check name and password
 // user must have membership of one role of the organization
 
 $sql    = 'SELECT usr_id
              FROM '. TBL_USERS. ', '. TBL_MEMBERS. '
-            WHERE UPPER(usr_login_name) LIKE UPPER(\''.$loginname.'\')
+            WHERE UPPER(usr_login_name) LIKE UPPER(\''.mysql_escape_string($loginname).'\')
               AND usr_valid      = 1
               AND mem_usr_id     = usr_id
               AND mem_rol_id     = 2
@@ -100,5 +113,6 @@ if ($userFound >= 1)
         exit();
     }
 }
-
+echo "FAIL\n";
+exit();
 ?>

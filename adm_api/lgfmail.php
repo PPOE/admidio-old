@@ -25,16 +25,16 @@ mysql_select_db($g_adm_db,$link);
 $los    = array(0 => 'Keine', 38 => 'Burgenland', 40 => 'K&auml;rnten', 39 => 'Nieder&ouml;sterreich', 41 => 'Ober&ouml;sterreich', 42 => 'Salzburg', 43 => 'Steiermark', 44 => 'Tirol', 45 => 'Vorarlberg', 37 => 'Wien');
 
 $mails = array(
-0 => array("bv@piratenpartei.at","bgf@piratenpartei.at","bgf-intern@piratenpartei.at","ag-mentoring@piratenpartei.at"),
-37 => array("bv@piratenpartei.at","bgf@piratenpartei.at","bgf-intern@piratenpartei.at","lv-wien@piratenpartei.at","sekretariat-wien@piratenpartei.at"),
-38 => array("bv@piratenpartei.at","bgf@piratenpartei.at","bgf-intern@piratenpartei.at","lv-burgenland@piratenpartei.at","lgf-burgenland@piratenpartei.at"),
-39 => array("bv@piratenpartei.at","bgf@piratenpartei.at","bgf-intern@piratenpartei.at","lgf-noe@piratenpartei.at"),
-40 => array("bv@piratenpartei.at","bgf@piratenpartei.at","bgf-intern@piratenpartei.at","lv-kaernten@piratenpartei.at","lgf-kaernten@piratenpartei.at"),
-41 => array("bv@piratenpartei.at","bgf@piratenpartei.at","bgf-intern@piratenpartei.at","lv-ooe@piratenpartei.at"),
-42 => array("bv@piratenpartei.at","bgf@piratenpartei.at","bgf-intern@piratenpartei.at","lv-sbg@piratenpartei.at","lgf-sbg@piratenpartei.at"),
-43 => array("bv@piratenpartei.at","bgf@piratenpartei.at","bgf-intern@piratenpartei.at","lv-steiermark@piratenpartei.at","lgf-steiermark@piratenpartei.at"),
-44 => array("bv@piratenpartei.at","bgf@piratenpartei.at","bgf-intern@piratenpartei.at","lv-tirol@piratenpartei.at","lgf-tirol@piratenpartei.at"),
-45 => array("bv@piratenpartei.at","bgf@piratenpartei.at","bgf-intern@piratenpartei.at","lv-vorarlberg@piratenpartei.at","lgf-vorarlberg@piratenpartei.at")
+0 => array("bv@piratenpartei.at","bgf-intern@piratenpartei.at","ag-mentoring@piratenpartei.at"),
+37 => array("bv@piratenpartei.at","bgf-intern@piratenpartei.at","lv-wien@piratenpartei.at","sekretariat-wien@piratenpartei.at"),
+38 => array("bv@piratenpartei.at","bgf-intern@piratenpartei.at","lv-burgenland@piratenpartei.at","lgf-burgenland@piratenpartei.at"),
+39 => array("bv@piratenpartei.at","bgf-intern@piratenpartei.at","lgf-noe@piratenpartei.at"),
+40 => array("bv@piratenpartei.at","bgf-intern@piratenpartei.at","lv-kaernten@piratenpartei.at","lgf-kaernten@piratenpartei.at"),
+41 => array("bv@piratenpartei.at","bgf-intern@piratenpartei.at","lv-ooe@piratenpartei.at"),
+42 => array("bv@piratenpartei.at","bgf-intern@piratenpartei.at","lv-sbg@piratenpartei.at","lgf-sbg@piratenpartei.at"),
+43 => array("bv@piratenpartei.at","bgf-intern@piratenpartei.at","lv-steiermark@piratenpartei.at","lgf-steiermark@piratenpartei.at"),
+44 => array("bv@piratenpartei.at","bgf-intern@piratenpartei.at","lv-tirol@piratenpartei.at","lgf-tirol@piratenpartei.at"),
+45 => array("bv@piratenpartei.at","bgf-intern@piratenpartei.at","lv-vorarlberg@piratenpartei.at","lgf-vorarlberg@piratenpartei.at")
 );
 
 $refill = true;
@@ -60,6 +60,8 @@ while ($row = mysql_fetch_array($query)) {
   echo "Generating Mails for new user $lo $id (not TO user)\n";
   foreach ($mails[$lo] AS $mail)
   {
+    if ($mail == 'bgf-intern@piratenpartei.at')
+      continue;
     $subject = "[Admidio] Neues Mitglied zugeordnet";
     $text = "Es wurde ein neues Mitglied ($nick) der LO {$los[$lo]} zugeordnet:
 
@@ -91,8 +93,8 @@ while ($q2 && mysql_num_rows($q2) > 0)
 {
 $sid = mt_rand();
 }
-$q4 = mysql_query("INSERT INTO ppoe_api_data.users (email, prefs, sid) VALUES ('".mysql_escape_string($mail)."', $prefs, $sid);");
-echo "INSERT INTO ppoe_api_data.users (email, prefs, sid) VALUES ('".mysql_escape_string($mail)."', $prefs, $sid);\n";
+$q4 = mysql_query("INSERT INTO ppoe_api_data.users (email, prefs, sid, confirmed) VALUES ('".mysql_escape_string($mail)."', $prefs, $sid, 1);");
+echo "INSERT INTO ppoe_api_data.users (email, prefs, sid, confirmed) VALUES ('".mysql_escape_string($mail)."', $prefs, $sid, 1);\n";
 if (!$q4)
 {
   echo "FAILED!!!!\n";
@@ -255,6 +257,8 @@ Mit piratigen Grüßen,
   $lo = intval($row["LO"]);
   foreach ($mails[$lo] AS $mail)
   {
+    if ($mail == 'bgf-intern@piratenpartei.at')
+      continue;
     $subject = "[Admidio] Mitglied ohne Mitgliedsbeitrag";
     $text = "Ein Mitglied ($nick) der LO {$los[$lo]} zahlt keinen Mitgliedsbeitrag mehr:
 
@@ -298,6 +302,8 @@ Mit piratigen Grüßen,
   $lo = intval($row["LO"]);
   foreach ($mails[$lo] AS $mail)
   {
+    if ($mail == 'bgf-intern@piratenpartei.at')
+      continue;
     $subject = "[Admidio] Mitglied hat den Mitgliedsbeitrag eingezahlt!";
     $text = "Ein Mitglied ($nick) der LO {$los[$lo]} hat den Mitgliedsbeitrag eingezahlt:
 
@@ -352,6 +358,8 @@ Mit piratigen Grüßen,
   $lo = intval($row["LO"]);
   foreach ($mails[$lo] AS $mail)
   {
+    if ($mail == 'bgf-intern@piratenpartei.at')
+      continue;
     $subject = "[Admidio] Mitglied seit 3 Monaten ohne Mitgliedsbeitrag";
     $text = "Ein Mitglied ($nick) der LO {$los[$lo]} zahlt seit 3 Monaten keinen Mitgliedsbeitrag mehr:
 
@@ -407,6 +415,8 @@ Mit piratigen Grüßen,
   $lo = intval($row["LO"]);
   foreach ($mails[$lo] AS $mail)
   {
+    if ($mail == 'bgf-intern@piratenpartei.at')
+      $mail = 'bgf@piratenpartei.at';
     $subject = "[Admidio] Mitglied seit 6 Monaten ohne Mitgliedsbeitrag";
     $text = "Ein Mitglied ($sel_nick) der LO {$los[$lo]} zahlt seit 6 Monaten keinen Mitgliedsbeitrag mehr:
 
