@@ -182,7 +182,7 @@ while ($row = mysql_fetch_array($query)) {
   $name = $row["Name"];
   $mbuntil = $row["MBUntil"];
   $subject = "[Piraten] Erinnerung: Mitgliedsbeitrag";
-  $text = 'Hallo $name!
+  $text = 'Hallo '.$name.'!
 
 Wir danken dir für die Zahlung deines Mitgliedsbeitrags im vergangenen Jahr und hoffen, dass du auch weiterhin ein aktives, unterstützendes Mitglied der Piratenpartei bleiben wirst.
 
