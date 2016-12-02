@@ -11,8 +11,8 @@ $sel_members_nick = "(select G2.usr_login_name from ppoe_mitglieder.adm_users G2
 $sel_mbuntil = "(select G2.usd_value from ppoe_mitglieder.adm_user_data G2 where G1.usr_id = G2.usd_usr_id AND G2.usd_usf_id = 26) as MBUntil";
 $sel_lo = "(SELECT G3.mem_rol_id FROM ppoe_mitglieder.adm_members G3 WHERE G1.usr_id = G3.mem_usr_id AND G3.mem_end > curdate() AND G3.mem_rol_id >= 37 AND G3.mem_rol_id <= 45 LIMIT 1) AS LO";
 $sel_mb = "CASE WHEN (select G2.usd_value FROM ppoe_mitglieder.adm_user_data G2 WHERE G1.usr_id = G2.usd_usr_id AND G2.usd_usf_id = 26 AND G2.usd_value >= curdate() LIMIT 1) IS NULL THEN 0 ELSE 1 END AS MB";
-$sel_mbm14 = "CASE WHEN (select G2.usd_value FROM ppoe_mitglieder.adm_user_data G2 WHERE G1.usr_id = G2.usd_usr_id AND G2.usd_usf_id = 26 AND G2.usd_value >= curdate() + INTERVAL 14 DAY LIMIT 1) IS NULL THEN 0 ELSE 1 END AS MBM14";
-$sel_mbp14 = "CASE WHEN (select G2.usd_value FROM ppoe_mitglieder.adm_user_data G2 WHERE G1.usr_id = G2.usd_usr_id AND G2.usd_usf_id = 26 AND G2.usd_value >= curdate() - INTERVAL 14 DAY LIMIT 1) IS NULL THEN 0 ELSE 1 END AS MBP14";
+$sel_mbm30 = "CASE WHEN (select G2.usd_value FROM ppoe_mitglieder.adm_user_data G2 WHERE G1.usr_id = G2.usd_usr_id AND G2.usd_usf_id = 26 AND G2.usd_value >= curdate() + INTERVAL 30 DAY LIMIT 1) IS NULL THEN 0 ELSE 1 END AS MBM30";
+$sel_mbp30 = "CASE WHEN (select G2.usd_value FROM ppoe_mitglieder.adm_user_data G2 WHERE G1.usr_id = G2.usd_usr_id AND G2.usd_usf_id = 26 AND G2.usd_value >= curdate() - INTERVAL 30 DAY LIMIT 1) IS NULL THEN 0 ELSE 1 END AS MBP30";
 $sel_mbp90 = "CASE WHEN (select G2.usd_value FROM ppoe_mitglieder.adm_user_data G2 WHERE G1.usr_id = G2.usd_usr_id AND G2.usd_usf_id = 26 AND G2.usd_value >= curdate() - INTERVAL 90 DAY LIMIT 1) IS NULL THEN 0 ELSE 1 END AS MBP90";
 $sel_mbp180 = "CASE WHEN (select G2.usd_value FROM ppoe_mitglieder.adm_user_data G2 WHERE G1.usr_id = G2.usd_usr_id AND G2.usd_usf_id = 26 AND G2.usd_value >= curdate() - INTERVAL 180 DAY LIMIT 1) IS NULL THEN 0 ELSE 1 END AS MBP180";
 $sel_akk = "CASE WHEN (select G2.usd_value FROM ppoe_mitglieder.adm_user_data G2 WHERE G1.usr_id = G2.usd_usr_id AND G2.usd_usf_id = 35 AND G2.usd_value <= curdate() LIMIT 1) IS NULL THEN 0 ELSE 1 END AS Akk";
@@ -171,9 +171,9 @@ Mit piratigen Grüßen,
 }
 
 ////////////////////////////////////
-// INFO TO MEMBER 14 DAYS LEFT!!
+// INFO TO MEMBER 30 DAYS LEFT!!
 ////////////////////////////////////
-$query = mysql_query("SELECT * FROM (select G1.usr_id, $sel_name, $sel_mbuntil, $sel_mail, $sel_lo, $sel_mb, $sel_mbm14, $sel_akk from ppoe_mitglieder.adm_users G1 $where_member) A WHERE MB AND NOT MBM14 AND (usr_id,CASE WHEN LO IS NULL THEN 0 ELSE LO END,MBM14) NOT IN (SELECT usr_id,LO,MBM14 FROM ppoe_api_data.members);");
+$query = mysql_query("SELECT * FROM (select G1.usr_id, $sel_name, $sel_mbuntil, $sel_mail, $sel_lo, $sel_mb, $sel_mbm30, $sel_akk from ppoe_mitglieder.adm_users G1 $where_member) A WHERE MB AND NOT MBM30 AND (usr_id,CASE WHEN LO IS NULL THEN 0 ELSE LO END,MBM30) NOT IN (SELECT usr_id,LO,MBM30 FROM ppoe_api_data.members);");
 if ($query) {
 while ($row = mysql_fetch_array($query)) {
   $refill = true;
@@ -208,7 +208,7 @@ Mit piratigen Grüßen,
  deine Bundesgeschäftsführung
 ';
   utf8_mail($mail,$subject,$text);
-  echo "INFO TO MEMBER 14 DAYS LEFT!! Mail to $mail $id\n";
+  echo "INFO TO MEMBER 30 DAYS LEFT!! Mail to $mail $id\n";
 }
 }
 
@@ -227,7 +227,7 @@ while ($row = mysql_fetch_array($query)) {
   $subject = "[Piraten] Erinnerung: Mitgliedsbeitrag";
   $text = "Hallo $name!
 
-Wie wir dich in der letzten E-Mail informiert haben, läuft heute dein Mitgliedsbeitrag aus, und deine Mitgliedschaft wird ruhend gestellt. Dein Stimmrecht in Liquid wird noch für 14 Tage erhalten bleiben.
+Wie wir dich in der letzten E-Mail informiert haben, läuft heute dein Mitgliedsbeitrag aus, und deine Mitgliedschaft wird ruhend gestellt. Dein Stimmrecht in Liquid wird noch für 30 Tage erhalten bleiben.
 
 Um für 2016 stimmberechtigt zu sein (in Liquid oder auf den Mitgliederversammlungen), bitten wir dich wie jedes Jahr erneut um die Entrichtung des Mitgliedsbeitrages. Dieser wurde in der letzten Abstimmung hierzu auf eine Höhe von € 40,00 festgelegt. Genauere Informationen findest du weiter unten.
 
@@ -430,7 +430,7 @@ if ($refill == true)
 {
 $query = mysql_query("TRUNCATE ppoe_api_data.members;");
 
-$query = mysql_query("INSERT INTO ppoe_api_data.members (usr_id, Email, LO, MB, MBM14, MBP14, MBP90, MBP180, Akk) SELECT * FROM (select G1.usr_id, $sel_mail, $sel_lo, $sel_mb, $sel_mbm14, $sel_mbp14, $sel_mbp90, $sel_mbp180, $sel_akk from ppoe_mitglieder.adm_users G1 $where_member) A;");
+$query = mysql_query("INSERT INTO ppoe_api_data.members (usr_id, Email, LO, MB, MBM30, MBP30, MBP90, MBP180, Akk) SELECT * FROM (select G1.usr_id, $sel_mail, $sel_lo, $sel_mb, $sel_mbm30, $sel_mbp30, $sel_mbp90, $sel_mbp180, $sel_akk from ppoe_mitglieder.adm_users G1 $where_member) A;");
 }
 
 $query = mysql_query("SELECT * FROM ppoe_mv_info.mv_statistik WHERE LO = 0 AND timestamp >= '" . date_format($date, 'Y-m-d 00:00:00') . "' AND timestamp <= '" . date_format($date, 'Y-m-d 23:59:59') . "';");
@@ -456,7 +456,7 @@ foreach ($los as $num => $lo) {
     $lo_zahlend = $row[0];
   }
   $lo_stimmberechtigt = 0;
-  $query = mysql_query("SELECT COUNT(*) FROM ppoe_api_data.members WHERE $where AND (MB = 1 OR MBP14 = 1) AND Akk = 1;");
+  $query = mysql_query("SELECT COUNT(*) FROM ppoe_api_data.members WHERE $where AND (MB = 1 OR MBP30 = 1) AND Akk = 1;");
   if ($query && ($row = mysql_fetch_array($query))) {
     $lo_stimmberechtigt = $row[0];
   }

@@ -12,7 +12,7 @@ $query = mysql_query("select G1.usr_id,
 (SELECT nuts FROM ppoe_mitglieder.adm_user_data G3 LEFT JOIN ppoe_mitglieder.nutsplz ON usd_value = plz WHERE usd_usf_id IN (4,39) AND G1.usr_id = G3.usd_usr_id GROUP BY nuts ORDER BY nuts ASC LIMIT 1 OFFSET 1) AS RO2,
 (select G2.usd_value from `adm_user_data` G2 where G1.usr_id = G2.usd_usr_id AND G2.usd_usf_id = 35 AND G2.usd_value <= curdate()) as AkkDate,
 (select G2.usd_value + interval 30 day from `adm_user_data` G2 where G1.usr_id = G2.usd_usr_id AND G2.usd_usf_id = 35 AND G2.usd_value + interval 30 day >= curdate()) as Probemonat,
-(select G2.usd_value from `adm_user_data` G2 where G1.usr_id = G2.usd_usr_id AND G2.usd_usf_id = 26 AND G2.usd_value + interval 14 day >= curdate()) as Paid
+(select G2.usd_value from `adm_user_data` G2 where G1.usr_id = G2.usd_usr_id AND G2.usd_usf_id = 26 AND G2.usd_value + interval 30 day >= curdate()) as Paid
 from `adm_users` G1
 WHERE (select G1.usr_id IN (select T3.usr_id from `adm_users` T3 INNER JOIN `adm_members` T4 WHERE T3.usr_id = T4.mem_usr_id AND T3.usr_valid = 1 AND T4.mem_rol_id = 2 AND T4.mem_begin <= curdate() AND T4.mem_end >= curdate()))"); 
 

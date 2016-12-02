@@ -112,20 +112,20 @@ echo '</ul>
                     </dl>
                 </li>';
             }
-                echo '
-                <li>
-                    <dl>
-                        <dt>
-                            <a href="/blog"><img
-                            src="'.THEME_PATH.'/icons/announcements_big.png" alt="Allianzblog" title="Allianzblog" /></a>
-                        </dt>
-                        <dd>
-                            <span class="veryBigFontSize"><a href="/blog">Allianzblog</a></span><br />
-                            <span class="smallFontSize">Interner Blog der Wahlallianz &middot; Informationen für alle MitarbeiterInnen und Mitglieder der Wahlallianz.</span>
-                        </dd>
-                    </dl>
-                </li>';
-
+//                echo '
+//                <li>
+//                    <dl>
+//                        <dt>
+//                            <a href="/blog"><img
+//                            src="'.THEME_PATH.'/icons/announcements_big.png" alt="Allianzblog" title="Allianzblog" /></a>
+//                        </dt>
+//                        <dd>
+//                            <span class="veryBigFontSize"><a href="/blog">Allianzblog</a></span><br />
+//                            <span class="smallFontSize">Interner Blog der Wahlallianz &middot; Informationen für alle MitarbeiterInnen und Mitglieder der Wahlallianz.</span>
+//                        </dd>
+//                    </dl>
+//                </li>';
+//
                 echo '
                 <li>
                     <dl>
