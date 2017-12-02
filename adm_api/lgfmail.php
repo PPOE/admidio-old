@@ -186,11 +186,11 @@ while ($row = mysql_fetch_array($query)) {
 
 Wir danken dir für die Zahlung deines Mitgliedsbeitrags im vergangenen Jahr und hoffen, dass du auch weiterhin ein aktives, unterstützendes Mitglied der Piratenpartei bleiben wirst.
 
-Ebenfalls möchten wir uns dafür bedanken, dass wir 2016 einen durchschnittlichen Mitgliedsbeitrag von über 40€ erhalten haben! Um für 2017 stimmberechtigt zu sein (in Liquid und auf den Mitgliederversammlungen), bitten wir dich wie jedes Jahr erneut um die Entrichtung des Mitgliedsbeitrages.
+Ebenfalls möchten wir uns dafür bedanken, dass wir auch in diesem Jahr wieder einen durchschnittlichen Mitgliedsbeitrag von über 40€ pro Mitglied verbuchen konnten! Um für das folgende Jahr stimmberechtigt zu sein (in Liquid und auf den Mitgliederversammlungen), bitten wir dich wie jeden Dezember um die Entrichtung des Mitgliedsbeitrages.
 
-Um für 2017 stimmberechtigt zu sein (in Liquid und auf den Mitgliederversammlungen), bitten wir dich wie jedes Jahr erneut um die Entrichtung des Mitgliedsbeitrages. Ab einem Beitrag von € 20 erhältst du Stimmrecht. Um alle unsere Kosten zu decken und Handlungsspielraum im neuen Jahr zu haben, bitten wir dich aber, einen Mitgliedsbeitrag von mindestens € 40 zu zahlen, sofern dir das möglich ist.
+Um im folgenden Jahr auch wieder stimmberechtigt zu sein (in Liquid und auf den Mitgliederversammlungen), bitten wir dich erneut um die Entrichtung des Mitgliedsbeitrages. Ab einem Beitrag von € 20 erhältst du Stimmrecht. Um alle unsere Kosten zu decken und Handlungsspielraum im neuen Jahr zu haben, bitten wir dich aber, einen Mitgliedsbeitrag von mindestens € 40 zu zahlen, sofern dir das möglich ist.
 
-Solltest du deinen Mitgliedsbeitrag für 2017 bereits überwiesen haben (ab 1. Oktober 2016) wird dieser selbstverständlich berücksichtigt. Dein Jahresbeitrag sowie weitere Beitragszahlungen, bis maximal €1000 im Jahr, werden außerdem als Mitgliedsbeitrag gerechnet, sofern nicht explizit anders gewünscht. Darüber hinausgehende Einzahlungen werden als Spenden angesehen. In Anlehnung an die Empfehlung der Piratenpartei Deutschland, fänden wir es auch sehr entgegenkommend, wenn du deinen Mitgliedsbeitrag an deiner aktuellen Einkommenssituation ausrichten würdest, und dir die Mitgliedschaft und die finanzielle Handlungsfähigkeit etwa 1% deines Einkommens als Mitgliedsbeitrag wert wäre.
+Solltest du deinen Mitgliedsbeitrag für das kommende Jahr bereits überwiesen haben (wird ab 1. Oktober angerechnet), wird dieser selbstverständlich berücksichtigt und du musst nichts weiter tun. Dein Jahresbeitrag sowie weitere Beitragszahlungen, bis maximal €1000 im Jahr, werden außerdem als Mitgliedsbeitrag gerechnet, sofern nicht explizit anders gewünscht. Darüber hinausgehende Einzahlungen werden als Spenden angesehen. In Anlehnung an die Empfehlung der Piratenpartei Deutschland, fänden wir es auch sehr entgegenkommend, wenn du deinen Mitgliedsbeitrag an deiner aktuellen Einkommenssituation ausrichten würdest, und dir die Mitgliedschaft und die finanzielle Handlungsfähigkeit etwa 1% deines Einkommens als Mitgliedsbeitrag wert wäre.
 
 Bitte überweise deinen Mitgliedsbeitrag auf folgendes Konto:
 
@@ -200,7 +200,7 @@ BIC: OPSKATWW
 
 oder schicke deinen Mitgliedsbeitrag über PayPal an spende@piratenpartei.at
 
-Wir bitten dich im Buchungstext/Verwendungszweck deinen Nicknamen anzugeben, sowie "MB2017" oder "Mitgliedsbeitrag".
+Wir bitten dich im Buchungstext/Verwendungszweck deinen Nicknamen anzugeben, sowie "MB" oder "Mitgliedsbeitrag".
 
 Wir danken dir für deine finanzielle Unterstützung!
 
@@ -229,7 +229,7 @@ while ($row = mysql_fetch_array($query)) {
 
 Zuallererst ein gutes neues Jahr! Wahrscheinlich hattest du die letzten Tage anderes zu tun, allerdings möchten wir dich erinnern, dass am 1.1. dein Mitgliedsbeitrag ausgelaufen ist, und deine Mitgliedschaft somit ruhend gestellt wurde. Dein Stimmrecht in Liquid wird noch für 10 Tage erhalten bleiben.
 
-Um für 2017 stimmberechtigt zu sein (in Liquid oder auf den Mitgliederversammlungen), bitten wir dich wie jedes Jahr erneut um die Entrichtung des Mitgliedsbeitrages. Dieser wurde in der letzten Abstimmung hierzu auf eine Höhe von € 40,00 festgelegt. Genauere Informationen findest du weiter unten.
+Um auch in diesem Jahr stimmberechtigt zu sein (in Liquid oder auf den Mitgliederversammlungen), bitten wir dich wie jedes Jahr erneut um die Entrichtung des Mitgliedsbeitrages. Dieser wurde in der letzten Abstimmung hierzu auf eine Höhe von € 40,00 festgelegt. Genauere Informationen findest du weiter unten.
 
 Bitte überweise deinen Mitgliedsbeitrag auf folgendes Konto:
 
@@ -237,7 +237,7 @@ Kontoinhaber: Piratenpartei Österreichs
 IBAN: AT916000050110110437
 BIC: OPSKATWW
 
-oder schicke deinen Mitgliedsbeitrag an spende@piratenpartei.at mit dem Vermerk, dass es ein Mitgliedsbeitrag ist (MB2017) und deinem Klarnamen, damit wir die Überweisung auch zuordnen können.
+oder schicke deinen Mitgliedsbeitrag an spende@piratenpartei.at mit dem Vermerk, dass es ein Mitgliedsbeitrag (MB) ist und zusätzlich deinem Namen, damit wir die Überweisung auch zuordnen können.
 
 Wir danken dir für deine finanzielle Unterstützung!
 
@@ -258,7 +258,7 @@ Mit piratigen Grüßen,
 
 https://mitglieder.piratenpartei.at/adm_program/modules/profile/profile.php?user_id=$id
 
-Es wurde bereits benachrichtigt, aber vielleicht hilft ja eine persönliche Nachfrage. Sollte sich der Zahlungsstatus nicht mehr ändern, erhältst du in 3 Monaten eine erneute Benachrichtigung. Sollte nach 6 Monaten noch immer keine Zahlung eingegangen sein, wird die BGF das Mitglied löschen.
+Es wurde bereits benachrichtigt, aber vielleicht hilft ja eine persönliche Nachfrage. Sollte sich der Zahlungsstatus nicht mehr ändern, erhältst du in 3 Monaten eine erneute Benachrichtigung. Sollte nach 6 Monaten noch immer keine Zahlung eingegangen sein, wird die BGF deine Mitgliedschaft löschen.
 
 Du musst eingeloggt sein, um den obigen Link zu öffnen.";
     utf8_mail($mail,$subject,$text);
@@ -327,7 +327,7 @@ while ($row = mysql_fetch_array($query)) {
 
 Wir schreiben dich nun an, weil du seit drei Monaten keinen Mitgliedsbeitrag mehr gezahlt hast.
 
-Um für 2017 stimmberechtigt zu sein (in Liquid oder auf den Mitgliederversammlungen), bitten wir dich wie jedes Jahr erneut um die Entrichtung des Mitgliedsbeitrages. Dieser wurde in der letzten Abstimmung hierzu auf eine Höhe von € 40,00 festgelegt. Genauere Informationen findest du weiter unten.
+Um auch dieses Jahr stimmberechtigt zu sein (in Liquid oder auf den Mitgliederversammlungen), bitten wir dich wie jedes Jahr erneut um die Entrichtung des Mitgliedsbeitrages. Dieser wurde in der letzten Abstimmung hierzu auf eine Höhe von € 40,00 festgelegt. Genauere Informationen findest du weiter unten.
 
 Bitte überweise deinen Mitgliedsbeitrag auf folgendes Konto:
 
@@ -335,7 +335,7 @@ Kontoinhaber: Piratenpartei Österreichs
 IBAN: AT916000050110110437
 BIC: OPSKATWW
 
-oder schicke deinen Mitgliedsbeitrag an spende@piratenpartei.at mit dem Vermerk, dass es ein Mitgliedsbeitrag ist (MB2017) und deinem Klarnamen, damit wir die Überweisung auch zuordnen können.
+oder schicke deinen Mitgliedsbeitrag an spende@piratenpartei.at mit dem Vermerk, dass es ein Mitgliedsbeitrag ist (MB) und deinem Namen, damit wir die Überweisung auch zuordnen können.
 
 Ab einem Beitrag von € 20 erhältst du Stimmrecht. Um alle unsere Kosten zu decken und Handlungsspielraum im neuen Jahr zu haben, bitten wir dich aber, einen Mitgliedsbeitrag von mindestens € 40 zu zahlen, sofern dir das möglich ist. Dein Jahresbeitrag sowie weitere Beitragszahlungen, bis maximal €1000 im Jahr, werden außerdem als Mitgliedsbeitrag gerechnet, sofern nicht explizit anders gewünscht. Darüber hinausgehende Einzahlungen werden als Spenden angesehen.
 
@@ -359,7 +359,7 @@ Mit piratigen Grüßen,
 
 https://mitglieder.piratenpartei.at/adm_program/modules/profile/profile.php?user_id=$id
 
-Es wurde bereits mehrfach benachrichtigt, aber vielleicht hilft ja eine persönliche Nachfrage. Sollte sich der Zahlungsstatus nicht mehr ändern, erhältst du in 3 Monaten eine erneute Benachrichtigung. Die BGF wird dann das Mitglied löschen.
+Es wurde bereits mehrfach benachrichtigt, aber vielleicht hilft ja eine persönliche Nachfrage. Sollte sich der Zahlungsstatus nicht mehr ändern, erhältst du in 3 Monaten eine erneute Benachrichtigung. Die BGF wird dann die Mitgliedschaft löschen.
 
 Du musst eingeloggt sein, um den obigen Link zu öffnen.";
     utf8_mail($mail,$subject,$text);
@@ -384,7 +384,7 @@ while ($row = mysql_fetch_array($query)) {
 
 Wir schreiben dich nun an, weil du seit sechs Monaten keinen Mitgliedsbeitrag gezahlt hast.
 
-Um für 2017 stimmberechtigt zu sein (in Liquid oder auf den Mitgliederversammlungen), bitten wir dich wie jedes Jahr erneut um die Entrichtung des Mitgliedsbeitrages. Dieser wurde in der letzten Abstimmung hierzu auf eine Höhe von € 40,00 festgelegt. Genauere Informationen findest du weiter unten.
+Um in diesem Jahr stimmberechtigt zu sein (in Liquid oder auf den Mitgliederversammlungen), bitten wir dich wie jedes Jahr erneut um die Entrichtung des Mitgliedsbeitrages. Dieser wurde in der letzten Abstimmung hierzu auf eine Höhe von € 40,00 festgelegt. Genauere Informationen findest du weiter unten.
 
 Bitte überweise deinen Mitgliedsbeitrag auf folgendes Konto:
 
@@ -392,7 +392,7 @@ Kontoinhaber: Piratenpartei Österreichs
 IBAN: AT916000050110110437
 BIC: OPSKATWW
 
-oder schicke deinen Mitgliedsbeitrag an spende@piratenpartei.at mit dem Vermerk, dass es ein Mitgliedsbeitrag ist (MB2017) und deinem Klarnamen, damit wir die Überweisung auch zuordnen können.
+oder schicke deinen Mitgliedsbeitrag an spende@piratenpartei.at mit dem Vermerk, dass es ein Mitgliedsbeitrag (MB) ist und deinem Namen, damit wir die Überweisung auch zuordnen können.
 
 Ab einem Beitrag von € 20 erhältst du Stimmrecht. Um alle unsere Kosten zu decken und Handlungsspielraum im neuen Jahr zu haben, bitten wir dich aber, einen Mitgliedsbeitrag von mindestens € 40 zu zahlen, sofern dir das möglich ist. Dein Jahresbeitrag sowie weitere Beitragszahlungen, bis maximal €1000 im Jahr, werden außerdem als Mitgliedsbeitrag gerechnet, sofern nicht explizit anders gewünscht. Darüber hinausgehende Einzahlungen werden als Spenden angesehen.
 
