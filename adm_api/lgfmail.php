@@ -38,7 +38,9 @@ $mails = array(
 );
 
 $refill = true;
-$date = new DateTime("now");
+$date = new DateTime();
+$thisYear = (int) $date->format('Y');
+$nextYear = $thisYear + 1;
 
 ////////////////////////////////////
 // INFO TO LGF NEW MEMBER
@@ -148,7 +150,7 @@ while ($row = mysql_fetch_array($query)) {
   $mbuntil = $row["MBUntil"];
   if ($akk != 1 && $mb == 1) {
     $subject = "[Liquid] Akkreditierung notwendig";
-    $text = "Hallo $name!
+    $text = 'Hallo '.$name.'!
 
 Laut Mitgliederdatenbank bist du Mitglied und hast einen aufrechten Zahlungsstatus, bist aber noch nicht akkreditiert. Um an unserer Online-Abstimmungsplattform Liquid teilzunehmen, musst du dich noch akkreditieren.
 
@@ -164,7 +166,7 @@ Solltest du noch weitere Fragen haben, wende dich bitte einfach an die AG Liquid
 
 Mit piratigen Grüßen,
   die AG Liquid
-";
+';
     echo "NOT AKK BUT MB Mail to $mail $lo $id $mb\n";
   }
 }
@@ -173,6 +175,7 @@ Mit piratigen Grüßen,
 ////////////////////////////////////
 // INFO TO MEMBER 30 DAYS LEFT!!
 ////////////////////////////////////
+///
 $query = mysql_query("SELECT * FROM (select G1.usr_id, $sel_name, $sel_mbuntil, $sel_mail, $sel_lo, $sel_mb, $sel_mbm30, $sel_akk from ppoe_mitglieder.adm_users G1 $where_member) A WHERE MB AND NOT MBM30 AND (usr_id,CASE WHEN LO IS NULL THEN 0 ELSE LO END,MBM30) NOT IN (SELECT usr_id,LO,MBM30 FROM ppoe_api_data.members);");
 if ($query) {
 while ($row = mysql_fetch_array($query)) {
@@ -186,11 +189,11 @@ while ($row = mysql_fetch_array($query)) {
 
 Wir danken dir für die Zahlung deines Mitgliedsbeitrags im vergangenen Jahr und hoffen, dass du auch weiterhin ein aktives, unterstützendes Mitglied der Piratenpartei bleiben wirst.
 
-Ebenfalls möchten wir uns dafür bedanken, dass wir 2016 einen durchschnittlichen Mitgliedsbeitrag von über 40€ erhalten haben! Um für 2017 stimmberechtigt zu sein (in Liquid und auf den Mitgliederversammlungen), bitten wir dich wie jedes Jahr erneut um die Entrichtung des Mitgliedsbeitrages.
+Ebenfalls möchten wir uns dafür bedanken, dass wir '.$thisYear.' einen durchschnittlichen Mitgliedsbeitrag von über 40€ erhalten haben! Um für '.$nextYear.' stimmberechtigt zu sein (in Liquid und auf den Mitgliederversammlungen), bitten wir dich wie jedes Jahr erneut um die Entrichtung des Mitgliedsbeitrages.
 
-Um für 2017 stimmberechtigt zu sein (in Liquid und auf den Mitgliederversammlungen), bitten wir dich wie jedes Jahr erneut um die Entrichtung des Mitgliedsbeitrages. Ab einem Beitrag von € 20 erhältst du Stimmrecht. Um alle unsere Kosten zu decken und Handlungsspielraum im neuen Jahr zu haben, bitten wir dich aber, einen Mitgliedsbeitrag von mindestens € 40 zu zahlen, sofern dir das möglich ist.
+Um für '.$nextYear.' stimmberechtigt zu sein (in Liquid und auf den Mitgliederversammlungen), bitten wir dich wie jedes Jahr erneut um die Entrichtung des Mitgliedsbeitrages. Ab einem Beitrag von € 20 erhältst du Stimmrecht. Um alle unsere Kosten zu decken und Handlungsspielraum im neuen Jahr zu haben, bitten wir dich aber, einen Mitgliedsbeitrag von mindestens € 40 zu zahlen, sofern dir das möglich ist.
 
-Solltest du deinen Mitgliedsbeitrag für 2017 bereits überwiesen haben (ab 1. Oktober 2016) wird dieser selbstverständlich berücksichtigt. Dein Jahresbeitrag sowie weitere Beitragszahlungen, bis maximal €1000 im Jahr, werden außerdem als Mitgliedsbeitrag gerechnet, sofern nicht explizit anders gewünscht. Darüber hinausgehende Einzahlungen werden als Spenden angesehen. In Anlehnung an die Empfehlung der Piratenpartei Deutschland, fänden wir es auch sehr entgegenkommend, wenn du deinen Mitgliedsbeitrag an deiner aktuellen Einkommenssituation ausrichten würdest, und dir die Mitgliedschaft und die finanzielle Handlungsfähigkeit etwa 1% deines Einkommens als Mitgliedsbeitrag wert wäre.
+Solltest du deinen Mitgliedsbeitrag für '.$nextYear.' bereits überwiesen haben (ab 1. Oktober '.$thisYear.') wird dieser selbstverständlich berücksichtigt. Dein Jahresbeitrag sowie weitere Beitragszahlungen, bis maximal €1000 im Jahr, werden außerdem als Mitgliedsbeitrag gerechnet, sofern nicht explizit anders gewünscht. Darüber hinausgehende Einzahlungen werden als Spenden angesehen. In Anlehnung an die Empfehlung der Piratenpartei Deutschland, fänden wir es auch sehr entgegenkommend, wenn du deinen Mitgliedsbeitrag an deiner aktuellen Einkommenssituation ausrichten würdest, und dir die Mitgliedschaft und die finanzielle Handlungsfähigkeit etwa 1% deines Einkommens als Mitgliedsbeitrag wert wäre.
 
 Bitte überweise deinen Mitgliedsbeitrag auf folgendes Konto:
 
@@ -200,7 +203,7 @@ BIC: OPSKATWW
 
 oder schicke deinen Mitgliedsbeitrag über PayPal an spende@piratenpartei.at
 
-Wir bitten dich im Buchungstext/Verwendungszweck deinen Nicknamen anzugeben, sowie "MB2017" oder "Mitgliedsbeitrag".
+Wir bitten dich im Buchungstext/Verwendungszweck deinen Nicknamen anzugeben, sowie "MB'.$nextYear.'" oder "Mitgliedsbeitrag".
 
 Wir danken dir für deine finanzielle Unterstützung!
 
@@ -225,11 +228,11 @@ while ($row = mysql_fetch_array($query)) {
   $name = $row["Name"];
   $mbuntil = $row["MBUntil"];
   $subject = "[Piraten] Erinnerung: Mitgliedsbeitrag";
-  $text = "Hallo $name!
+  $text = 'Hallo '.$name.'!
 
 Zuallererst ein gutes neues Jahr! Wahrscheinlich hattest du die letzten Tage anderes zu tun, allerdings möchten wir dich erinnern, dass am 1.1. dein Mitgliedsbeitrag ausgelaufen ist, und deine Mitgliedschaft somit ruhend gestellt wurde. Dein Stimmrecht in Liquid wird noch für 10 Tage erhalten bleiben.
 
-Um für 2017 stimmberechtigt zu sein (in Liquid oder auf den Mitgliederversammlungen), bitten wir dich wie jedes Jahr erneut um die Entrichtung des Mitgliedsbeitrages. Dieser wurde in der letzten Abstimmung hierzu auf eine Höhe von € 40,00 festgelegt. Genauere Informationen findest du weiter unten.
+Um für '.$thisYear.' stimmberechtigt zu sein (in Liquid oder auf den Mitgliederversammlungen), bitten wir dich wie jedes Jahr erneut um die Entrichtung des Mitgliedsbeitrages. Dieser wurde in der letzten Abstimmung hierzu auf eine Höhe von € 40,00 festgelegt. Genauere Informationen findest du weiter unten.
 
 Bitte überweise deinen Mitgliedsbeitrag auf folgendes Konto:
 
@@ -237,7 +240,7 @@ Kontoinhaber: Piratenpartei Österreichs
 IBAN: AT916000050110110437
 BIC: OPSKATWW
 
-oder schicke deinen Mitgliedsbeitrag an spende@piratenpartei.at mit dem Vermerk, dass es ein Mitgliedsbeitrag ist (MB2017) und deinem Klarnamen, damit wir die Überweisung auch zuordnen können.
+oder schicke deinen Mitgliedsbeitrag an spende@piratenpartei.at mit dem Vermerk, dass es ein Mitgliedsbeitrag ist (MB'.$thisYear.') und deinem Klarnamen, damit wir die Überweisung auch zuordnen können.
 
 Wir danken dir für deine finanzielle Unterstützung!
 
@@ -245,7 +248,7 @@ Wenn die Beitragszahlung innerhalb der nächsten Woche eingeht, wirst du zu kein
 
 Mit piratigen Grüßen,
  deine Bundesgeschäftsführung
-";
+';
   utf8_mail($mail,$subject,$text);
   echo "INFO TO MEMBER PAY NOW!! Mail to $mail $id\n";
   $lo = intval($row["LO"]);
@@ -280,7 +283,7 @@ while ($row = mysql_fetch_array($query)) {
   $name = $row["Name"];
   $mbuntil = $row["MBUntil"];
   $subject = "[Piraten] Du bist stimmberechtigt!";
-  $text = "Hallo $name!
+  $text = 'Hallo '.$name.'!
 
 Danke, dass du deinen Mitgliedsbeitrag eingezahlt hast! Damit leistest du einen wichtigen Beitrag für eine bessere Politik.
 
@@ -289,7 +292,7 @@ Solltest du Unterstützung bei der Anmeldung dort brauchen, dann schreibe uns bi
 
 Mit piratigen Grüßen,
  deine Bundesgeschäftsführung
-";
+';
   utf8_mail($mail,$subject,$text);
 
   echo "INFO TO MEMBER THANKS FOR PAYING Mail to $mail $id\n";
@@ -323,11 +326,11 @@ while ($row = mysql_fetch_array($query)) {
   $name = $row["Name"];
   $mbuntil = $row["MBUntil"];
   $subject = "[Piraten] Erinnerung: Mitgliedsbeitrag";
-  $text = "Hallo $name!
+  $text = 'Hallo '.$name.'!
 
 Wir schreiben dich nun an, weil du seit drei Monaten keinen Mitgliedsbeitrag mehr gezahlt hast.
 
-Um für 2017 stimmberechtigt zu sein (in Liquid oder auf den Mitgliederversammlungen), bitten wir dich wie jedes Jahr erneut um die Entrichtung des Mitgliedsbeitrages. Dieser wurde in der letzten Abstimmung hierzu auf eine Höhe von € 40,00 festgelegt. Genauere Informationen findest du weiter unten.
+Um für '.$thisYear.' stimmberechtigt zu sein (in Liquid oder auf den Mitgliederversammlungen), bitten wir dich wie jedes Jahr erneut um die Entrichtung des Mitgliedsbeitrages. Dieser wurde in der letzten Abstimmung hierzu auf eine Höhe von € 40,00 festgelegt. Genauere Informationen findest du weiter unten.
 
 Bitte überweise deinen Mitgliedsbeitrag auf folgendes Konto:
 
@@ -335,7 +338,7 @@ Kontoinhaber: Piratenpartei Österreichs
 IBAN: AT916000050110110437
 BIC: OPSKATWW
 
-oder schicke deinen Mitgliedsbeitrag an spende@piratenpartei.at mit dem Vermerk, dass es ein Mitgliedsbeitrag ist (MB2017) und deinem Klarnamen, damit wir die Überweisung auch zuordnen können.
+oder schicke deinen Mitgliedsbeitrag an spende@piratenpartei.at mit dem Vermerk, dass es ein Mitgliedsbeitrag ist (MB'.$thisYear.') und deinem Klarnamen, damit wir die Überweisung auch zuordnen können.
 
 Ab einem Beitrag von € 20 erhältst du Stimmrecht. Um alle unsere Kosten zu decken und Handlungsspielraum im neuen Jahr zu haben, bitten wir dich aber, einen Mitgliedsbeitrag von mindestens € 40 zu zahlen, sofern dir das möglich ist. Dein Jahresbeitrag sowie weitere Beitragszahlungen, bis maximal €1000 im Jahr, werden außerdem als Mitgliedsbeitrag gerechnet, sofern nicht explizit anders gewünscht. Darüber hinausgehende Einzahlungen werden als Spenden angesehen.
 
@@ -345,7 +348,7 @@ Außerdem möchten wir dich darauf hinweisen, dass in etwa drei Monaten gemäß 
 
 Mit piratigen Grüßen,
  deine Bundesgeschäftsführung
-";
+';
   utf8_mail($mail,$subject,$text);
 
   echo "INFO TO MEMBER 90 DAYS DUE!! Mail to $mail $id\n";
@@ -380,11 +383,11 @@ while ($row = mysql_fetch_array($query)) {
   $nick = $row["Nick"];
   $mbuntil = $row["MBUntil"];
   $subject = "[Piraten] Erinnerung: Mitgliedsbeitrag";
-  $text = "Hallo $name!
+  $text = 'Hallo '.$name.'!
 
 Wir schreiben dich nun an, weil du seit sechs Monaten keinen Mitgliedsbeitrag gezahlt hast.
 
-Um für 2017 stimmberechtigt zu sein (in Liquid oder auf den Mitgliederversammlungen), bitten wir dich wie jedes Jahr erneut um die Entrichtung des Mitgliedsbeitrages. Dieser wurde in der letzten Abstimmung hierzu auf eine Höhe von € 40,00 festgelegt. Genauere Informationen findest du weiter unten.
+Um für '.$thisYear.' stimmberechtigt zu sein (in Liquid oder auf den Mitgliederversammlungen), bitten wir dich wie jedes Jahr erneut um die Entrichtung des Mitgliedsbeitrages. Dieser wurde in der letzten Abstimmung hierzu auf eine Höhe von € 40,00 festgelegt. Genauere Informationen findest du weiter unten.
 
 Bitte überweise deinen Mitgliedsbeitrag auf folgendes Konto:
 
@@ -392,7 +395,7 @@ Kontoinhaber: Piratenpartei Österreichs
 IBAN: AT916000050110110437
 BIC: OPSKATWW
 
-oder schicke deinen Mitgliedsbeitrag an spende@piratenpartei.at mit dem Vermerk, dass es ein Mitgliedsbeitrag ist (MB2017) und deinem Klarnamen, damit wir die Überweisung auch zuordnen können.
+oder schicke deinen Mitgliedsbeitrag an spende@piratenpartei.at mit dem Vermerk, dass es ein Mitgliedsbeitrag ist (MB'.$thisYear.') und deinem Klarnamen, damit wir die Überweisung auch zuordnen können.
 
 Ab einem Beitrag von € 20 erhältst du Stimmrecht. Um alle unsere Kosten zu decken und Handlungsspielraum im neuen Jahr zu haben, bitten wir dich aber, einen Mitgliedsbeitrag von mindestens € 40 zu zahlen, sofern dir das möglich ist. Dein Jahresbeitrag sowie weitere Beitragszahlungen, bis maximal €1000 im Jahr, werden außerdem als Mitgliedsbeitrag gerechnet, sofern nicht explizit anders gewünscht. Darüber hinausgehende Einzahlungen werden als Spenden angesehen.
 
@@ -402,7 +405,7 @@ Außerdem möchten wir dich darauf hinweisen, dass in den nächsten Tagen gemä�
 
 Mit piratigen Grüßen,
  deine Bundesgeschäftsführung
-";
+';
   utf8_mail($mail,$subject,$text);
 
   echo "INFO TO MEMBER 180 DAYS DUE!! Mail to $mail $id\n";
