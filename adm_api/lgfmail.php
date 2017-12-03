@@ -415,7 +415,7 @@ Mit piratigen Grüßen,
     if ($mail == 'bgf-intern@piratenpartei.at')
       $mail = 'bgf@piratenpartei.at';
     $subject = "[Admidio] Mitglied seit 6 Monaten ohne Mitgliedsbeitrag";
-    $text = "Ein Mitglied ($sel_nick) der LO {$los[$lo]} zahlt seit 6 Monaten keinen Mitgliedsbeitrag mehr:
+    $text = "Ein Mitglied ($nick) der LO {$los[$lo]} zahlt seit 6 Monaten keinen Mitgliedsbeitrag mehr:
 
 https://mitglieder.piratenpartei.at/adm_program/modules/profile/profile.php?user_id=$id
 
