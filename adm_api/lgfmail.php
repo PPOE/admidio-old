@@ -137,7 +137,7 @@ Du musst eingeloggt sein, um diesen Link zu öffnen.
 ////////////////////////////////////
 // INFO TO MEMBER NOT AKK BUT MB
 ////////////////////////////////////
-$query = mysqli_query("SELECT * FROM (select G1.usr_id, $sel_name, $sel_mbuntil, $sel_mail, $sel_lo, $sel_mb, $sel_akk from ppoe_mitglieder.adm_users G1 $where_member) A WHERE (usr_id,CASE WHEN LO IS NULL THEN 0 ELSE LO END,MB) NOT IN (SELECT usr_id,LO,MB FROM ppoe_api_data.members);");
+$query = mysqli_query($link, "SELECT * FROM (select G1.usr_id, $sel_name, $sel_mbuntil, $sel_mail, $sel_lo, $sel_mb, $sel_akk from ppoe_mitglieder.adm_users G1 $where_member) A WHERE (usr_id,CASE WHEN LO IS NULL THEN 0 ELSE LO END,MB) NOT IN (SELECT usr_id,LO,MB FROM ppoe_api_data.members);");
 if ($query) {
 while ($row = mysqli_fetch_array($query)) {
   $refill = true;
