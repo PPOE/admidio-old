@@ -45,7 +45,7 @@ $nextYear = $thisYear + 1;
 ////////////////////////////////////
 // INFO TO LGF NEW MEMBER
 ////////////////////////////////////
-$query = mysqli_query("SELECT * FROM (select G1.usr_id, $sel_mail, $sel_nick, $sel_lo, $sel_reason from ppoe_mitglieder.adm_users G1 $where_member) A WHERE (usr_id,CASE WHEN LO IS NULL THEN 0 ELSE LO END) NOT IN (SELECT usr_id,LO FROM ppoe_api_data.members);");
+$query = mysqli_query($link, "SELECT * FROM (select G1.usr_id, $sel_mail, $sel_nick, $sel_lo, $sel_reason from ppoe_mitglieder.adm_users G1 $where_member) A WHERE (usr_id,CASE WHEN LO IS NULL THEN 0 ELSE LO END) NOT IN (SELECT usr_id,LO FROM ppoe_api_data.members);");
 if ($query) {
 while ($row = mysqli_fetch_array($query)) {
   $refill = true;
@@ -86,16 +86,16 @@ Das Mitglied hat folgende Interessen angegeben: $reason";
   if($lo == 45) {$prefs += 128;}
   if($lo == 37) {$prefs += 512;}
   $mail = $row["Email"];
-$q2 = mysqli_query("SELECT * FROM users WHERE email = '".mysqli_escape_string($mail)."'");
+$q2 = mysqli_query($link, "SELECT * FROM users WHERE email = '".mysqli_escape_string($mail)."'");
 if (!$q2 || mysqli_num_rows($q2) == 0)
 {
 $sid = mt_rand();
-$q2 = mysqli_query("SELECT * FROM users WHERE sid = $sid");
+$q2 = mysqli_query($link, "SELECT * FROM users WHERE sid = $sid");
 while ($q2 && mysqli_num_rows($q2) > 0)
 {
 $sid = mt_rand();
 }
-$q4 = mysqli_query("INSERT INTO ppoe_api_data.users (email, prefs, sid, confirmed) VALUES ('".mysqli_escape_string($mail)."', $prefs, $sid, 1);");
+$q4 = mysqli_query($link, "INSERT INTO ppoe_api_data.users (email, prefs, sid, confirmed) VALUES ('".mysqli_escape_string($mail)."', $prefs, $sid, 1);");
 echo "INSERT INTO ppoe_api_data.users (email, prefs, sid, confirmed) VALUES ('".mysqli_escape_string($mail)."', $prefs, $sid, 1);\n";
 if (!$q4)
 {
@@ -108,7 +108,7 @@ if (!$q4)
 ////////////////////////////////////
 // INFO TO LGF LOST MEMBER
 ////////////////////////////////////
-$query = mysqli_query("SELECT *,$sel_members_nick FROM ppoe_api_data.members WHERE (usr_id,CASE WHEN LO IS NULL THEN 0 ELSE LO END) NOT IN (select G1.usr_id, $sel_lo from ppoe_mitglieder.adm_users G1 $where_member);");
+$query = mysqli_query($link, "SELECT *,$sel_members_nick FROM ppoe_api_data.members WHERE (usr_id,CASE WHEN LO IS NULL THEN 0 ELSE LO END) NOT IN (select G1.usr_id, $sel_lo from ppoe_mitglieder.adm_users G1 $where_member);");
 if ($query) {
 while ($row = mysqli_fetch_array($query)) {
   $refill = true;
@@ -137,7 +137,7 @@ Du musst eingeloggt sein, um diesen Link zu öffnen.
 ////////////////////////////////////
 // INFO TO MEMBER NOT AKK BUT MB
 ////////////////////////////////////
-$query = mysqli_query("SELECT * FROM (select G1.usr_id, $sel_name, $sel_mbuntil, $sel_mail, $sel_lo, $sel_mb, $sel_akk from ppoe_mitglieder.adm_users G1 $where_member) A WHERE (usr_id,CASE WHEN LO IS NULL THEN 0 ELSE LO END,MB) NOT IN (SELECT usr_id,LO,MB FROM ppoe_api_data.members);");
+$query = mysqli_query($link, "SELECT * FROM (select G1.usr_id, $sel_name, $sel_mbuntil, $sel_mail, $sel_lo, $sel_mb, $sel_akk from ppoe_mitglieder.adm_users G1 $where_member) A WHERE (usr_id,CASE WHEN LO IS NULL THEN 0 ELSE LO END,MB) NOT IN (SELECT usr_id,LO,MB FROM ppoe_api_data.members);");
 if ($query) {
 while ($row = mysqli_fetch_array($query)) {
   $refill = true;
@@ -176,7 +176,7 @@ Mit piratigen Grüßen,
 // INFO TO MEMBER 30 DAYS LEFT!!
 ////////////////////////////////////
 ///
-$query = mysqli_query("SELECT * FROM (select G1.usr_id, $sel_name, $sel_mbuntil, $sel_mail, $sel_lo, $sel_mb, $sel_mbm30, $sel_akk from ppoe_mitglieder.adm_users G1 $where_member) A WHERE MB AND NOT MBM30 AND (usr_id,CASE WHEN LO IS NULL THEN 0 ELSE LO END,MBM30) NOT IN (SELECT usr_id,LO,MBM30 FROM ppoe_api_data.members);");
+$query = mysqli_query($link, "SELECT * FROM (select G1.usr_id, $sel_name, $sel_mbuntil, $sel_mail, $sel_lo, $sel_mb, $sel_mbm30, $sel_akk from ppoe_mitglieder.adm_users G1 $where_member) A WHERE MB AND NOT MBM30 AND (usr_id,CASE WHEN LO IS NULL THEN 0 ELSE LO END,MBM30) NOT IN (SELECT usr_id,LO,MBM30 FROM ppoe_api_data.members);");
 if ($query) {
 while ($row = mysqli_fetch_array($query)) {
   $refill = true;
@@ -218,7 +218,7 @@ Mit piratigen Grüßen,
 ////////////////////////////////////
 // INFO TO MEMBER PAY NOW!!
 ////////////////////////////////////
-$query = mysqli_query("SELECT * FROM (select G1.usr_id, $sel_nick, $sel_name, $sel_mbuntil, $sel_mail, $sel_lo, $sel_mb, $sel_akk from ppoe_mitglieder.adm_users G1 $where_member) A WHERE NOT MB AND (usr_id,CASE WHEN LO IS NULL THEN 0 ELSE LO END,1) IN (SELECT usr_id,LO,MB FROM ppoe_api_data.members);");
+$query = mysqli_query($link, "SELECT * FROM (select G1.usr_id, $sel_nick, $sel_name, $sel_mbuntil, $sel_mail, $sel_lo, $sel_mb, $sel_akk from ppoe_mitglieder.adm_users G1 $where_member) A WHERE NOT MB AND (usr_id,CASE WHEN LO IS NULL THEN 0 ELSE LO END,1) IN (SELECT usr_id,LO,MB FROM ppoe_api_data.members);");
 if ($query) {
 while ($row = mysqli_fetch_array($query)) {
   $refill = true;
@@ -273,7 +273,7 @@ Du musst eingeloggt sein, um den obigen Link zu öffnen.";
 ////////////////////////////////////
 // INFO TO MEMBER THANKS FOR PAYING
 ////////////////////////////////////
-$query = mysqli_query("SELECT * FROM (select G1.usr_id, $sel_nick, $sel_name, $sel_mbuntil, $sel_mail, $sel_lo, $sel_mb, $sel_akk from ppoe_mitglieder.adm_users G1 $where_member) A WHERE MB AND (usr_id,CASE WHEN LO IS NULL THEN 0 ELSE LO END,0) IN (SELECT usr_id,LO,MB FROM ppoe_api_data.members);");
+$query = mysqli_query($link, "SELECT * FROM (select G1.usr_id, $sel_nick, $sel_name, $sel_mbuntil, $sel_mail, $sel_lo, $sel_mb, $sel_akk from ppoe_mitglieder.adm_users G1 $where_member) A WHERE MB AND (usr_id,CASE WHEN LO IS NULL THEN 0 ELSE LO END,0) IN (SELECT usr_id,LO,MB FROM ppoe_api_data.members);");
 if ($query) {
 while ($row = mysqli_fetch_array($query)) {
   $refill = true;
@@ -316,7 +316,7 @@ Du musst eingeloggt sein, um den obigen Link zu öffnen.";
 ////////////////////////////////////
 // INFO TO MEMBER SHOULD HAVE PAID 90 DAYS AGO
 ////////////////////////////////////
-$query = mysqli_query("SELECT * FROM (select G1.usr_id, $sel_nick, $sel_name, $sel_mbuntil, $sel_mail, $sel_lo, $sel_mb, $sel_mbp90, $sel_mbp180, $sel_akk from ppoe_mitglieder.adm_users G1 $where_member) A WHERE NOT MB AND NOT MBP90 AND MBP180 AND (usr_id,CASE WHEN LO IS NULL THEN 0 ELSE LO END,0,1) IN (SELECT usr_id,LO,MB,MBP90 FROM ppoe_api_data.members);");
+$query = mysqli_query($link, "SELECT * FROM (select G1.usr_id, $sel_nick, $sel_name, $sel_mbuntil, $sel_mail, $sel_lo, $sel_mb, $sel_mbp90, $sel_mbp180, $sel_akk from ppoe_mitglieder.adm_users G1 $where_member) A WHERE NOT MB AND NOT MBP90 AND MBP180 AND (usr_id,CASE WHEN LO IS NULL THEN 0 ELSE LO END,0,1) IN (SELECT usr_id,LO,MB,MBP90 FROM ppoe_api_data.members);");
 if ($query) {
 while ($row = mysqli_fetch_array($query)) {
   $refill = true;
@@ -373,7 +373,7 @@ Du musst eingeloggt sein, um den obigen Link zu öffnen.";
 ////////////////////////////////////
 // INFO TO MEMBER SHOULD HAVE PAID 180 DAYS AGO
 ////////////////////////////////////
-$query = mysqli_query("SELECT * FROM (select G1.usr_id, $sel_name, $sel_nick, $sel_mbuntil, $sel_mail, $sel_lo, $sel_mb, $sel_mbp180, $sel_akk from ppoe_mitglieder.adm_users G1 $where_member) A WHERE NOT MB AND NOT MBP180 AND (usr_id,CASE WHEN LO IS NULL THEN 0 ELSE LO END,0,0,1) IN (SELECT usr_id,LO,MB,MBP90,MBP180 FROM ppoe_api_data.members);");
+$query = mysqli_query($link, "SELECT * FROM (select G1.usr_id, $sel_name, $sel_nick, $sel_mbuntil, $sel_mail, $sel_lo, $sel_mb, $sel_mbp180, $sel_akk from ppoe_mitglieder.adm_users G1 $where_member) A WHERE NOT MB AND NOT MBP180 AND (usr_id,CASE WHEN LO IS NULL THEN 0 ELSE LO END,0,0,1) IN (SELECT usr_id,LO,MB,MBP90,MBP180 FROM ppoe_api_data.members);");
 if ($query) {
 while ($row = mysqli_fetch_array($query)) {
   $refill = true;
@@ -431,12 +431,12 @@ Du musst eingeloggt sein, um den obigen Link zu öffnen.";
 
 if ($refill == true)
 {
-$query = mysqli_query("TRUNCATE ppoe_api_data.members;");
+$query = mysqli_query($link, "TRUNCATE ppoe_api_data.members;");
 
-$query = mysqli_query("INSERT INTO ppoe_api_data.members (usr_id, Email, LO, MB, MBM30, MBP30, MBP90, MBP180, Akk) SELECT * FROM (select G1.usr_id, $sel_mail, $sel_lo, $sel_mb, $sel_mbm30, $sel_mbp30, $sel_mbp90, $sel_mbp180, $sel_akk from ppoe_mitglieder.adm_users G1 $where_member) A;");
+$query = mysqli_query($link, "INSERT INTO ppoe_api_data.members (usr_id, Email, LO, MB, MBM30, MBP30, MBP90, MBP180, Akk) SELECT * FROM (select G1.usr_id, $sel_mail, $sel_lo, $sel_mb, $sel_mbm30, $sel_mbp30, $sel_mbp90, $sel_mbp180, $sel_akk from ppoe_mitglieder.adm_users G1 $where_member) A;");
 }
 
-$query = mysqli_query("SELECT * FROM ppoe_mv_info.mv_statistik WHERE LO = 0 AND timestamp >= '" . date_format($date, 'Y-m-d 00:00:00') . "' AND timestamp <= '" . date_format($date, 'Y-m-d 23:59:59') . "';");
+$query = mysqli_query($link, "SELECT * FROM ppoe_mv_info.mv_statistik WHERE LO = 0 AND timestamp >= '" . date_format($date, 'Y-m-d 00:00:00') . "' AND timestamp <= '" . date_format($date, 'Y-m-d 23:59:59') . "';");
 if ($query && ($row = mysqli_fetch_array($query)))
 {
 }
@@ -449,21 +449,21 @@ foreach ($los as $num => $lo) {
   else
     $where = "LO = $num";
   $lo_members = 0;
-  $query = mysqli_query("SELECT COUNT(*) FROM ppoe_api_data.members WHERE $where;");
+  $query = mysqli_query($link, "SELECT COUNT(*) FROM ppoe_api_data.members WHERE $where;");
   if ($query && ($row = mysqli_fetch_array($query))) {
     $lo_members = $row[0];
   }
   $lo_zahlend = 0;
-  $query = mysqli_query("SELECT COUNT(*) FROM ppoe_api_data.members WHERE $where AND MB = 1;");
+  $query = mysqli_query($link, "SELECT COUNT(*) FROM ppoe_api_data.members WHERE $where AND MB = 1;");
   if ($query && ($row = mysqli_fetch_array($query))) {
     $lo_zahlend = $row[0];
   }
   $lo_stimmberechtigt = 0;
-  $query = mysqli_query("SELECT COUNT(*) FROM ppoe_api_data.members WHERE $where AND (MB = 1 OR MBP30 = 1) AND Akk = 1;");
+  $query = mysqli_query($link, "SELECT COUNT(*) FROM ppoe_api_data.members WHERE $where AND (MB = 1 OR MBP30 = 1) AND Akk = 1;");
   if ($query && ($row = mysqli_fetch_array($query))) {
     $lo_stimmberechtigt = $row[0];
   }
-  $query = mysqli_query("INSERT INTO ppoe_mv_info.mv_statistik (akk,members,users,LO,timestamp) VALUES (" . $lo_stimmberechtigt . ", " . $lo_zahlend . ", " . $lo_members . ", " . $num . ", '" . date_format($date, 'Y-m-d') . "');");
+  $query = mysqli_query($link, "INSERT INTO ppoe_mv_info.mv_statistik (akk,members,users,LO,timestamp) VALUES (" . $lo_stimmberechtigt . ", " . $lo_zahlend . ", " . $lo_members . ", " . $num . ", '" . date_format($date, 'Y-m-d') . "');");
 //echo "INSERT INTO ppoe_mv_info.mv_statistik (akk,members,users,LO,timestamp) VALUES (" . $lo_stimmberechtigt . ", " . $lo_zahlend . ", " . $lo_members . ", " . $num . ", '" . date_format($date, 'Y-m-d') . "');\n";
 }
 }
