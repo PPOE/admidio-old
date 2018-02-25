@@ -20,7 +20,7 @@ $where_member = "where G1.usr_id IN (select T3.usr_id from ppoe_mitglieder.adm_u
 
 
 $link = mysqli_connect($g_adm_srv,$g_adm_usr,$g_adm_pw);
-mysqli_select_db($g_adm_db,$link);
+mysqli_select_db($link,$g_adm_db);
 
 $los    = array(0 => 'Keine', 38 => 'Burgenland', 40 => 'K&auml;rnten', 39 => 'Nieder&ouml;sterreich', 41 => 'Ober&ouml;sterreich', 42 => 'Salzburg', 43 => 'Steiermark', 44 => 'Tirol', 45 => 'Vorarlberg', 37 => 'Wien');
 
