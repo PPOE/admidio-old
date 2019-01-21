@@ -64,8 +64,8 @@ while ($row = mysqli_fetch_array($query)) {
   {
     if ($mail == 'bgf-intern@piratenpartei.at')
       continue;
-    $subject = "[Admidio] Neues Mitgliedd zugeordnet";
-    $text = "Es wurde ein neues Mitgliedd ($nick) der LO {$los[$lo]} zugeordnet:
+    $subject = "[Admidio] Neues Mitglied zugeordnet";
+    $text = "Es wurde ein neues Mitglied ($nick) der LO {$los[$lo]} zugeordnet:
 
 https://mitglieder.piratenpartei.at/adm_program/modules/profile/profile.php?user_id=$id
 
