@@ -6,7 +6,7 @@ function mail_utf8($to, $subject, $message, $headers)
   $subject = base64_encode($subject);
   $message = base64_encode($message);
   $headers = base64_encode($headers);
-  mysqli_query("INSERT INTO ppoe_api_data.mail_queue (mto,msubject,mbody,mheaders) VALUES ('$to', '$subject', '$message', '$headers');");
+  mysqli_query($link, "INSERT INTO ppoe_api_data.mail_queue (mto,msubject,mbody,mheaders) VALUES ('$to', '$subject', '$message', '$headers');");
   return true;
 }
 
