@@ -1,5 +1,5 @@
 <?php
-
+require("config.php");
 function mail_utf8($to, $subject, $message, $headers)
 {
   $to = base64_encode($to);
