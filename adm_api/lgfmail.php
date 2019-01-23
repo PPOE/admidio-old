@@ -86,7 +86,7 @@ Das Mitglied hat folgende Interessen angegeben: $reason";
   if($lo == 45) {$prefs += 128;}
   if($lo == 37) {$prefs += 512;}
   $mail = $row["Email"];
-$q2 = mysqli_query($link, "SELECT * FROM users WHERE email = '".mysqli_escape_string($mail)."'");
+$q2 = mysqli_query($link, "SELECT * FROM users WHERE email = '".mysqli_escape_string($link, $mail)."'");
 if (!$q2 || mysqli_num_rows($q2) == 0)
 {
 $sid = mt_rand();
@@ -95,8 +95,8 @@ while ($q2 && mysqli_num_rows($q2) > 0)
 {
 $sid = mt_rand();
 }
-$q4 = mysqli_query($link, "INSERT INTO ppoe_api_data.users (email, prefs, sid, confirmed) VALUES ('".mysqli_escape_string($mail)."', $prefs, $sid, 1);");
-echo "INSERT INTO ppoe_api_data.users (email, prefs, sid, confirmed) VALUES ('".mysqli_escape_string($mail)."', $prefs, $sid, 1);\n";
+$q4 = mysqli_query($link, "INSERT INTO ppoe_api_data.users (email, prefs, sid, confirmed) VALUES ('".mysqli_escape_string($link, $mail)."', $prefs, $sid, 1);");
+echo "INSERT INTO ppoe_api_data.users (email, prefs, sid, confirmed) VALUES ('".mysqli_escape_string($link, $mail)."', $prefs, $sid, 1);\n";
 if (!$q4)
 {
   echo "FAILED!!!!\n";
