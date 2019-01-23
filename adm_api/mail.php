@@ -2,6 +2,7 @@
 
 function mail_utf8($to, $subject, $message, $headers)
 {
+  require("config.php");
   $to = base64_encode($to);
   $subject = base64_encode($subject);
   $message = base64_encode($message);
