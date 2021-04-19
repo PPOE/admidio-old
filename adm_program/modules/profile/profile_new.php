@@ -491,7 +491,7 @@ echo '
                                 <dl>
                                     <dt><label for="password2">'.$gL10n->get('SYS_CONFIRM_PASSWORD').':</label></dt>
                                     <dd>
-                                        <input type="password" id="password2" name="password2" style="width: 130px;" maxlength="20" />
+                                        <input type="password" id="password2" name="password2" style="width: 130px;" maxlength="75" />
                                         <span class="mandatoryFieldMarker" title="'.$gL10n->get('SYS_MANDATORY_FIELD').'">*</span>
                                     </dd>
                                 </dl>
