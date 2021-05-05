@@ -43,34 +43,39 @@ echo "<tr><td>{$row['c']}</td><td>{$row['a']} €</td></tr>";
 echo "</tr></table></tr>";
 
 echo "<tr><td>Geschlecht</td><td><table border=1><tr><th>Wert</th><th>Häufigkeit</th></tr>";
-$query = mysql_query("SELECT * FROM (SELECT usd_value AS v,COUNT(*) AS c FROM ppoe_mitglieder.adm_user_data WHERE usd_usf_id = 11 AND usd_usr_id IN (SELECT mem_usr_id FROM adm_members WHERE mem_rol_id = $lo AND mem_begin <= curdate() AND mem_end >= curdate()) GROUP BY usd_value ORDER BY c DESC LIMIT 10) A WHERE c >= 25;");
+//$query = mysql_query("SELECT * FROM (SELECT usd_value AS v,COUNT(*) AS c FROM ppoe_mitglieder.adm_user_data WHERE usd_usf_id = 11 AND usd_usr_id IN (SELECT mem_usr_id FROM adm_members WHERE mem_rol_id = $lo AND mem_begin <= curdate() AND mem_end >= curdate()) GROUP BY usd_value ORDER BY c DESC LIMIT 10) A WHERE c >= 25;");
+$query =  mysql_query("SELECT * FROM (SELECT usd_value AS v,COUNT(*) AS c FROM ppoe_mitglieder.adm_user_data WHERE usd_usf_id = 11 AND usd_usr_id IN (SELECT mem_usr_id FROM adm_members WHERE mem_rol_id = 2  AND mem_begin <= curdate() AND mem_end >= curdate()) GROUP BY usd_value ORDER BY c DESC ) A ;");
+
 $members_c = $members;
 while ($query && ($row = mysql_fetch_assoc($query))) {
+
+//echo "<tr><td>".$row['v']."</td></tr>";
 echo "<tr><td>".str_replace(array('1','2'),array('männlich','weiblich'),$row['v'])."</td><td>{$row['c']}</td></tr>";
+
 $members_c -= $row['c'];
 }
-echo "<tr><td>Rest</td><td>$members_c</td>";
+echo "<tr><td>Ohne Angabe</td><td>$members_c</td>";
 echo "</tr></table></tr>";
 
-echo "<tr><td>Vorname</td><td><table border=1><tr><th>Wert</th><th>Häufigkeit</th></tr>";
-$query = mysql_query("SELECT * FROM (SELECT usd_value AS v,COUNT(*) AS c FROM ppoe_mitglieder.adm_user_data WHERE usd_usf_id = 2 AND usd_usr_id IN (SELECT mem_usr_id FROM adm_members WHERE mem_rol_id = $lo AND mem_begin <= curdate() AND mem_end >= curdate()) GROUP BY usd_value ORDER BY c DESC LIMIT 10) A WHERE c >= 25;");
-$members_c = $members;
-while ($query && ($row = mysql_fetch_assoc($query))) {
-echo "<tr><td>{$row['v']}</td><td>{$row['c']}</td></tr>";
-$members_c -= $row['c'];
-}
-echo "<tr><td>Rest</td><td>$members_c</td>";
-echo "</tr></table></tr>";
+//echo "<tr><td>Vorname</td><td><table border=1><tr><th>Wert</th><th>Häufigkeit</th></tr>";
+//$query = mysql_query("SELECT * FROM (SELECT usd_value AS v,COUNT(*) AS c FROM ppoe_mitglieder.adm_user_data WHERE usd_usf_id = 2 AND usd_usr_id IN (SELECT mem_usr_id FROM adm_members WHERE mem_rol_id = $lo AND mem_begin <= curdate() AND mem_end >= curdate()) GROUP BY usd_value ORDER BY c DESC LIMIT 10) A WHERE c >= 25;");
+//$members_c = $members;
+//while ($query && ($row = mysql_fetch_assoc($query))) {
+//echo "<tr><td>{$row['v']}</td><td>{$row['c']}</td></tr>";
+//$members_c -= $row['c'];
+//}
+//echo "<tr><td>Rest</td><td>$members_c</td>";
+//echo "</tr></table></tr>";
 
-echo "<tr><td>PLZ</td><td><table border=1><tr><th>Wert</th><th>Häufigkeit</th></tr>";
-$query = mysql_query("SELECT * FROM (SELECT usd_value AS v,COUNT(*) AS c FROM ppoe_mitglieder.adm_user_data WHERE usd_usf_id = 4 AND usd_usr_id IN (SELECT mem_usr_id FROM adm_members WHERE mem_rol_id = $lo AND mem_begin <= curdate() AND mem_end >= curdate()) GROUP BY usd_value ORDER BY c DESC LIMIT 10) A WHERE c >= 25;");
-$members_c = $members;
-while ($query && ($row = mysql_fetch_assoc($query))) {
-echo "<tr><td>{$row['v']}</td><td>{$row['c']}</td></tr>";
-$members_c -= $row['c'];
-}
-echo "<tr><td>Rest</td><td>$members_c</td>";
-echo "</tr></table></td></tr>";
+//echo "<tr><td>PLZ</td><td><table border=1><tr><th>Wert</th><th>Häufigkeit</th></tr>";
+//$query = mysql_query("SELECT * FROM (SELECT usd_value AS v,COUNT(*) AS c FROM ppoe_mitglieder.adm_user_data WHERE usd_usf_id = 4 AND usd_usr_id IN (SELECT mem_usr_id FROM adm_members WHERE mem_rol_id = $lo AND mem_begin <= curdate() AND mem_end >= curdate()) GROUP BY usd_value ORDER BY c DESC LIMIT 10) A WHERE c >= 25;");
+//$members_c = $members;
+//while ($query && ($row = mysql_fetch_assoc($query))) {
+//echo "<tr><td>{$row['v']}</td><td>{$row['c']}</td></tr>";
+//$members_c -= $row['c'];
+//}
+//echo "<tr><td>Rest</td><td>$members_c</td>";
+//echo "</tr></table></td></tr>";
 
 echo "<tr><td>Ort</td><td><table border=1><tr><th>Wert</th><th>Häufigkeit</th></tr>";
 $query = mysql_query("SELECT * FROM (SELECT usd_value AS v,COUNT(*) AS c FROM ppoe_mitglieder.adm_user_data WHERE usd_usf_id = 5 AND usd_usr_id IN (SELECT mem_usr_id FROM adm_members WHERE mem_rol_id = $lo AND mem_begin <= curdate() AND mem_end >= curdate()) GROUP BY usd_value ORDER BY c DESC LIMIT 10) A WHERE c >= 25;");
@@ -79,7 +84,9 @@ while ($query && ($row = mysql_fetch_assoc($query))) {
 echo "<tr><td>{$row['v']}</td><td>{$row['c']}</td></tr>";
 $members_c -= $row['c'];
 }
+
 echo "<tr><td>Rest</td><td>$members_c</td>";
+
 echo "</tr></table></td></tr>";
 
 echo "<tr><td>Land</td><td><table border=1><tr><th>Wert</th><th>Häufigkeit</th></tr>";
